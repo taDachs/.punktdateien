@@ -42,6 +42,7 @@ alias z='zathura'
 alias prettyj='python -mjson.tool'
 alias fv='fzf | xargs nvim'
 alias ls='ls --color=auto'
+alias ls='grep --color=auto'
 
 # robot_folders setup
 source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
