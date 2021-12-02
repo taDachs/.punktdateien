@@ -1,9 +1,14 @@
 -- python
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local pylsp_cap = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig').pylsp.setup {
-  capabilities = capabilities
+  capabilities = pylsp_cap
 }
+
+local pyright_cap = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig').pyright.setup({
-  capabilities = capabilities
+  on_attach = function(client)
+    client.resolved_capabilities.rename = false
+  end,
+  capabilities = pyright_cap,
 })

@@ -14,5 +14,9 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 " <C-P> : go to next
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" Shift+F6 : rename
+nnoremap <silent> <F18> <cmd>lua vim.lsp.buf.rename()<CR>
+" Shift+F6 : rename
+nnoremap <silent> <a-CR> <cmd>lua vim.lsp.buf.code_action()<CR>
 
 luafile ~/.config/nvim/profiles/lua/lsp-config.lua
