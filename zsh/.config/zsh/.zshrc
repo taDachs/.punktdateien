@@ -42,7 +42,7 @@ alias z='zathura'
 alias prettyj='python -mjson.tool'
 alias fv='fzf | xargs nvim'
 alias ls='ls --color=auto'
-alias ls='grep --color=auto'
+alias grep='grep --color=auto'
 
 # robot_folders setup
 source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
@@ -73,3 +73,5 @@ PROMPT='$PROMPT_TIME:$PROMPT_HOSTNAME:$PROMPT_CWD$(__git_ps1 " (%s)")$PROMPT_END
 RPROMPT_RETURN_CODE='%F{red}%(?..return %?)%f'
 RPROMPT='$RPROMPT_RETURN_CODE'
 fpath+=~/.zsh/zsh_functions
+
+[ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env" # ghcup-env

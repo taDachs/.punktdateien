@@ -19,7 +19,9 @@ colorscheme monokai_pro
 " relative numbers
 set relativenumber
 
-map <C-_> :call CommentOut()<Cr>
+nnoremap <C-_> :call CommentOut()<Cr>
+noremap L >>
+noremap H <<
 
 " removes unnecessary whitespaces
 autocmd BufWritePre * %s/\s\+$//e
