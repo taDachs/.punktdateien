@@ -40,9 +40,12 @@ bindkey "^[[1;5C" forward-word
 alias v='nvim'
 alias z='zathura'
 alias prettyj='python -mjson.tool'
-alias fv='fzf | xargs nvim'
+alias fv='f(){ find $@ | fzf | xargs nvim }; f'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias ...='../..'
+alias ....='../../..'
+alias paramdoc-ros='python3 ~/Work/FZI/projects/auto_doc/paramdoc_ros.py'
 
 # robot_folders setup
 source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
@@ -74,4 +77,4 @@ RPROMPT_RETURN_CODE='%F{red}%(?..return %?)%f'
 RPROMPT='$RPROMPT_RETURN_CODE'
 fpath+=~/.zsh/zsh_functions
 
-[ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env" # ghcup-env
+[ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env"

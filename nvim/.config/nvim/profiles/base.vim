@@ -22,6 +22,8 @@ set relativenumber
 nnoremap <C-_> :call CommentOut()<Cr>
 noremap L >>
 noremap H <<
+inoremap jk <Esc>
+inoremap <Esc> <nop>
 
 " removes unnecessary whitespaces
 autocmd BufWritePre * %s/\s\+$//e
