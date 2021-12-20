@@ -51,6 +51,7 @@ alias paramdoc-ros='python3 ~/Work/FZI/projects/auto_doc/paramdoc_ros.py'
 source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
 
 export EDITOR=nvim
+export PATH=$PATH:$HOME/.cargo/bin
 
 # custom functions
 forgit() {
@@ -77,4 +78,4 @@ RPROMPT_RETURN_CODE='%F{red}%(?..return %?)%f'
 RPROMPT='$RPROMPT_RETURN_CODE'
 fpath+=~/.zsh/zsh_functions
 
-[ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env"
+# [ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env"
