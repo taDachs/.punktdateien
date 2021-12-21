@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+TITLE=$(playerctl metadata title)
+ARTIST=$(playerctl metadata artist)
+
+echo "$TITLE - $ARTIST"

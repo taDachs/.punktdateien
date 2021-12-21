@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+NUM_MONITORS=$(xrandr | grep " connected " | wc -l)
+
+if [ $NUM_MONITORS -eq 1 ]; then
+  xrandr --output DP1-2 --off || true
+  xrandr --output DP1-3 --off || true
+  xrandr --output eDP1 --primary --mode 1920x1080 || true
+else
+  xrandr --output DP1-2 --mode 2560x1440 --primary || true
+  xrandr --output DP1-3 --mode 1920x1080 --right-of DP1-2 || true
+  xrandr --output eDP1 --off || true
+fi
+
+feh --bg-scale $WALLPAPER
+polybar-launch
