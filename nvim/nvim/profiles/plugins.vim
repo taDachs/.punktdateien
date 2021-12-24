@@ -1,26 +1,32 @@
 call plug#begin('~/.vim/plugged')
-	Plug 'preservim/nerdtree'
 	Plug 'jiangmiao/auto-pairs'
   Plug 'kshenoy/vim-signature'
   Plug 'phanviet/vim-monokai-pro'
   Plug 'neovim/nvim-lspconfig'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-surround'
 
   " completion
+  Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
+  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
   " snippets
   Plug 'SirVer/ultisnips'
-  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
   Plug 'honza/vim-snippets'
+
+  " telescope
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
-" NERDTREE
-nnoremap <C-a> :NERDTreeToggle<CR>
+luafile ~/.config/nvim/profiles/lua/telescope.lua
 
-" Airline
+nnoremap <C-a> <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope live_grep<cr>
