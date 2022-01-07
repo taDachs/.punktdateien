@@ -14,3 +14,4 @@ fi
 
 feh --bg-scale $WALLPAPER
 polybar-launch
+setxkbmap -layout us -variant altgr-intl

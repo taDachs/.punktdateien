@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+  " misc
 	Plug 'jiangmiao/auto-pairs'
   Plug 'kshenoy/vim-signature'
   Plug 'phanviet/vim-monokai-pro'
@@ -6,6 +7,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-surround'
+  Plug 'junegunn/vim-easy-align'
 
   " completion
   Plug 'hrsh7th/nvim-cmp'
@@ -26,7 +28,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
+" Telescope
 luafile ~/.config/nvim/profiles/lua/telescope.lua
-
 nnoremap <C-a> <cmd>Telescope find_files<cr>
 nnoremap <C-f> <cmd>Telescope live_grep<cr>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)

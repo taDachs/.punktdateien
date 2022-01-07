@@ -212,6 +212,7 @@ exec --no-startup-id nm-applet
 # bluetooth manager
 exec --no-startup-id blueman-applet
 
-exec --no-startup-id setxkbmap -layout us -variant altgr-intl
-
 exec_always --no-startup-id screen-mode
+
+exec --no-startup-id setxkbmap -layout us -variant altgr-intl
+exec compton

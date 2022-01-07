@@ -13,8 +13,12 @@ setopt prompt_subst
 
 # history file
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt autocd
 bindkey -e
@@ -58,6 +62,9 @@ forgit() {
     ignore_pattern="./3rdparty"
     find . -name ".git" -type d | sed 's/\/.git//' | grep -v $ignore_pattern |  xargs -I{} sh -c "echo ========= {} =========; git -C {} $*;"
 }
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Promt
 # enable colors

@@ -38,3 +38,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 zstyle '*' single-ignored show
 autoload -U +X bashcompinit && bashcompinit
+
+autoload -U bashcompinit
+
