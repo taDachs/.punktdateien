@@ -1,7 +1,9 @@
 source  ~/.config/nvim/profiles/plugins.vim
 source  ~/.config/nvim/profiles/utils.vim
-source  ~/.config/nvim/profiles/lsp-config.vim
+source ~/.config/nvim/profiles/mappings.vim
+
 luafile ~/.config/nvim/profiles/lua/completion.lua
+luafile ~/.config/nvim/profiles/lua/lsp-config.lua
 
 " softtabs
 set tabstop=2
@@ -18,12 +20,6 @@ colorscheme monokai_pro
 
 " relative numbers
 set relativenumber
-
-nnoremap <C-_> :call CommentOut()<Cr>
-noremap L >>
-noremap H <<
-inoremap jk <Esc>
-inoremap <Esc> <nop>
 
 " removes unnecessary whitespaces
 autocmd BufWritePre * %s/\s\+$//e
