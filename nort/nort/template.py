@@ -7,21 +7,25 @@ from nort.nort import list_notes
 
 def get_last_note(tags):
     notes = list_notes(cfg=Template.cfg, tags=tags)
-    if not notes:
-        return None
     notes = list(filter(lambda x: x.created, notes))
+    notes.sort(key=lambda x: x.created, reverse=True)
+
     notes = list(
         filter(
-            lambda x:
-            (datetime.today().replace(hour=0, minute=0, second=0) - x.
-             created.replace(hour=0, minute=0, second=0)).days > 0, notes))
-    notes.sort(key=lambda x: x.created, reverse=True)
+            lambda x: (datetime.today().replace(
+                hour=0, minute=0, second=0, microsecond=0) - x.created.replace(
+                    hour=0, minute=0, second=0, microsecond=0)).days > 0,
+            notes))
+
+    if not notes:
+        return None
 
     return notes[0]
 
 
 def last_todo(tags):
     note = get_last_note(tags)
+
     if not note:
         return '## TODO'
 
@@ -32,6 +36,7 @@ def last_todo(tags):
 
 
 class Diary(Template):
+
     def get_name(self):
         return 'Diary_[[DATE]]'
 
@@ -47,6 +52,7 @@ class Diary(Template):
 
 
 class Work(Template):
+
     def __init__(self, job='Work'):
         super().__init__()
         self.job = job
@@ -71,10 +77,12 @@ class Work(Template):
 
 
 class SCC(Work):
+
     def __init__(self):
         super().__init__('SCC')
 
 
 class FZI(Work):
+
     def __init__(self):
         super().__init__('FZI')

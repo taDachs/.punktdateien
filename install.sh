@@ -17,4 +17,5 @@ curl \
   -sL --create-dirs \
   https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
   -o $HOME/.local/share/miniplug.zsh
+miniplug install
 

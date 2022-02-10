@@ -8,6 +8,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-surround'
   Plug 'junegunn/vim-easy-align'
+  Plug 'tikhomirov/vim-glsl'
+  Plug 'bfrg/vim-cpp-modern'
 
   " completion
   Plug 'hrsh7th/nvim-cmp'
