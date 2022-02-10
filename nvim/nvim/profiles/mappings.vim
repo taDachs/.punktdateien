@@ -1,3 +1,25 @@
+let g:mapleader = '-'
+
+function! ToggleNERDTreeFind()
+    if g:NERDTree.IsOpen()
+        execute ':NERDTreeClose'
+    else
+        execute ':NERDTreeFind'
+    endif
+endfunction
+nnoremap <leader>a <cmd>call ToggleNERDTreeFind()<cr>
+
+nnoremap <leader><C-a> <cmd>Telescope find_files<cr>
+nnoremap <leader><C-f> <cmd>Telescope live_grep<cr>
+
+map <C-_> <plug>NERDCommenterToggle
+
+noremap L >>
+noremap H <<
+inoremap jk <Esc>
+inoremap <Esc> <nop>
+
+" LSP
 " gd : goto definition
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 " gD : goto declaration
@@ -19,4 +41,8 @@ nnoremap <silent> <F18> <cmd>lua vim.lsp.buf.rename()<CR>
 " Shift+F6 : rename
 nnoremap <silent> <a-CR> <cmd>lua vim.lsp.buf.code_action()<CR>
 
-luafile ~/.config/nvim/profiles/lua/lsp-config.lua
+" UltiSnips
+" Move to next Tab Stop
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" Move to previous Tab Stop
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
