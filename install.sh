@@ -7,7 +7,7 @@ stow --target ~/.config nvim
 stow --target ~/.config polybar
 stow --target ~/.config git
 stow --target ~/.config nort
-stow --target ~/.config tmux
+stow --target ~ tmux
 
 # install plugin loaders for nvim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
