@@ -1,10 +1,10 @@
-source  ~/.config/nvim/profiles/plugins.vim
-source  ~/.config/nvim/profiles/utils.vim
-source ~/.config/nvim/profiles/mappings.vim
+source  ~/.config/nvim/plugins.vim
+source  ~/.config/nvim/utils.vim
+source ~/.config/nvim/mappings.vim
 
-luafile ~/.config/nvim/profiles/lua/completion.lua
-luafile ~/.config/nvim/profiles/lua/lsp-config.lua
-luafile ~/.config/nvim/profiles/lua/treesitter.lua
+luafile ~/.config/nvim/lua/completion.lua
+luafile ~/.config/nvim/lua/lsp-config.lua
+luafile ~/.config/nvim/lua/treesitter.lua
 
 " softtabs
 set tabstop=2

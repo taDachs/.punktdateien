@@ -38,7 +38,7 @@ inoremap jk <Esc>
 inoremap <Esc> <nop>
 tnoremap jk <C-\><C-n>
 
-command EditConfig :tabnew ~/.config/nvim/profiles/base.vim
+command EditConfig :tabnew ~/.config/nvim/init.vim
 
 " LSP
 " gd : goto definition

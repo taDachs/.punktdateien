@@ -1,3 +1,9 @@
+" Automatically install vim-plug if not present
+" stolen from https://github.com/fmauch/dot_vim/blob/master/.vim/plugin/plugins.vim
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 call plug#begin('~/.vim/plugged')
   " misc
   Plug 'jiangmiao/auto-pairs'
@@ -41,7 +47,7 @@ call plug#end()
 filetype plugin on
 
 " Telescope
-luafile ~/.config/nvim/profiles/lua/telescope.lua
+luafile ~/.config/nvim/lua/telescope-config.lua
 
 " NerdCommenter
 let g:NERDSpaceDelims = 1

@@ -3,7 +3,7 @@
 stow --target ~ zsh
 stow --target ~/.config alacritty
 stow --target ~/.config i3
-stow --target ~/.config nvim
+stow nvim
 stow --target ~/.config polybar
 stow --target ~/.config git
 stow --target ~/.config nort
@@ -18,5 +18,5 @@ curl \
   -sL --create-dirs \
   https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
   -o $HOME/.local/share/miniplug.zsh
-miniplug install
+zsh -c "miniplug install"
 
