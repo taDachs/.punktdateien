@@ -6,18 +6,19 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-surround'
-  Plug 'junegunn/vim-easy-align'
   Plug 'tikhomirov/vim-glsl'
   Plug 'bfrg/vim-cpp-modern'
   Plug 'preservim/nerdtree'
   Plug 'preservim/nerdcommenter'
   Plug 'udalov/kotlin-vim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/nvim-lsp-installer'
-  Plug 'simrat39/symbols-outline.nvim'
+  " Plug 'simrat39/symbols-outline.nvim'
 
   " completion
   Plug 'hrsh7th/nvim-cmp'
@@ -47,3 +48,9 @@ let g:NERDSpaceDelims = 1
 
 " UltiSnips
 set runtimepath+=~/.vim/plugged/musnips/
+
+
+" Markdown Preview
+let g:mkdp_auto_close = 1
+let g:mkdp_command_for_global = 1
+let g:mkdp_browser = 'surf'
