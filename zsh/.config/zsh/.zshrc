@@ -1,6 +1,7 @@
 # auto completion
-source $HOME/.config/zsh/profiles/completion.zsh
-source $HOME/.config/zsh/external/git_prompt.sh
+source "$HOME/.config/zsh/profiles/completion.zsh"
+source "$HOME/.config/zsh/external/git_prompt.sh"
+source "$HOME/.config/zsh/functions/util.bash"
 
 autoload -Uz compinit
 compinit
@@ -56,13 +57,6 @@ source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
 
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.cargo/bin
-
-# custom functions
-forgit() {
-    ignore_pattern="./3rdparty"
-    find . -name ".git" -type d | sed 's/\/.git//' | grep -v $ignore_pattern |  xargs -I{} sh -c "echo ========= {} =========; git -C {} $*;"
-}
-
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
