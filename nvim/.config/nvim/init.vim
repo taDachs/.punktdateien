@@ -5,6 +5,7 @@ source ~/.config/nvim/mappings.vim
 luafile ~/.config/nvim/lua/completion.lua
 luafile ~/.config/nvim/lua/lsp-config.lua
 luafile ~/.config/nvim/lua/treesitter.lua
+luafile ~/.config/nvim/lua/telescope-config.lua
 
 " softtabs
 set tabstop=2

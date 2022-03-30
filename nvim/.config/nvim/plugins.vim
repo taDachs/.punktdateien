@@ -46,9 +46,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 filetype plugin on
 
-" Telescope
-luafile ~/.config/nvim/lua/telescope-config.lua
-
 " NerdCommenter
 let g:NERDSpaceDelims = 1
 

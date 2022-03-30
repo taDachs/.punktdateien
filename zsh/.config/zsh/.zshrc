@@ -57,8 +57,15 @@ source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
 
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.cargo/bin
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+source_nvm () {
+  unalias nvm
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  nvm $@
+}
+
+alias nvm=source_nvm
 
 # Promt
 # enable colors
