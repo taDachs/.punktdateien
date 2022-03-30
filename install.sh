@@ -3,6 +3,7 @@
 stow --target ~ zsh
 stow --target ~/.config alacritty
 stow --target ~/.config i3
+stow --target ~/.config awesome
 stow nvim
 stow --target ~/.config polybar
 stow --target ~/.config git
