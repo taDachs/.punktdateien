@@ -9,7 +9,6 @@ require('telescope').setup{
   },
   pickers = {
     find_files = {
-      find_command = { 'rg', '--files', '--hidden', '--iglob', '!.git'},
       mappings = {
         i = {
           ["<C-a>"] = actions.close

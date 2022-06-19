@@ -1,0 +1,41 @@
+format = """
+$username\
+$hostname\
+$directory\
+$fill\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$nodejs\
+$python\
+$conda\
+$cmd_duration\
+$time\
+$line_break\
+ $character"""
+
+right_format="$status"
+
+add_newline = true
+
+[character]
+success_symbol = "[λ](bold green) "
+error_symbol = "[λ](bold red) "
+
+[status]
+disabled=false
+
+[time]
+disabled=false
+
+[nodejs]
+symbol="node "
+
+[username]
+show_always = true
+format="[$user]($style)@"
+
+[hostname]
+ssh_only = false
+disabled=false

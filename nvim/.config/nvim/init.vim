@@ -1,3 +1,6 @@
+syntax enable
+set termguicolors
+
 source  ~/.config/nvim/plugins.vim
 source  ~/.config/nvim/utils.vim
 source ~/.config/nvim/mappings.vim
@@ -12,6 +15,8 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+set colorcolumn=100
+
 
 " spelling
 set spelllang=en_us
@@ -19,13 +24,12 @@ set spelllang=en_us
 " persistent undo
 set undodir=~/.cache/nvim/undodir
 set undofile
-
-syntax enable
-colorscheme monokai_pro
-
 " relative numbers
 set relativenumber
 set number
+" colorscheme monokai_pro
+colorscheme kit
+" source ~/Projects/KIT.vim/colors.vim
 
 " removes unnecessary whitespaces
 autocmd BufWritePre * %s/\s\+$//e
@@ -34,5 +38,4 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufRead,BufNewFile *.launch setfiletype xml
 
 set completeopt=menu,menuone,noselect
-setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
+set omnifunc=v:lua.vim.lsp.omnifunc

@@ -1,7 +1,7 @@
-[includeIf "gitdir:~/Work/FZI/"]
-  path = ~/Work/FZI/.gitconfig
 [user]
 	email = max.schik@googlemail.com
 	name = Max Schik
 [pull]
 	rebase = true
+[includeIf "gitdir:~/Work/FZI/**"]
+  path = ~/Work/FZI/.gitconfig

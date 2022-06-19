@@ -1,6 +1,5 @@
 # auto completion
-source "$HOME/.config/zsh/profiles/completion.zsh"
-source "$HOME/.config/zsh/external/git_prompt.sh"
+export ZSH="$HOME/.oh-my-zsh/"
 source "$HOME/.config/zsh/functions/util.bash"
 
 autoload -Uz compinit
@@ -24,39 +23,32 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt autocd
 bindkey -e
 
-# Plugins
-source "$HOME/.local/share/miniplug.zsh"
+# Make colors work with tmux
+# if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 
-miniplug plugin 'zsh-users/zsh-syntax-highlighting'
-miniplug plugin 'zsh-users/zsh-history-substring-search'
-miniplug plugin 'zsh-users/zsh-completions'
-miniplug load
-
-export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=magenta,fg=white,bold"
 export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
-
-# Keybind
-bindkey "$key[Up]" history-substring-search-up
-bindkey "$key[Down]" history-substring-search-down
-bindkey "^[[1;5D" backward-word
-bindkey "^[[1;5C" forward-word
 
 # aliases
 alias v='nvim'
 alias z='zathura'
 alias prettyj='python -mjson.tool'
-alias fv='f(){ find $@ | fzf | xargs nvim }; f'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias ...='../..'
 alias ....='../../..'
-alias paramdoc-ros='python3 ~/Work/FZI/projects/auto_doc/paramdoc_ros.py'
+alias pzf='fzf --preview="less {}"'
 
-# robot_folders setup
-source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
 
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.cargo/bin
+
+source_robot_folders () {
+  unalias fzirob
+  source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
+  fzirob $@
+}
+
+alias fzirob=source_robot_folders
 
 source_nvm () {
   unalias nvm
@@ -67,23 +59,56 @@ source_nvm () {
 
 alias nvm=source_nvm
 
+source_ghcup () {
+  unalias ghc
+  unalias ghci
+  unalias ghcup
+  call=$1
+  shift
+
+  [ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env"
+  command $call $@
+}
+
+alias ghc="source_ghcup ghc"
+alias ghci="source_ghcup ghci"
+alias ghcup="source_ghcup ghcup"
+
+source_gvm () {
+  unalias gvm
+  source /home/max/.gvm/scripts/gvm
+  gvm $@
+}
+
+alias gvm="source_gvm"
+
+setup_anymal () {
+  export ROS_IP=192.168.151.69
+  export ROS_MASTER_URI=http://192.168.151.51:11311
+}
+
+setup_android () {
+  export ANDROID_HOME=/usr/share/android/
+  export PATH=$ANDROID_HOME/cmdline-tools/tools/bin/:$PATH
+  export PATH=$ANDROID_HOME/emulator/:$PATH
+  export PATH=$ANDROID_HOME/platform-tools/:$PATH
+}
+
 # Promt
 # enable colors
 export CLICOLOR=1
 
-# git prompt things
-GIT_PS1_SHOWCOLORHINTS=1
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM="auto"
+# Oh my zsh
+plugins=(
+  poetry
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+source $ZSH/oh-my-zsh.sh
+eval "$(starship init zsh)"
 
-PROMPT_TIME='[%F{yellow}%*%f]'
-PROMPT_HOSTNAME='%B%n%b%B@%b%B%m%b'
-PROMPT_CWD='%F{blue}%~%f'
-PROMPT_END='%F{%(?.green.red)} ▶%f '
-PROMPT='$PROMPT_TIME:$PROMPT_HOSTNAME:$PROMPT_CWD$(__git_ps1 " (%s)")$PROMPT_END'
-RPROMPT_RETURN_CODE='%F{red}%(?..return %?)%f'
-RPROMPT='$RPROMPT_RETURN_CODE'
-fpath+=~/.zsh/zsh_functions
-
-# [ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env"
+# stolen from https://unix.stackexchange.com/questions/43601/how-can-i-set-my-default-shell-to-start-up-tmux
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  # exec tmux
+# fi
