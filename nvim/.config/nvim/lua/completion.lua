@@ -1,8 +1,8 @@
-local cmp = require'cmp'
+local cmp = require 'cmp'
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   mapping = {
@@ -20,7 +20,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'ultisnips' },
+    { name = 'luasnip' },
   }, {
     -- { name = 'buffer' },
   })
@@ -30,7 +30,11 @@ cmp.setup({
 cmp.setup.cmdline('/', {
   sources = {
     { name = 'buffer' }
-  }
+  },
+  mapping = {
+    -- ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 's' }),
+    -- ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 's' })
+  },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -39,6 +43,9 @@ cmp.setup.cmdline(':', {
     { name = 'path' }
   }, {
     { name = 'cmdline' }
-  })
+  }),
+  mapping = {
+    -- ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 's' }),
+    -- ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 's' })
+  },
 })
-

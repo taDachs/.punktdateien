@@ -4,7 +4,7 @@ local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 local conf = require("telescope.config").values
 
-require('telescope').setup{
+require('telescope').setup {
   defaults = {
   },
   pickers = {
@@ -37,5 +37,3 @@ require('telescope').setup{
     },
   }
 }
-
-
