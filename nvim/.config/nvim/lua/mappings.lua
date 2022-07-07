@@ -71,8 +71,8 @@ vim.api.nvim_set_keymap('s', '<Tab>', "<cmd>lua require'luasnip'.jump(1)<Cr>", {
 vim.api.nvim_set_keymap('s', '<S-Tab>', "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true, noremap = true })
 
 -- Commands
--- TODO: not expanded
-vim.api.nvim_create_user_command("EditConfig", "tabnew ~/.config/nvim/init.lua", {})
-vim.api.nvim_create_user_command("EditPlugins", "tabnew ~/.config/nvim/lua/plugins.lua", {})
-vim.api.nvim_create_user_command("EditMappings", "tabnew ~/.config/nvim/lua/mappins.lua", {})
+vim.api.nvim_create_user_command("EditConfig", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/init.lua", {})
+vim.api.nvim_create_user_command("EditPlugins", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/lua/plugins.lua", {})
+vim.api.nvim_create_user_command("EditMappings", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/lua/mappings.lua", {})
+
 vim.api.nvim_create_user_command("FormatBuffer", "lua vim.lsp.buf.format()", {})
