@@ -1,6 +1,6 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
+if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
   install_path })
 end
@@ -8,17 +8,26 @@ end
 plugins = require('packer').startup(function()
   -- misc
   use 'wbthomason/packer.nvim'
-  use { "windwp/nvim-autopairs", config = function()
-    require("nvim-autopairs").setup({
-      check_ts = true,
-    })
-  end }
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup({ check_ts = true }) end
+  }
   use 'kshenoy/vim-signature' -- for marks in side column
   use 'dstein64/vim-startuptime' -- for marks in side column
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function () require("lualine").setup() end
+    config = function () require("statusline") end
+  }
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v2.*",
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() require("bufferline").setup({
+      options = {
+        mode = "tabs"
+      }
+    }) end
   }
   use {
     "ur4ltz/surround.nvim",
@@ -59,35 +68,48 @@ plugins = require('packer').startup(function()
     opt = true,
     cmd = {"MarkdownPreview"}
   }
-  use { "xuhdev/vim-latex-live-preview", ft = { 'tex' } }
+  use {
+    "xuhdev/vim-latex-live-preview",
+    ft = { 'tex' }
+  }
   use 'takac/vim-hardtime'
   use {
-      'vim-scripts/DoxygenToolkit.vim',
-      opt = true,
-      cmd = {"Dox"}
-    }
-    use { "heavenshell/vim-pydocstring",
+    'vim-scripts/DoxygenToolkit.vim',
+    opt = true,
+    cmd = {"Dox"}
+  }
+  use {
+    "heavenshell/vim-pydocstring",
     run = 'make install',
     ft = { 'python' },
     opt = true,
     cmd = {"Pydocstring"}
   }
-  use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function() require('colorizer').setup() end
+  }
   use{
     'taketwo/vim-ros',
     opt = true,
     cmd = {"Rosed"}
   }
   use 'christoomey/vim-tmux-navigator'
-  use { 'smjonas/inc-rename.nvim', config = function() require("inc_rename").setup() end }
+  use {
+    'smjonas/inc-rename.nvim',
+    config = function() require("inc_rename").setup() end
+  }
   use 'airblade/vim-gitgutter'
-  use { 'numToStr/Comment.nvim', config = function() require("Comment").setup({
-    mappings = {
-      basic = false,
-      extra = false,
-      extended = false,
-    }
-  }) end }
+  use {
+    'numToStr/Comment.nvim',
+    config = function() require("Comment").setup({
+      mappings = {
+        basic = false,
+        extra = false,
+        extended = false,
+      }
+    }) end
+  }
   use {
     'preservim/tagbar',
     opt = true,
@@ -109,7 +131,10 @@ plugins = require('packer').startup(function()
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
-  use { 'ray-x/lsp_signature.nvim', config = function() require("lsp_signature").setup() end }
+  use {
+    'ray-x/lsp_signature.nvim',
+    config = function() require("lsp_signature").setup({hint_prefix = ""}) end
+  }
 
   -- snippets
   use 'L3MON4D3/LuaSnip'
@@ -117,7 +142,10 @@ plugins = require('packer').startup(function()
   use '~/Projects/musnips/'
 
   -- completion
-  use { 'hrsh7th/nvim-cmp', config = function() require('completion') end }
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function() require('completion') end
+  }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -129,7 +157,11 @@ plugins = require('packer').startup(function()
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   }
-  use { 'nvim-telescope/telescope.nvim', requires = {{"nvim-lua/plenary.nvim"}}, config = function() require('telescope-config') end }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{"nvim-lua/plenary.nvim"}},
+    config = function() require('telescope-config') end
+  }
 
   if packer_bootstrap then
     require('packer').sync()

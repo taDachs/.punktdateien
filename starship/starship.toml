@@ -20,22 +20,29 @@ right_format="$status"
 add_newline = true
 
 [character]
-success_symbol = "[λ](bold green) "
-error_symbol = "[λ](bold red) "
+success_symbol = "[λ](bold #68c152) "
+error_symbol = "[λ](bold #c62033) "
 
 [status]
 disabled=false
 
 [time]
+style = "bold #ffe844"
 disabled=false
 
 [nodejs]
 symbol="node "
 
 [username]
+style_root = "bold #c62033"
+style_user = "bold #fd9c3a"
 show_always = true
 format="[$user]($style)@"
 
 [hostname]
+style = "bold dimmed #00a88f"
 ssh_only = false
 disabled=false
+
+[directory]
+style = "bold #2075b8"
