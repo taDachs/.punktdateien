@@ -14,10 +14,16 @@ fv() {
   nvim $file
 }
 
+clang-format-all() {
+  format_path="$1"
+  find "$format_path" -type f \( -iname \*.h -o -iname \*.hpp -o -iname \*.cpp \) -print0 | xargs -0 clang-format -i
+}
+
 source_robot_folders() {
   unalias fzirob
+  unalias ce
   source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
-  fzirob $@
+  $@
 }
 
 source_nvm() {
@@ -49,6 +55,10 @@ setup_anymal() {
   export ROS_MASTER_URI=http://192.168.151.51:11311
 }
 
+setup_anymal_wifi() {
+  sudo ip route add 192.168.151.0/24 via 192.168.42.151 dev wlp0s20f3
+}
+
 setup_android() {
   export ANDROID_HOME=/usr/share/android/
   export PATH=$ANDROID_HOME/cmdline-tools/tools/bin/:$PATH
@@ -78,4 +88,11 @@ git_sparse_clone() (
 git_split_off() {
   path_to_folder="$2"
   git filter-repo --subdirectory-filter "$path_to_folder"
+}
+
+get_days_until() {
+  target=`date -d "$1" +%j`
+  today=`date +%j`
+  days=$(($target - $today))
+  echo "$days"
 }

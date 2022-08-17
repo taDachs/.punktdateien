@@ -44,6 +44,7 @@ colorscheme = {
     c = {bg = colors.background_color[3], fg = colors.foreground_color[4]}
   }
 }
+
 require('lualine').setup {
   options = {
     icons_enabled = true,

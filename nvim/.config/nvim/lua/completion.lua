@@ -21,6 +21,8 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'emoji' },
+    { name = 'cmp_ros' },
   }, {
     -- { name = 'buffer' },
   })
@@ -45,8 +47,8 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   }),
   mapping = {
-    -- ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 's' }),
-    -- ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 's' })
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 's' }),
+    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 's' })
   },
 })
 

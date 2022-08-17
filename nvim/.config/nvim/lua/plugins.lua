@@ -7,6 +7,7 @@ end
 
 plugins = require('packer').startup(function()
   -- misc
+  use "tversteeg/registers.nvim"
   use 'wbthomason/packer.nvim'
   use {
     "windwp/nvim-autopairs",
@@ -24,15 +25,31 @@ plugins = require('packer').startup(function()
     tag = "v2.*",
     requires = 'kyazdani42/nvim-web-devicons',
     config = function() require("bufferline").setup({
+      -- highlights = {
+      --     fill = {
+      --       guibg = '#000000',
+      --     },
+      --     buffer_visible = {
+      --       guifg = '#333333',
+      --     }
+      -- },
       options = {
-        mode = "tabs"
+        -- mode = "tabs"
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        separator_style = "thick",
+        diagnostics = "nvim_lsp",
       }
     }) end
   }
   use {
     "ur4ltz/surround.nvim",
     config = function()
-      require"surround".setup {mappings_style = "surround"}
+      require"surround".setup {
+        mappings_style = "surround",
+        map_insert_mode = false,
+        context_offset = 1,
+      }
     end
   }
   use {
@@ -65,8 +82,8 @@ plugins = require('packer').startup(function()
   use {
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
-    opt = true,
-    cmd = {"MarkdownPreview"}
+    -- opt = true,
+    -- cmd = {"MarkdownPreview"}
   }
   use {
     "xuhdev/vim-latex-live-preview",
@@ -127,10 +144,28 @@ plugins = require('packer').startup(function()
   -- colorschemes
   use 'phanviet/vim-monokai-pro'
   use '~/Projects/KIT.vim/'
+  use {
+    '~/Projects/ros.nvim/',
+    config = function() require("ros-nvim").setup({telescope = {only_workspace = true}}) end,
+  }
+  use {
+    '~/Projects/cmp-ros/',
+    -- config = function() require("cmp-ros").setup({telescope = {only_workspace = true}}) end,
+  }
 
   -- LSP
+  use {
+    "williamboman/mason.nvim",
+    config = function () require("mason").setup() end,
+  }
+  use {
+    "williamboman/mason-lspconfig.nvim",
+    config = function () require("mason-lspconfig").setup({
+     automatic_installation = true,
+    }) end,
+  }
   use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
+
   use {
     'ray-x/lsp_signature.nvim',
     config = function() require("lsp_signature").setup({hint_prefix = ""}) end
@@ -151,6 +186,7 @@ plugins = require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'saadparwaiz1/cmp_luasnip'
+  use 'hrsh7th/cmp-emoji'
 
   -- telescope
   use {
@@ -161,6 +197,10 @@ plugins = require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {{"nvim-lua/plenary.nvim"}},
     config = function() require('telescope-config') end
+  }
+
+  use {
+    'tpope/vim-eunuch'
   }
 
   if packer_bootstrap then

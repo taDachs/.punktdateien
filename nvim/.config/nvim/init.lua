@@ -1,12 +1,11 @@
 vim.opt.termguicolors = true
 vim.opt.syntax = "enabled"
 
+vim.cmd("color kit")
+
 local plugins = require("plugins")
 local mappings = require("mappings")
 local lsp = require("lsp-config")
-
--- color shit
-vim.cmd("color kit")
 
 -- softtabs
 vim.opt.tabstop = 2
