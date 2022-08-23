@@ -96,3 +96,8 @@ get_days_until() {
   days=$(($target - $today))
   echo "$days"
 }
+
+trash() {
+  mkdir -p /tmp/trash
+  mv $@ /tmp/trash
+}

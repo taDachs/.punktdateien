@@ -202,6 +202,16 @@ plugins = require('packer').startup(function()
   use {
     'tpope/vim-eunuch'
   }
+  use {
+    'j-hui/fidget.nvim',
+    config = function() require"fidget".setup{} end
+  }
+  use {
+    'm-demare/hlargs.nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = function() require('hlargs').setup() end
+
+  }
 
   if packer_bootstrap then
     require('packer').sync()
