@@ -12,3 +12,4 @@ stow --target ~/.config nort
 stow --target ~ tmux
 stow --target ~/.config starship
 stow --target ~/.config gtk-3.0
+stow --target ~/.config rofi
