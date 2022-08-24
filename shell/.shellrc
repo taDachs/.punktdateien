@@ -1,0 +1,6 @@
+#/* vim: set filetype=sh : */
+
+source ~/.config/shell/alias.sh
+source ~/.config/shell/util.bash
+source ~/.config/shell/env.sh
+source ~/.config/shell/ros.bash

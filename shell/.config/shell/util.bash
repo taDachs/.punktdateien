@@ -10,7 +10,7 @@ mcd() {
 }
 
 fv() {
-  file="$(find $@ -type f | fzf --preview="less {}")"
+  file="$(find $@ -type f | pzf)"
   nvim $file
 }
 
@@ -19,18 +19,10 @@ clang-format-all() {
   find "$format_path" -type f \( -iname \*.h -o -iname \*.hpp -o -iname \*.cpp \) -print0 | xargs -0 clang-format -i
 }
 
-source_robot_folders() {
-  unalias fzirob
-  unalias ce
-  source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
-  $@
-}
-
 source_nvm() {
   unalias nvm
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-  nvm $@
 }
 
 source_ghcup() {
@@ -41,22 +33,11 @@ source_ghcup() {
   shift
 
   [ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env"
-  command $call $@
 }
 
 source_gvm() {
   unalias gvm
   source /home/max/.gvm/scripts/gvm
-  gvm $@
-}
-
-setup_anymal() {
-  export ROS_IP=192.168.151.69
-  export ROS_MASTER_URI=http://192.168.151.51:11311
-}
-
-setup_anymal_wifi() {
-  sudo ip route add 192.168.151.0/24 via 192.168.42.151 dev wlp0s20f3
 }
 
 setup_android() {
@@ -97,7 +78,14 @@ get_days_until() {
   echo "$days"
 }
 
-trash() {
-  mkdir -p /tmp/trash
-  mv $@ /tmp/trash
+pdf-ack-grep() {
+  if hash pdftotext 2>/dev/null; then
+    find . -name '*.pdf' -exec sh -c 'pdftotext "{}" - | grep --with-filename --label="{}" --color '"$1" \;
+  else
+    echo "pdftotext not found. Please install the pdftotext utility to use this function."
+  fi
+}
+
+insult() {
+  echo "\033[0;31mNo, you are an idiot! Do you remember how many times you wiped your fucking drive because you didn't think about what exactly you are deleting or because you forgot a subfolder? Either THINK about what you are about to do or use trash or move, or just don't delete the fucking file(s) in the first place.\033[0m"
 }

@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+set -x
 
 stow --target ~ zsh
 # stow --target ~/.config alacritty
@@ -13,3 +14,4 @@ stow --target ~ tmux
 stow --target ~/.config starship
 stow --target ~/.config gtk-3.0
 stow --target ~/.config rofi
+stow --target ~ shell

@@ -1,8 +1,29 @@
-# auto completion
+source ~/.shellrc
+
 export CONFIG_DIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh/"
-source "$CONFIG_DIR/functions/util.bash"
-source "$CONFIG_DIR/alias.bash"
+
+# i am an idiot
+function trash () {( set -e
+  mkdir -p /tmp/trash
+  force=false
+  for var in "$@"; do
+    if [[ $var != -* ]]; then
+      if [ ! -f "$var" ] ; then
+        # to stupid to use !
+        if [ $force = false ]; then
+          echo "trash: cannot remove $var: No such file or directory"
+          exit 1
+        fi
+      else
+        mv -f $var /tmp/trash
+      fi
+    elif [[ $var == *f* ]]; then
+      force=true
+    fi
+  done)
+}
+alias rm="trash"
 
 # Oh my zsh
 plugins=(
@@ -33,11 +54,7 @@ bindkey "^n" history-search-forward
 
 # Make colors work with tmux
 # if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
-
 export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
-
-export EDITOR=nvim
-export PATH=$PATH:$HOME/.cargo/bin
 
 # Promt
 # enable colors
