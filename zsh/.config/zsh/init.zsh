@@ -7,22 +7,45 @@ export ZSH="$HOME/.oh-my-zsh/"
 function trash () {( set -e
   mkdir -p /tmp/trash
   force=false
+  recursive=false
+
+  while getopts "fr" opt; do
+    case $opt in
+      f)
+        force=true
+        ;;
+      r)
+        recursive=true
+        ;;
+      *)
+        exit 1;
+    esac
+  done
+  shift $((OPTIND - 1))
+
   for var in "$@"; do
-    if [[ $var != -* ]]; then
-      if [ ! -f "$var" ] ; then
-        # to stupid to use !
-        if [ $force = false ]; then
-          echo "trash: cannot remove $var: No such file or directory"
-          exit 1
-        fi
-      else
-        mv -f $var /tmp/trash
-      fi
-    elif [[ $var == *f* ]]; then
-      force=true
+    exists=false
+    if [[ -f "$var" || -d "$var" ]]; then
+      exists=true
     fi
-  done)
-}
+    if [[ "$exists" = true || "$force" = true ]]; then
+      if [[ (-d "$var") && ("$recursive" = false) ]]; then
+        echo "trash: cannot trash $var: $var is a directory"
+        exit 1
+      fi
+    else
+        echo "trash: cannot trash $var: No such file or directory"
+        exit 1
+    fi
+  done
+  for var in "$@"; do
+    if [[ -f "$var" || -d "$var" ]]; then
+      \rm -rf /tmp/trash/$var
+      mv -f "$var" /tmp/trash
+    fi
+  done
+)}
+
 alias rm="trash"
 
 # Oh my zsh

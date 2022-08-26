@@ -1,5 +1,6 @@
-
-vim.g.mapleader = '-'
+vim.api.nvim_set_keymap('n', '<space>', '<nop>', { noremap = true })
+vim.g.mapleader = ' '
+-- vim.cmd("let mapleader=\"\\<Space>\"")
 
 -- remap esc to jk
 vim.api.nvim_set_keymap('i', 'jk', '<esc>', { noremap = true })
@@ -41,6 +42,7 @@ vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>Telescope find_files<cr>', { nor
 vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>Telescope live_grep<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>Telescope ros ros<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>b', '<cmd>Telescope buffers<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>l', '<cmd>Telescope lsp_document_symbols<cr>', { noremap = true })
 
 -- LSP
 -- gd : goto definition

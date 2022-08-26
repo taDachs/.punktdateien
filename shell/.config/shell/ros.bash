@@ -10,6 +10,11 @@ setup_anymal() {
   export ROS_MASTER_URI=http://192.168.151.51:11311
 }
 
+setup_spot() {
+  export ROS_IP=192.168.42.190
+  export ROS_MASTER_URI=http://192.168.42.141:11311
+}
+
 setup_anymal_wifi() {
   sudo ip route add 192.168.151.0/24 via 192.168.42.151 dev wlp0s20f3
 }
