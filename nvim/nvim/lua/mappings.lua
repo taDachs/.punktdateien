@@ -29,6 +29,8 @@ vim.api.nvim_set_keymap('n', '<leader><space>', '<cmd>noh<cr>', { noremap = true
 -- J deletes leading spaces
 -- vim.api.nvim_set_keymap('n', 'J', 'Jdw', { noremap = true })
 
+-- <leader>rw -- remove wrapping function call
+vim.api.nvim_set_keymap('n', '<leader>rw', 'dt(ds(', { noremap = false })
 
 
 -- comments
