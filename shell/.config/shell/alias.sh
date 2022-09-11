@@ -13,3 +13,5 @@ alias ghc="source_ghcup; ghc"
 alias ghci="source_ghcup; ghci"
 alias ghcup="source_ghcup; ghcup"
 alias gvm="source_gvm; gvm"
+
+alias gs="git status"

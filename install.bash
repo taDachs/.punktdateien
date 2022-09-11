@@ -2,7 +2,7 @@
 set -x
 
 stow --target ~ zsh
-# stow --target ~/.config alacritty
+stow --target ~/.config alacritty
 stow --target ~/.config i3
 stow --target ~/.config i3status
 # stow --target ~/.config awesome

@@ -42,7 +42,7 @@ show_always = true
 format="[$user]($style)@"
 
 [hostname]
-style = "bold dimmed #00a88f"
+style = "bold #00a88f"
 ssh_only = false
 disabled=false
 

@@ -199,6 +199,9 @@ gaps outer 1
 smart_gaps on
 hide_edge_borders smart
 
+# no_focus [class=".*"]
+# focus_on_window_activation none
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {

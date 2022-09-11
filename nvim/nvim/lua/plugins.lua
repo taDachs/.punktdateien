@@ -213,6 +213,8 @@ plugins = require('packer').startup(function()
 
   }
 
+  use 'sheerun/vim-polyglot'
+
   if packer_bootstrap then
     require('packer').sync()
   end

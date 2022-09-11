@@ -3,6 +3,9 @@ source ~/.shellrc
 export CONFIG_DIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh/"
 
+
+# source /usr/local/share/zsh/site-functions/_nb
+
 # i am an idiot
 function trash () {( set -e
   mkdir -p /tmp/trash
@@ -84,3 +87,4 @@ export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VE
 export CLICOLOR=1
 
 eval "$(starship init zsh)"
+source /usr/share/doc/fzf/examples/key-bindings.zsh

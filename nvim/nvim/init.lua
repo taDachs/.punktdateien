@@ -12,6 +12,8 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- color column
 vim.opt.colorcolumn = "100"
@@ -25,6 +27,7 @@ vim.opt.undofile = true
 -- relaive numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.mouse = nil
 
 local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
