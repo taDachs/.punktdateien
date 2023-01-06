@@ -41,7 +41,8 @@ function trash () {( set -e
   for var in "$@"; do
     if [[ -f "$var" || -d "$var" ]]; then
       \rm -rf /tmp/trash/$var
-      mv -f "$var" /tmp/trash
+      mkdir -p /tmp/trash/$var
+      mv -f "$var" /tmp/trash/$var
     fi
   done
 )}

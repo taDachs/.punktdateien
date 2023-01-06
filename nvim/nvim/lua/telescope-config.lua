@@ -35,5 +35,8 @@ require('telescope').setup {
       override_generic_sorter = true,
       override_file_sorter = true,
     },
+    bibtex = {
+      format = 'tex'
+    },
   }
 }

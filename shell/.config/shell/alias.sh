@@ -3,7 +3,7 @@ alias z='zathura'
 alias prettyj='python -mjson.tool'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias pzf="fzf --height 100% --preview 'batcat --color=always --style=full --line-range=:500 {}'"
+alias pzf="fzf --height 100% --preview 'bat --color=always --style=full --line-range=:500 {}'"
 alias open='xdg-open'
 
 alias fzirob="source_robot_folders fzirob"
@@ -15,3 +15,5 @@ alias ghcup="source_ghcup; ghcup"
 alias gvm="source_gvm; gvm"
 
 alias gs="git status"
+
+alias emacs="emacs --no-window-system"

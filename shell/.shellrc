@@ -6,8 +6,13 @@ if [ ! -f ~/.fzf.zsh ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 fi
 
+if [ -f ~/.local_shellrc ]; then
+    source ~/.local_shellrc
+fi
+
 source ~/.config/shell/alias.sh
 source ~/.config/shell/util.bash
 source ~/.config/shell/env.sh
 source ~/.config/shell/ros.bash
 source ~/.config/shell/completions/ros_fzf_completions.sh
+source ~/.config/shell/completions/git_fzf_completions.sh

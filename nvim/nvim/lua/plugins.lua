@@ -7,14 +7,14 @@ end
 
 plugins = require('packer').startup(function()
   -- misc
-  use "tversteeg/registers.nvim"
   use 'wbthomason/packer.nvim'
+  use "tversteeg/registers.nvim"
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup({ check_ts = true }) end
   }
   use 'kshenoy/vim-signature' -- for marks in side column
-  use 'dstein64/vim-startuptime' -- for marks in side column
+  use 'dstein64/vim-startuptime'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
@@ -25,20 +25,13 @@ plugins = require('packer').startup(function()
     tag = "v2.*",
     requires = 'kyazdani42/nvim-web-devicons',
     config = function() require("bufferline").setup({
-      -- highlights = {
-      --     fill = {
-      --       guibg = '#000000',
-      --     },
-      --     buffer_visible = {
-      --       guifg = '#333333',
-      --     }
-      -- },
       options = {
         -- mode = "tabs"
         show_buffer_close_icons = false,
         show_close_icon = false,
         separator_style = "thick",
         diagnostics = "nvim_lsp",
+        numbers = "ordinal",
       }
     }) end
   }
@@ -106,11 +99,11 @@ plugins = require('packer').startup(function()
     'norcalli/nvim-colorizer.lua',
     config = function() require('colorizer').setup() end
   }
-  use{
-    'taketwo/vim-ros',
-    opt = true,
-    cmd = {"Rosed"}
-  }
+  --  use{
+  --    'taketwo/vim-ros',
+  --    opt = true,
+  --    cmd = {"Rosed"}
+  --  }
   use 'christoomey/vim-tmux-navigator'
   use {
     'smjonas/inc-rename.nvim',
@@ -137,7 +130,9 @@ plugins = require('packer').startup(function()
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function() require("treesitter") end
+    config = function()
+      require("treesitter")
+    end
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
@@ -161,7 +156,7 @@ plugins = require('packer').startup(function()
   use {
     "williamboman/mason-lspconfig.nvim",
     config = function () require("mason-lspconfig").setup({
-     automatic_installation = true,
+      automatic_installation = true,
     }) end,
   }
   use 'neovim/nvim-lspconfig'
@@ -198,22 +193,37 @@ plugins = require('packer').startup(function()
     requires = {{"nvim-lua/plenary.nvim"}},
     config = function() require('telescope-config') end
   }
-
   use {
-    'tpope/vim-eunuch'
+    "nvim-telescope/telescope-bibtex.nvim",
+    requires = {
+      {'nvim-telescope/telescope.nvim'},
+    },
+    config = function ()
+      require"telescope".load_extension("bibtex")
+    end,
   }
+
   use {
     'j-hui/fidget.nvim',
     config = function() require"fidget".setup{} end
   }
+
   use {
     'm-demare/hlargs.nvim',
     requires = { 'nvim-treesitter/nvim-treesitter' },
     config = function() require('hlargs').setup() end
-
+  }
+  use {
+    'tamton-aquib/duck.nvim',
+    config = function()
+      vim.keymap.set('n', '<leader>dd', function() for i = 1, 1, 1 do require("duck").hatch() end end, {})
+      vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
+    end
   }
 
-  use 'sheerun/vim-polyglot'
+  use {
+    "aduros/ai.vim"
+  }
 
   if packer_bootstrap then
     require('packer').sync()
@@ -239,6 +249,9 @@ vim.g.hardtime_motion_with_count_resets = 1
 
 -- git gutter
 vim.g.gitgutter_map_keys = 0
+
+-- ai.vim
+vim.g.ai_no_mappings = 1
 
 -- pydocstring
 vim.api.nvim_set_keymap('n', '<nop>', '<Plug>(pydocstring)', { noremap = true })

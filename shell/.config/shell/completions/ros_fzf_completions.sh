@@ -35,3 +35,21 @@ _fzf_complete_rosrun() {
   { rospack list-names }
   )
 }
+_fzf_complete_rossrv() {
+  ARGS="$@"
+  _fzf_complete "--sort" "$@" < <(
+  { rossrv list }
+  )
+}
+_fzf_complete_rosmsg() {
+  ARGS="$@"
+  _fzf_complete "--sort" "$@" < <(
+  { rosmsg list }
+  )
+}
+_fzf_complete_roscd() {
+  ARGS="$@"
+  _fzf_complete "--sort" "$@" < <(
+  { rospack list-names }
+  )
+}

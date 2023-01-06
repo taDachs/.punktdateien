@@ -67,7 +67,7 @@ git_sparse_clone() (
 )
 
 git_split_off() {
-  path_to_folder="$2"
+  path_to_folder="$1"
   git filter-repo --subdirectory-filter "$path_to_folder"
 }
 

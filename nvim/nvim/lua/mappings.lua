@@ -34,17 +34,29 @@ vim.api.nvim_set_keymap('n', '<leader>rw', 'dt(ds(', { noremap = false })
 
 
 -- comments
-vim.keymap.set('n', '<leader>co', '<CMD>lua require("Comment.api").toggle.current_linewise()<CR>')
-vim.keymap.set('x', '<leader>co', '<ESC><CMD>lua require("Comment.api").toggle.linewise_op(vim.fn.visualmode())<CR>')
+local comment_api = require("Comment.api")
+local esc = vim.api.nvim_replace_termcodes(
+    '<ESC>', true, false, true
+)
+vim.keymap.set('n', '<leader>co', comment_api.toggle.linewise.current)
+vim.keymap.set('x', '<leader>co', function()
+  vim.api.nvim_feedkeys(esc, 'nx', false)
+  comment_api.toggle.linewise(vim.fn.visualmode())
+end)
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<leader>ta', '<cmd>Telescope find_files<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>tf', '<cmd>Telescope live_grep<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>tr', '<cmd>Telescope ros ros<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>Telescope lsp_document_symbols<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>tds', '<cmd>Telescope lsp_document_symbols<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>tws', '<cmd>Telescope lsp_workspace_symbols<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>Telescope bibtex format=tex<cr><esc>', { noremap = true })
+-- vim.api.nvim_set_keymap('i', '<C-c>', '<cmd>Telescope bibtex format=tex<cr>', { noremap = true })
+
 -- tree
 vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>NnnPicker<cr>', { noremap = true })
 
 -- LSP
 -- gd : goto definition
@@ -77,9 +89,23 @@ vim.api.nvim_set_keymap('s', '<Tab>', "<cmd>lua require'luasnip'.jump(1)<Cr>", {
 vim.api.nvim_set_keymap('s', '<S-Tab>', "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true, noremap = true })
 
 -- bufferline
-vim.api.nvim_set_keymap('n', 'gt', "<cmd>BufferLineCycleNext<Cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap('n', 'gT', "<cmd>BufferLineCyclePrev<Cr>", { silent = true, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'gt', "<cmd>BufferLineCycleNext<Cr>", { silent = true, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'gT', "<cmd>BufferLineCyclePrev<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>k', "<cmd>BufferLineCycleNext<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>j', "<cmd>BufferLineCyclePrev<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>K', "<cmd>BufferLineMoveNext<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>J', "<cmd>BufferLineMovePrev<Cr>", { silent = true, noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>bls', "lua require('bufferline').sort_buffers_by(function (buf_a, buf_b) return buf_a.name < buf_b.name end)", { silent = true, noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>q', "<cmd>bd<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>1', "<cmd>BufferLineGoToBuffer 1<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>2', "<cmd>BufferLineGoToBuffer 2<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>3', "<cmd>BufferLineGoToBuffer 3<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>4', "<cmd>BufferLineGoToBuffer 4<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>5', "<cmd>BufferLineGoToBuffer 5<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>6', "<cmd>BufferLineGoToBuffer 6<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>7', "<cmd>BufferLineGoToBuffer 7<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>8', "<cmd>BufferLineGoToBuffer 8<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>9', "<cmd>BufferLineGoToBuffer 9<Cr>", { silent = true, noremap = true })
 
 -- Commands
 vim.api.nvim_create_user_command("EditConfig", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/init.lua", {})
@@ -87,3 +113,10 @@ vim.api.nvim_create_user_command("EditPlugins", "tabnew " .. vim.fn.expand("~") 
 vim.api.nvim_create_user_command("EditMappings", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/lua/mappings.lua", {})
 
 vim.api.nvim_create_user_command("FormatBuffer", "lua vim.lsp.buf.format()", {})
+
+-- TODO: move to ftplugin
+vim.api.nvim_set_keymap('n', '<leader>ch', "<cmd>ClangdSwitchSourceHeader<Cr>", { silent = true, noremap = true })
+
+-- ros helper stuff
+vim.api.nvim_set_keymap('v', '<leader>rol', "<cmd>lua open_ros_launch_include()<Cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>rol', "<cmd>lua open_ros_launch_include()<Cr>", { silent = true, noremap = true })

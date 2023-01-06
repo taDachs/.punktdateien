@@ -1,11 +1,13 @@
 vim.opt.termguicolors = true
 vim.opt.syntax = "enabled"
+vim.opt.spell = true
 
 vim.cmd("color kit")
 
 local plugins = require("plugins")
 local mappings = require("mappings")
 local lsp = require("lsp-config")
+local util = require("util")
 
 -- softtabs
 vim.opt.tabstop = 2
@@ -14,6 +16,9 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+-- vim.opt.display = "lastline"
+-- vim.o.ch = 0
+-- vim.o.ls = 0
 
 -- color column
 vim.opt.colorcolumn = "100"
@@ -27,7 +32,6 @@ vim.opt.undofile = true
 -- relaive numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.mouse = nil
 
 local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {

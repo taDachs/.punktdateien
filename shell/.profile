@@ -9,4 +9,9 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+if [ -d "/var/lib/flatpak/exports/share" ] ; then
+    XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
+fi
+
 export EDITOR="nvim"
+. "$HOME/.cargo/env"

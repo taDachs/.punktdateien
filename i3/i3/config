@@ -199,6 +199,8 @@ gaps outer 1
 smart_gaps on
 hide_edge_borders smart
 
+workspace_auto_back_and_forth yes
+
 # no_focus [class=".*"]
 # focus_on_window_activation none
 
@@ -206,7 +208,7 @@ hide_edge_borders smart
 # finds out, if available)
 bar {
   colors {
-    background #000000
+    background #222222
     statusline #FFFFFF
     separator  #666666
 
@@ -218,13 +220,13 @@ bar {
   }
   position top
   font pango: UbuntuMono, FontAwesome 12
-  status_command i3blocks
+  status_command i3status
   tray_output primary
 }
 
 exec --no-startup-id autorandr -c
 exec_always synclient TouchpadOff=1
-exec_always feh --bg-fill Pictures/Wallpapers/era7-spaceships.jpg
+exec_always feh --bg-fill Pictures/Wallpapers/paragon-station.jpg
 
 exec --no-startup-id i3-msg 'workspace 1 ; exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 3 ; exec brave-browser'
