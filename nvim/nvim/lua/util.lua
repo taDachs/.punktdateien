@@ -29,3 +29,11 @@ function open_ros_launch_include()
     vim.api.nvim_command('edit ' .. path)
   end
 end
+
+function lazy_load_treesitter()
+  local timer = vim.loop.new_timer()
+  timer:start(10, 0, vim.schedule_wrap(function()
+    require("treesitter")
+  end))
+end
+

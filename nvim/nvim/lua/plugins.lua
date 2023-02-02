@@ -1,34 +1,36 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-  install_path })
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 
-plugins = require('packer').startup(function()
-  -- misc
-  use 'wbthomason/packer.nvim'
-  use {
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup({
+-- misc
+  {
     "tversteeg/registers.nvim",
-    config = function()
-      require("registers").setup()
-    end,
-  }
-  use {
+    config = true,
+  },
+  {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup({ check_ts = true }) end
-  }
-  use 'kshenoy/vim-signature' -- for marks in side column
-  use 'dstein64/vim-startuptime'
-  use {
+  },
+  'kshenoy/vim-signature', -- for marks in side column
+  { 'dstein64/vim-startuptime', cmd = { "StartupTime" }},
+  {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function () require("statusline") end
-  }
-  use {
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    config = function() require("statusline") end,
+  },
+  {
     'akinsho/bufferline.nvim',
-    tag = "v2.*",
-    requires = 'kyazdani42/nvim-web-devicons',
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function() require("bufferline").setup({
       options = {
         -- mode = "tabs"
@@ -39,8 +41,8 @@ plugins = require('packer').startup(function()
         numbers = "ordinal",
       }
     }) end
-  }
-  use {
+  },
+  {
     "ur4ltz/surround.nvim",
     config = function()
       require"surround".setup {
@@ -48,74 +50,46 @@ plugins = require('packer').startup(function()
         map_insert_mode = false,
         context_offset = 1,
       }
-    end
-  }
-  use {
-    'kyazdani42/nvim-tree.lua',
-    config = function() require("nvim-tree").setup({
-      view = {
-        mappings = {
-          custom_only = true,
-          list = {
-            { key = { "<CR>", "o" }, action = "edit_no_picker" },
-            { key = "O", action = "system_open" },
-            { key = "a", action = "create" },
-            { key = "s", action = "vsplit" },
-            { key = "t", action = "tabnew" },
-            { key = "q", action = "close" },
-            { key = "r", action = "full_rename" },
-            { key = "d", action = "remove" },
-            { key = "i", action = "toggle_dotfiles" },
-            { key = "y", action = "copy_name" },
-            { key = "Y", action = "copy_path" },
-            { key = "g?", action = "toggle_help" },
-          },
-        },
-      },
-    }) end,
-    requires = {"kyazdani42/nvim-web-devicons"},
-    opt = true,
-    cmd = {"NvimTreeFindFileToggle"}
-  }
-  use {
+    end,
+    keys = { "s", "ys" },
+  },
+  {
     "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-    -- opt = true,
-    -- cmd = {"MarkdownPreview"}
-  }
-  use {
+    build = function() vim.fn["mkdp#util#install"]() end,
+    cmd = {"MarkdownPreview"},
+  },
+  {
     "xuhdev/vim-latex-live-preview",
     ft = { 'tex' }
-  }
-  use 'takac/vim-hardtime'
-  use {
+  },
+  'takac/vim-hardtime',
+  {
     'vim-scripts/DoxygenToolkit.vim',
-    opt = true,
     cmd = {"Dox"}
-  }
-  use {
+  },
+  {
     "heavenshell/vim-pydocstring",
-    run = 'make install',
+    build = 'make install',
     ft = { 'python' },
-    opt = true,
     cmd = {"Pydocstring"}
-  }
-  use {
+  },
+  {
     'norcalli/nvim-colorizer.lua',
-    config = function() require('colorizer').setup() end
-  }
-  --  use{
-  --    'taketwo/vim-ros',
-  --    opt = true,
-  --    cmd = {"Rosed"}
-  --  }
-  use 'christoomey/vim-tmux-navigator'
-  use {
+    config = true,
+  },
+  -- --  use{
+  -- --    'taketwo/vim-ros',
+  -- --    opt = true,
+  -- --    cmd = {"Rosed"}
+  -- --  }
+  'christoomey/vim-tmux-navigator',
+  {
     'smjonas/inc-rename.nvim',
-    config = function() require("inc_rename").setup() end
-  }
-  use 'airblade/vim-gitgutter'
-  use {
+    config = true,
+    cmd = "IncRename"
+  },
+  'airblade/vim-gitgutter',
+  {
     'numToStr/Comment.nvim',
     config = function() require("Comment").setup({
       mappings = {
@@ -123,117 +97,118 @@ plugins = require('packer').startup(function()
         extra = false,
         extended = false,
       }
-    }) end
-  }
-  use {
-    'preservim/tagbar',
-    opt = true,
-    cmd = {"Tagbar"}
-  }
+    }) end,
+    keys = { "<leader>co" },
+  },
 
   -- treesitter
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function()
-      require("treesitter")
-    end
-  }
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
+    lazy = true,
+  },
+  'nvim-treesitter/nvim-treesitter-textobjects',
 
   -- colorschemes
-  use 'phanviet/vim-monokai-pro'
-  use '~/Projects/KIT.vim/'
-  use {
-    '~/Projects/ros.nvim/',
+  'phanviet/vim-monokai-pro',
+  { dir = '~/Projects/KIT.vim/' },
+
+  -- mystuff
+  {
+    dir = '~/Projects/ros.nvim/',
     config = function() require("ros-nvim").setup({telescope = {only_workspace = true}}) end,
-  }
-  use {
-    '~/Projects/cmp-ros/',
+  },
+  {
+    dir = '~/Projects/cmp-ros/',
     -- config = function() require("cmp-ros").setup({telescope = {only_workspace = true}}) end,
-  }
+  },
 
   -- LSP
-  use {
+  {
     "williamboman/mason.nvim",
-    config = function () require("mason").setup() end,
-  }
-  use {
+    config = true,
+  },
+  {
     "williamboman/mason-lspconfig.nvim",
     config = function () require("mason-lspconfig").setup({
       automatic_installation = true,
     }) end,
-  }
-  use 'neovim/nvim-lspconfig'
+  },
+  'neovim/nvim-lspconfig',
 
-  use {
+  {
     'ray-x/lsp_signature.nvim',
     config = function() require("lsp_signature").setup({hint_prefix = ""}) end
-  }
+  },
 
   -- snippets
-  use 'L3MON4D3/LuaSnip'
-  use 'rafamadriz/friendly-snippets'
-  use '~/Projects/musnips/'
+  'L3MON4D3/LuaSnip',
+  'rafamadriz/friendly-snippets',
+  -- '~/Projects/musnips/'
 
-  -- completion
-  use {
+  -- -- completion
+  {
     'hrsh7th/nvim-cmp',
-    config = function() require('completion') end
-  }
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'hrsh7th/cmp-emoji'
+    config = function() require("completion") end,
+  },
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'saadparwaiz1/cmp_luasnip',
+  'hrsh7th/cmp-emoji',
 
   -- telescope
-  use {
+  {
     'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-  }
-  use {
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
+  {
     'nvim-telescope/telescope.nvim',
-    requires = {{"nvim-lua/plenary.nvim"}},
-    config = function() require('telescope-config') end
-  }
-  use {
+    dependencies = {"nvim-lua/plenary.nvim"},
+    config = true
+  },
+  {
     "nvim-telescope/telescope-bibtex.nvim",
-    requires = {
+    dependencies = {
       {'nvim-telescope/telescope.nvim'},
     },
     config = function ()
       require"telescope".load_extension("bibtex")
     end,
-  }
+  },
 
-  use {
+  {
     'j-hui/fidget.nvim',
-    config = function() require"fidget".setup{} end
-  }
+    config = true,
+  },
 
-  use {
+  {
     'm-demare/hlargs.nvim',
-    requires = { 'nvim-treesitter/nvim-treesitter' },
-    config = function() require('hlargs').setup() end
-  }
-  use {
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = true,
+  },
+  {
     'tamton-aquib/duck.nvim',
     config = function()
       vim.keymap.set('n', '<leader>dd', function() for i = 1, 1, 1 do require("duck").hatch() end end, {})
       vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
-    end
-  }
+    end,
+  },
 
-  use {
+  {
     "aduros/ai.vim"
-  }
+  },
 
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+  "cshuaimin/ssr.nvim",
+  {
+    "preservim/vimux",
+    cmd = {"VimuxRunCommand", "VimuxRunLastCommand"}
+  },
+
+
+})
+
 
 -- Markdown Preview
 vim.g.mkdp_auto_close = 1
@@ -264,4 +239,11 @@ vim.api.nvim_set_keymap('n', '<nop>', '<Plug>(pydocstring)', { noremap = true })
 -- luasnip
 require("luasnip.loaders.from_vscode").lazy_load()
 
+local treesitterGrp = vim.api.nvim_create_augroup("LazyTreesitter", { clear = true })
+vim.api.nvim_create_autocmd("UIEnter", {
+  command = 'lua lazy_load_treesitter()',
+  group = treesitterGrp,
+})
+
 return plugins
+

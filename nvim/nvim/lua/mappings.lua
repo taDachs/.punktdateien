@@ -34,14 +34,13 @@ vim.api.nvim_set_keymap('n', '<leader>rw', 'dt(ds(', { noremap = false })
 
 
 -- comments
-local comment_api = require("Comment.api")
 local esc = vim.api.nvim_replace_termcodes(
-    '<ESC>', true, false, true
+'<ESC>', true, false, true
 )
-vim.keymap.set('n', '<leader>co', comment_api.toggle.linewise.current)
+vim.keymap.set('n', '<leader>co', require("Comment.api").toggle.linewise.current)
 vim.keymap.set('x', '<leader>co', function()
   vim.api.nvim_feedkeys(esc, 'nx', false)
-  comment_api.toggle.linewise(vim.fn.visualmode())
+  require("Comment.api").toggle.linewise(vim.fn.visualmode())
 end)
 
 -- telescope
@@ -55,7 +54,7 @@ vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>Telescope bibtex format=tex<cr>
 -- vim.api.nvim_set_keymap('i', '<C-c>', '<cmd>Telescope bibtex format=tex<cr>', { noremap = true })
 
 -- tree
-vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>NnnPicker<cr>', { noremap = true })
 
 -- LSP
@@ -107,13 +106,25 @@ vim.api.nvim_set_keymap('n', '<leader>7', "<cmd>BufferLineGoToBuffer 7<Cr>", { s
 vim.api.nvim_set_keymap('n', '<leader>8', "<cmd>BufferLineGoToBuffer 8<Cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>9', "<cmd>BufferLineGoToBuffer 9<Cr>", { silent = true, noremap = true })
 
+-- structural replacement
+vim.keymap.set({ "n", "x" }, "<leader>sr", function() require("ssr").open() end)
+
+-- vimux
+vim.keymap.set({ "n" }, "<leader>tmc", function()
+  local _, val = pcall(function() return vim.fn.input("Run Command: ") end)
+  if (val == "Keyboard interrupt") then
+    return
+  end
+  vim.cmd("VimuxRunCommand \"" .. val .. "\"")
+end)
+vim.keymap.set({ "n" }, "<leader>tmr", function() vim.cmd("VimuxRunLastCommand") end)
+
 -- Commands
 vim.api.nvim_create_user_command("EditConfig", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/init.lua", {})
 vim.api.nvim_create_user_command("EditPlugins", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/lua/plugins.lua", {})
 vim.api.nvim_create_user_command("EditMappings", "tabnew " .. vim.fn.expand("~") .. "/.config/nvim/lua/mappings.lua", {})
 
 vim.api.nvim_create_user_command("FormatBuffer", "lua vim.lsp.buf.format()", {})
-
 
 -- ros helper stuff
 vim.api.nvim_set_keymap('v', '<leader>rol', "<cmd>lua open_ros_launch_include()<Cr>", { silent = true, noremap = true })
