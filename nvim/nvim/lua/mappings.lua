@@ -114,8 +114,6 @@ vim.api.nvim_create_user_command("EditMappings", "tabnew " .. vim.fn.expand("~")
 
 vim.api.nvim_create_user_command("FormatBuffer", "lua vim.lsp.buf.format()", {})
 
--- TODO: move to ftplugin
-vim.api.nvim_set_keymap('n', '<leader>ch', "<cmd>ClangdSwitchSourceHeader<Cr>", { silent = true, noremap = true })
 
 -- ros helper stuff
 vim.api.nvim_set_keymap('v', '<leader>rol', "<cmd>lua open_ros_launch_include()<Cr>", { silent = true, noremap = true })

@@ -63,8 +63,8 @@ source $ZSH/oh-my-zsh.sh
 # history file
 HISTFILE=~/.histfile
 
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
@@ -87,3 +87,5 @@ export CLICOLOR=1
 eval "$(starship init zsh)"
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fortune mechanicus

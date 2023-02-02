@@ -23,3 +23,9 @@ setup_base_station() {
   export ROS_IP=192.168.42.190
   export ROS_MASTER_URI=http://192.168.42.42:11311
 }
+
+setup_husky_biobots() {
+  source ~/current_semester/biobots/simulation_ws/devel/setup.zsh
+  export ROS_MASTER_URI=http://ids-husky-01:11311
+  export ROS_IP=192.168.42.166
+}

@@ -8,7 +8,12 @@ end
 plugins = require('packer').startup(function()
   -- misc
   use 'wbthomason/packer.nvim'
-  use "tversteeg/registers.nvim"
+  use {
+    "tversteeg/registers.nvim",
+    config = function()
+      require("registers").setup()
+    end,
+  }
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup({ check_ts = true }) end

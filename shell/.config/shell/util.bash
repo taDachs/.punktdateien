@@ -68,7 +68,7 @@ git_sparse_clone() (
 
 git_split_off() {
   path_to_folder="$1"
-  git filter-repo --subdirectory-filter "$path_to_folder"
+  git filter-repo --force --subdirectory-filter "$path_to_folder"
 }
 
 get_days_until() {
@@ -88,4 +88,26 @@ pdf-ack-grep() {
 
 insult() {
   echo "\033[0;31mNo, you are an idiot! Do you remember how many times you wiped your fucking drive because you didn't think about what exactly you are deleting or because you forgot a subfolder? Either THINK about what you are about to do or use trash or move, or just don't delete the fucking file(s) in the first place.\033[0m"
+}
+
+start_tmux_ba_session() {
+  session_name="Bachelorthesis"
+
+  # Only create tmux session if it doesn't already exist
+  if ! tmux has-session -t $session_name; then
+    cd /home/max/current_semester/bachelorarbeit/
+    # Start New Session with our name
+    tmux new-session -d -s $session_name -n 'Document'
+
+    # open bachelorthesis
+    tmux send-keys -t "$session_name:Document" 'cd bachelorthesis/document' C-m 'v booka4.tex' C-m
+
+    # open novex
+    tmux new-window -t $session_name:2 -n 'Novex'
+    tmux send-keys -t 'Novex' 'cd experiments/novex' C-m 'v novex/cli.py' C-m
+    tmux split-window -t 'Novex' -v
+  fi
+
+  # Attach Session, on the Main window
+  tmux attach-session -t $session_name
 }

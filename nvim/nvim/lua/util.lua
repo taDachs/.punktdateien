@@ -18,7 +18,7 @@ function open_ros_launch_include()
 
   local regex = "$%(find ([%a%d_]+)%)(/[%a%d_%.%~/-]+)"
 
-  -- <include file="$(find biobots_husky_sim)/launch/gazebo.xml.launch"/>
+  -- Test string: <include file="$(find biobots_husky_sim)/launch/gazebo.xml.launch"/>
   local package, file = string.match(visual_selection, regex)
   --
   if package and file then
