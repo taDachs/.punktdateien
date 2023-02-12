@@ -1,33 +1,32 @@
-local actions = require("telescope.actions")
+local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
-local pickers = require('telescope.pickers')
-local finders = require('telescope.finders')
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
 local conf = require("telescope.config").values
 
-require('telescope').setup {
-  defaults = {
-  },
+require("telescope").setup {
+  defaults = {},
   pickers = {
     find_files = {
       mappings = {
         i = {
-          ["<C-a>"] = actions.close
+          ["<C-a>"] = actions.close,
         },
         n = {
-          ["<C-a>"] = actions.close
-        }
+          ["<C-a>"] = actions.close,
+        },
       },
     },
     live_grep = {
       mappings = {
         i = {
-          ["<C-f>"] = actions.close
+          ["<C-f>"] = actions.close,
         },
         n = {
-          ["<C-f>"] = actions.close
-        }
+          ["<C-f>"] = actions.close,
+        },
       },
-    }
+    },
   },
   extensions = {
     fzf = {
@@ -36,7 +35,7 @@ require('telescope').setup {
       override_file_sorter = true,
     },
     bibtex = {
-      format = 'tex'
+      format = "tex",
     },
-  }
+  },
 }
