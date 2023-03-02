@@ -1,4 +1,4 @@
-function close_environment()
+local function close_environment()
   local row = vim.api.nvim_win_get_cursor(0)[1]
   local current_line = vim.api.nvim_buf_get_lines(0, row - 1, row, true)[1]
 
@@ -14,4 +14,6 @@ function close_environment()
   vim.api.nvim_command('normal j==k')
 end
 
-vim.api.nvim_set_keymap('n', '<leader>ce', "<cmd>lua close_environment()<Cr>", { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>ce', close_environment, { silent = true, noremap = true })
+
+vim.opt.textwidth = 100

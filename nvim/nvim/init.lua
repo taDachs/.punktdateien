@@ -1,22 +1,22 @@
-vim.opt.termguicolors = true
-vim.opt.syntax = "enabled"
-vim.opt.spell = true
-
+local core = require "core"
 local plugins = require "plugins"
-local mappings = require "mappings"
-local lsp = require "lsp-config"
-local opts = require "opts"
+local lsp = require "lsp"
+local completion = require "completion"
+local ui = require "ui"
+local treesitter = require "treesitter"
+local snippets = require "snippets"
 
-vim.cmd.colorscheme "kit"
+lsp.setup_dependencies()
+completion.setup_dependencies()
+ui.setup_dependencies()
+treesitter.setup_dependencies()
+snippets.setup_dependencies()
 
-local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  command = "silent! lua vim.highlight.on_yank()",
-  group = yankGrp,
-})
+core.setup()
+plugins.setup()
+lsp.setup()
+completion.setup()
+ui.setup()
+treesitter.setup()
+snippets.setup()
 
-local bufWriteGrp = vim.api.nvim_create_augroup("BufferWrite", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-  command = [[%s/\s\+$//e]],
-  group = bufWriteGrp,
-})
