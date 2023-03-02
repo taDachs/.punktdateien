@@ -1,10 +1,9 @@
-local keymaps = require"plugins.keymaps"
-local plugin_list = require"plugins.plugin_list"
-local common_plugins = require "plugins.common_plugins".common_plugins
+local keymaps = require "plugins.keymaps"
+local plugin_list = require "plugins.plugin_list"
+local common_plugins = require("plugins.common_plugins").common_plugins
 local M = {}
 
-local common_plugin_list = {
-  }
+local common_plugin_list = {}
 
 function M.setup()
   local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -21,8 +20,7 @@ function M.setup()
   vim.opt.rtp:prepend(lazypath)
 
   plugin_list.add_plugin_list(common_plugins)
-
-  for _, plugin in pairs(plugin_list.get_lazy_plugin_list()) do
+  for _, plugin in pairs(plugin_list.plugin_list) do
     -- print(vim.inspect(plugin))
     table.insert(common_plugin_list, plugin)
   end

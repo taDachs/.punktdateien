@@ -3,7 +3,7 @@ local keymaps = require "lsp.keymaps"
 local commands = require "lsp.commands"
 local plugins = require "lsp.plugins"
 
-local plugin_list = require("plugins.plugin_list")
+local plugin_list = require "plugins.plugin_list"
 
 local M = {}
 

@@ -10,10 +10,10 @@ local function close_environment()
     return
   end
   env = "\\end{" .. env .. "}"
-  vim.api.nvim_buf_set_lines(0, row, row, true, {env})
-  vim.api.nvim_command('normal j==k')
+  vim.api.nvim_buf_set_lines(0, row, row, true, { env })
+  vim.api.nvim_command "normal j==k"
 end
 
-vim.keymap.set('n', '<leader>ce', close_environment, { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>ce", close_environment, { silent = true, noremap = true })
 
 vim.opt.textwidth = 100

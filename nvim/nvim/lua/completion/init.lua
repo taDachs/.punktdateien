@@ -45,7 +45,7 @@ function M.setup()
         cmp.config.compare.offset,
         cmp.config.compare.exact,
         cmp.config.compare.score,
-        require "cmp-under-comparator".under,
+        require("cmp-under-comparator").under,
         cmp.config.compare.kind,
         cmp.config.compare.sort_text,
         cmp.config.compare.length,
@@ -53,8 +53,8 @@ function M.setup()
       },
     },
     formatting = {
-      format = lspkind.cmp_format()
-    }
+      format = lspkind.cmp_format(),
+    },
   }
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

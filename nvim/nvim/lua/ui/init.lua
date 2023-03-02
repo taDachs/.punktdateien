@@ -1,7 +1,7 @@
 local statusline = require "ui.statusline"
 local keymaps = require "ui.keymaps"
 local plugins = require "ui.plugins"
-local plugin_list = require("plugins.plugin_list")
+local plugin_list = require "plugins.plugin_list"
 local M = {}
 
 function M.setup_dependencies()

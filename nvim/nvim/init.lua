@@ -19,4 +19,3 @@ completion.setup()
 ui.setup()
 treesitter.setup()
 snippets.setup()
-

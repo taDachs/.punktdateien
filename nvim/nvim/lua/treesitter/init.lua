@@ -1,5 +1,5 @@
 local plugins = require "treesitter.plugins"
-local plugin_list = require("plugins.plugin_list")
+local plugin_list = require "plugins.plugin_list"
 local M = {}
 
 function M.setup_dependencies()
@@ -12,7 +12,7 @@ function M.setup()
   vim.api.nvim_create_autocmd("UIEnter", {
     callback = function()
       require("core.util").delay_function_call(function()
-        require "treesitter.config".setup()
+        require("treesitter.config").setup()
       end, 10)
     end,
     group = treesitterGrp,
