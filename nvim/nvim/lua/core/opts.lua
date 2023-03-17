@@ -17,7 +17,7 @@ function M.setup()
   vim.opt.splitbelow = true
 
   -- show 10 lines below and above cursor
-  vim.opt.scrolloff = 10
+  vim.opt.scrolloff = 3
 
   -- vim.opt.display = "lastline"
   -- vim.o.ch = 0
@@ -36,6 +36,8 @@ function M.setup()
   vim.opt.relativenumber = true
   vim.opt.number = true
   vim.diagnostic.config { virtual_lines = false }
+
+  vim.opt.updatetime = 500
 end
 
 return M

@@ -19,6 +19,10 @@ function M.setup()
         require("luasnip").lsp_expand(args.body)
       end,
     },
+  window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
     mapping = {
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
@@ -35,7 +39,7 @@ function M.setup()
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "emoji" },
+      -- { name = "emoji" },
       { name = "cmp_ros" },
     }, {
       -- { name = 'buffer' },
@@ -62,10 +66,7 @@ function M.setup()
     sources = {
       { name = "buffer" },
     },
-    mapping = {
-      -- ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 's' }),
-      -- ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 's' })
-    },
+    mapping = cmp.mapping.preset.cmdline(),
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).

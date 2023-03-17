@@ -26,7 +26,10 @@ function M.setup()
   -- leader ca : code action
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = true, noremap = true })
   -- open trouble.nvim
-  vim.keymap.set("n", "<leader>st", "<cmd>TroubleToggle<Cr>", { silent = true, noremap = true })
+  vim.keymap.set("n", "<leader>st", function()
+    vim.diagnostic.setqflist({ open=false })
+    vim.cmd("TroubleToggle quickfix")
+  end, { silent = true, noremap = true })
 end
 
 return M

@@ -5,8 +5,10 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias pzf="fzf --height 100% --preview 'bat --color=always --style=full --line-range=:500 {}'"
 alias open='xdg-open'
+alias ip='ip -c'
 
 alias fzirob="source_robot_folders fzirob"
+alias catmux="tmux -L catmux"
 alias ce="source_robot_folders fzirob change_environment"
 alias nvm="source_nvm; nvm"
 alias ghc="source_ghcup; ghc"

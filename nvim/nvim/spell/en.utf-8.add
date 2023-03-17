@@ -9,3 +9,8 @@ runtime
 Heightmap
 config
 direction/!
+usr
+bin
+!/usr/bin/env python3
+Zustandsautomat
+workspace

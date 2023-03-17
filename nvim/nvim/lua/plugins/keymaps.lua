@@ -17,6 +17,9 @@ function M.setup()
   vim.keymap.set("n", "<leader>tds", "<cmd>Telescope lsp_document_symbols<cr>", { noremap = true })
   vim.keymap.set("n", "<leader>tws", "<cmd>Telescope lsp_workspace_symbols<cr>", { noremap = true })
 
+  -- gitsigns
+  vim.keymap.set("n", "<leader>gd", "<cmd>Gitsigns preview_hunk<cr>", { noremap = true })
+
   -- ros helper stuff
   vim.keymap.set("n", "<leader>rol", function()
     require("ros-nvim.ros").open_launch_include()

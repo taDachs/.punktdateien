@@ -41,10 +41,11 @@ source_gvm() {
 }
 
 setup_android() {
-  export ANDROID_HOME=/usr/share/android/
-  export PATH=$ANDROID_HOME/cmdline-tools/tools/bin/:$PATH
-  export PATH=$ANDROID_HOME/emulator/:$PATH
-  export PATH=$ANDROID_HOME/platform-tools/:$PATH
+  export ANDROID_HOME=$HOME/.local/share/android
+  export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+  export PATH=$ANDROID_HOME/tools/bin:$PATH
+  export PATH=$ANDROID_HOME/emulator:$PATH
+  export PATH=$ANDROID_HOME/platform-tools:$PATH
 }
 
 git_sparse_clone() (
@@ -110,4 +111,9 @@ start_tmux_ba_session() {
 
   # Attach Session, on the Main window
   tmux attach-session -t $session_name
+}
+
+gocover() {
+  t="/tmp/go-cover.$$.tmp"
+  go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
 }

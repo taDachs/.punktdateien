@@ -64,12 +64,7 @@ M.common_plugins = {
     end,
   },
   { "christoomey/vim-tmux-navigator" },
-  {
-    "airblade/vim-gitgutter",
-    config = function()
-      vim.g.gitgutter_map_keys = 0
-    end,
-  },
+  { "lewis6991/gitsigns.nvim", config = true },
   {
     "numToStr/Comment.nvim",
     config = true,
@@ -115,7 +110,39 @@ M.common_plugins = {
     config = require("plugins.telescope").setup,
   },
 
-  -- { "lukas-reineke/indent-blankline.nvim", config = true },
+  -- neorg
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    opts = {
+      load = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+        -- ["core.norg.journal"] = {}, -- Adds journal
+        ["core.norg.dirman"] = { -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              notes = "~/Documents/Notes/neorg",
+            },
+            default_workspace = "notes",
+          },
+        },
+      },
+    },
+    dependencies = { { "nvim-lua/plenary.nvim" } },
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = true,
+    opts = {
+      show_current_context = true,
+      -- show_current_context_start = true,
+      -- char_highlight_list = {
+      --   -- "IndentBlanklineIndent",
+      --   },
+    },
+  },
 }
 
 return M

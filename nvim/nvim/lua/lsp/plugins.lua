@@ -13,6 +13,9 @@ M.dependencies = {
   {
     "ray-x/lsp_signature.nvim",
     config = true,
+    opts = {
+      hint_prefix = ""
+    }
   },
   {
     "williamboman/mason.nvim",

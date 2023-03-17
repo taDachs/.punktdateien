@@ -18,6 +18,7 @@ function trash () {( set -e
         recursive=true
         ;;
       *)
+        echo "unknown flag"
         exit 1;
     esac
   done
@@ -38,12 +39,9 @@ function trash () {( set -e
         exit 1
     fi
   done
-  for var in "$@"; do
-    if [[ -f "$var" || -d "$var" ]]; then
-      \rm -rf /tmp/trash/$var
-      mkdir -p /tmp/trash/$var
-      mv -f "$var" /tmp/trash/$var
-    fi
+  for file in "$@"; do
+    timestamp=$(date +%s)
+    mv "$file" /tmp/trash/"$(basename "$file")"_"$timestamp"
   done
 )}
 
@@ -76,6 +74,11 @@ bindkey "^p" history-search-backward
 bindkey "^n" history-search-forward
 
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd " " edit-command-line
+
+
 # Make colors work with tmux
 # if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
@@ -88,4 +91,5 @@ eval "$(starship init zsh)"
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-fortune mechanicus
+# fortune mechanicus
+cat ~/todo.txt

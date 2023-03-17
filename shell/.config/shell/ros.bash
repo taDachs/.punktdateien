@@ -6,7 +6,7 @@ source_robot_folders() {
 }
 
 setup_anymal() {
-  export ROS_IP=192.168.151.69
+  export ROS_IP=192.168.42.166
   export ROS_MASTER_URI=http://192.168.151.51:11311
 }
 
@@ -28,4 +28,13 @@ setup_husky_biobots() {
   source ~/current_semester/biobots/simulation_ws/devel/setup.zsh
   export ROS_MASTER_URI=http://ids-husky-01:11311
   export ROS_IP=192.168.42.166
+}
+
+link_compile_commands() {
+  ws_root="$(echo $CMAKE_PREFIX_PATH | cut --delimiter=':' --fields=1 | xargs dirname)"
+  package_name="$(pwd | xargs basename)"
+  compile_commands_path="$ws_root"/build/"$package_name"/compile_commands.json
+
+  ln -s "$compile_commands_path" ./compile_commands.json
+
 }
