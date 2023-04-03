@@ -23,7 +23,10 @@ M.dependencies = {
 
   -- colorschemes
   "phanviet/vim-monokai-pro",
-  { dir = "~/Projects/KIT.vim/" },
+  {
+    "tadachs/KIT.vim",
+    dev = true,
+  },
 }
 
 return M
