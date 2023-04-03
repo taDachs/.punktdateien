@@ -29,7 +29,7 @@ M.common_plugins = {
     config = function()
       vim.g.mkdp_auto_close = 1
       vim.g.mkdp_command_for_global = 1
-      vim.g.mkdp_browser = "surf"
+      vim.g.mkdp_browser = "brave-browser"
     end,
     -- cmd = {"MarkdownPreview"},
   },
@@ -142,6 +142,14 @@ M.common_plugins = {
       --   -- "IndentBlanklineIndent",
       --   },
     },
+  },
+  -- mystuff
+  {
+    "tadachs/ros-nvim",
+    config = true,
+    opts = {},
+    dependencies = { "nvim-lua/plenary.nvim" },
+    dev = true,
   },
 }
 

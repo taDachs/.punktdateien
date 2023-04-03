@@ -10,7 +10,7 @@ function M.setup()
       pylsp = {
         plugins = {
           pycodestyle = {
-            ignore = { "E203", "W503" },
+            ignore = { "E203", "W503", "E701" },
             maxLineLength = 100,
           },
         },

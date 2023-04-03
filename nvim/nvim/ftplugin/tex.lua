@@ -17,3 +17,5 @@ end
 vim.keymap.set("n", "<leader>ce", close_environment, { silent = true, noremap = true })
 
 vim.opt.textwidth = 100
+
+vim.opt.spell = true

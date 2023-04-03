@@ -24,14 +24,6 @@ M.dependencies = {
   -- colorschemes
   "phanviet/vim-monokai-pro",
   { dir = "~/Projects/KIT.vim/" },
-  -- mystuff
-  {
-    "tadachs/ros-nvim",
-    config = true,
-    opts = {},
-    dependencies = { "nvim-lua/plenary.nvim" },
-    dev = true,
-  },
 }
 
 return M

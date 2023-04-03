@@ -5,8 +5,7 @@
 	rebase = true
 [includeIf "gitdir:~/Work/FZI/**"]
   path = ~/Work/FZI/.gitconfig
-[safe]
-	directory = /tmp/sshfs_base_station/sshfs_husky_x_01/robot_folders/checkout/robprak22/catkin_ws/src/dstar_vdb
-	directory = /tmp/sshfs_base_station/sshfs_husky_x_01/robot_folders/checkout/robprak22/catkin_ws/src/vdb_mapping
 [init]
 	defaultBranch = main
+[core]
+	excludesfile = ~/.config/git/gitignore

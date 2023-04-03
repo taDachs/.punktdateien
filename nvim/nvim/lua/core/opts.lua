@@ -4,7 +4,6 @@ function M.setup()
   -- color stuff
   vim.opt.termguicolors = true
   vim.opt.syntax = "enabled"
-  vim.opt.spell = true
 
   -- softtabs
   vim.opt.tabstop = 2
@@ -27,7 +26,12 @@ function M.setup()
   vim.opt.colorcolumn = "100"
 
   -- spelling
-  vim.opt.spelllang = "en_us"
+  -- vim.opt.spell = true
+  -- vim.opt.spelllang = "en_us"
+
+  -- folding
+  vim.opt.foldmethod = "indent"
+  vim.opt.foldlevel  = 99
 
   -- persistent undo
   vim.opt.undofile = true

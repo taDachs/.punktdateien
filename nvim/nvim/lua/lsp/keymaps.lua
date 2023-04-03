@@ -27,8 +27,8 @@ function M.setup()
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = true, noremap = true })
   -- open trouble.nvim
   vim.keymap.set("n", "<leader>st", function()
-    vim.diagnostic.setqflist({ open=false })
-    vim.cmd("TroubleToggle quickfix")
+    -- vim.diagnostic.setqflist({ open=false })
+    vim.cmd("TroubleToggle")
   end, { silent = true, noremap = true })
 end
 
