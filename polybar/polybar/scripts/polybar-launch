@@ -3,6 +3,6 @@
 killall -q polybar
 
 echo "---" | tee -a /tmp/polybar-primary.log /tmp/polybar-secondary.log
-polybar bar-primary 2>&1 | tee -a /tmp/polybar-primary.log & disown
-polybar bar-secondary 2>&1 | tee -a /tmp/polybar-secondary.log & disown
+polybar primary 2>&1 | tee -a /tmp/polybar-primary.log & disown
+# polybar bar-secondary 2>&1 | tee -a /tmp/polybar-secondary.log & disown
 

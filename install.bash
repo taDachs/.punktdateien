@@ -7,7 +7,7 @@ stow --target ~/.config i3
 stow --target ~/.config i3status
 # stow --target ~/.config awesome
 stow --target ~/.config nvim
-# stow --target ~/.config polybar
+stow --target ~/.config polybar
 stow --target ~/.config git
 stow --target ~/.config nort
 stow --target ~ tmux
