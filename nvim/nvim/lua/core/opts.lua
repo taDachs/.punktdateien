@@ -31,7 +31,7 @@ function M.setup()
 
   -- folding
   vim.opt.foldmethod = "indent"
-  vim.opt.foldlevel  = 99
+  vim.opt.foldlevel = 99
 
   -- persistent undo
   vim.opt.undofile = true

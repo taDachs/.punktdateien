@@ -1,6 +1,6 @@
 local M = {}
 
-M.common_plugins = {
+M.dependencies = {
   {
     "tversteeg/registers.nvim",
     config = true,
@@ -15,11 +15,7 @@ M.common_plugins = {
   {
     "ur4ltz/surround.nvim",
     config = true,
-    opts = {
-      mappings_style = "surround",
-      map_insert_mode = false,
-      context_offset = 1,
-    },
+    opts = { mappings_style = "surround", map_insert_mode = false, context_offset = 1 },
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -64,7 +60,13 @@ M.common_plugins = {
     end,
   },
   { "christoomey/vim-tmux-navigator" },
-  { "lewis6991/gitsigns.nvim", config = true },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = true,
+    keys = {
+      { "<leader>gd", "<cmd>Gitsigns preview_hunk<cr>", mode = "n", noremap = true },
+    },
+  },
   {
     "numToStr/Comment.nvim",
     config = true,
@@ -75,28 +77,29 @@ M.common_plugins = {
         extended = false,
       },
     },
-    keys = { "<leader>co" },
+    keys = {
+      {
+        "<leader>co",
+        function()
+          require("Comment.api").toggle.linewise.current()
+        end,
+        mode = "n",
+        noremap = true,
+      },
+      {
+        "<leader>co",
+        function()
+          local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+          vim.api.nvim_feedkeys(esc, "nx", false)
+          require("Comment.api").toggle.linewise(vim.fn.visualmode())
+        end,
+        mode = "x",
+        noremap = true,
+      },
+    },
   },
   {
     "romainl/vim-cool",
-  },
-  {
-    "tamton-aquib/duck.nvim",
-    config = function()
-      vim.keymap.set("n", "<leader>dd", function()
-        for i = 1, 1, 1 do
-          require("duck").hatch()
-        end
-      end, {})
-      vim.keymap.set("n", "<leader>dk", function()
-        require("duck").cook()
-      end, {})
-    end,
-  },
-
-  {
-    "preservim/vimux",
-    cmd = { "VimuxRunCommand", "VimuxRunLastCommand" },
   },
 
   -- telescope
@@ -107,29 +110,26 @@ M.common_plugins = {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = require("plugins.telescope").setup,
-  },
-
-  -- neorg
-  {
-    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
+    config = true,
     opts = {
-      load = {
-        ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
-        -- ["core.norg.journal"] = {}, -- Adds journal
-        ["core.norg.dirman"] = { -- Manages Neorg workspaces
-          config = {
-            workspaces = {
-              notes = "~/Documents/Notes/neorg",
-            },
-            default_workspace = "notes",
-          },
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
         },
       },
     },
-    dependencies = { { "nvim-lua/plenary.nvim" } },
+    keys = {
+      { "<leader>ta", "<cmd>Telescope find_files<cr>", mode = "n", noremap = true },
+      { "<leader>tf", "<cmd>Telescope live_grep<cr>", mode = "n", noremap = true },
+      { "<leader>tb", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader><leader>", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader>th", "<cmd>Telescope help_tags<cr>", mode = "n", noremap = true },
+      { "<leader>tr", "<cmd>Telescope ros ros<cr>", mode = "n", noremap = true },
+      { "<leader>tds", "<cmd>Telescope lsp_document_symbols<cr>", mode = "n", noremap = true },
+      { "<leader>tws", "<cmd>Telescope lsp_workspace_symbols<cr>", mode = "n", noremap = true },
+    },
   },
 
   {
@@ -137,12 +137,9 @@ M.common_plugins = {
     config = true,
     opts = {
       show_current_context = true,
-      -- show_current_context_start = true,
-      -- char_highlight_list = {
-      --   -- "IndentBlanklineIndent",
-      --   },
     },
   },
+
   -- mystuff
   {
     "tadachs/ros-nvim",
@@ -150,6 +147,24 @@ M.common_plugins = {
     opts = {},
     dependencies = { "nvim-lua/plenary.nvim" },
     dev = true,
+    keys = {
+      {
+        "<leader>rol",
+        function()
+          require("ros-nvim.ros").open_launch_include()
+        end,
+        silent = true,
+        noremap = true,
+      },
+      {
+        "<leader>rd",
+        function()
+          require("ros-nvim.ros").show_interface_definition()
+        end,
+        silent = true,
+        noremap = true,
+      },
+    },
   },
 }
 
