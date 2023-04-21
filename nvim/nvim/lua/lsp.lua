@@ -114,6 +114,7 @@ function M.setup()
   require("lspconfig").clangd.setup {}
   require("lspconfig").texlab.setup {}
   require("lspconfig").gopls.setup {}
+  require("lspconfig").rust_analyzer.setup {}
   -- require("mason-lspconfig").setup_handlers {
   --   function(server_name) -- default handler (optional)
   --     require("lspconfig")[server_name].setup { autostart = true }

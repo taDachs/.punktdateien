@@ -1,4 +1,4 @@
-local M = {}
+  local M = {}
 
 M.dependencies = {
   {
@@ -102,6 +102,27 @@ M.dependencies = {
     "romainl/vim-cool",
   },
 
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    opts = {
+      load = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+        -- ["core.norg.journal"] = {}, -- Adds journal
+        ["core.norg.dirman"] = { -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              notes = "~/Documents/Notes/neorg",
+            },
+            default_workspace = "notes",
+          },
+        },
+      },
+    },
+    dependencies = { { "nvim-lua/plenary.nvim" } },
+  },
+
   -- telescope
   {
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -139,6 +160,12 @@ M.dependencies = {
       show_current_context = true,
     },
   },
+
+  { "dpelle/vim-LanguageTool",
+    config = function()
+        vim.g.languagetool_jar =  "/home/max/Downloads/LanguageTool-5.2/languagetool-commandline.jar"
+    end,
+    },
 
   -- mystuff
   {

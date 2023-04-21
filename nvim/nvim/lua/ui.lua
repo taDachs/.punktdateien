@@ -63,7 +63,7 @@ M.dependencies = {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename" },
+        lualine_c = {},
         lualine_x = {
           function()
             local workspace = require("ros-nvim.ros").handle.env:get_current_ws()
@@ -93,25 +93,24 @@ M.dependencies = {
         lualine_y = {},
         lualine_z = {},
       },
-      tabline = {},
+      tabline = {
+        lualine_a = {
+          {
+          "tabs",
+          mode = 1, -- 0: Shows tab_nr
+          }
+        },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {
+          -- { require("nvim-treesitter").statusline(90) }
+        },
+      },
       extensions = {},
     },
   },
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   dependencies = { "kyazdani42/nvim-web-devicons" },
-  --   config = true,
-  --   opts = {
-  --     options = {
-  --       -- mode = "tabs"
-  --       show_buffer_close_icons = false,
-  --       show_close_icon = false,
-  --       separator_style = "thick",
-  --       diagnostics = "nvim_lsp",
-  --       numbers = "ordinal",
-  --     },
-  --   },
-  -- },
 
   -- colorschemes
   "phanviet/vim-monokai-pro",

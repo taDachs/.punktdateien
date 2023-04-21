@@ -18,9 +18,9 @@ function M.setup()
   vim.keymap.set("x", "K", "dkP`[V`]", { noremap = true })
 
   -- copy to clipboard
-  vim.keymap.set("n", "<leader>c", '"+yy', { noremap = true })
-  vim.keymap.set("x", "<leader>c", '"+y', { noremap = true })
-  vim.keymap.set("n", "<leader>v", '"+p', { noremap = true })
+  vim.keymap.set("n", "<leader>y", '"+yy', { noremap = true })
+  vim.keymap.set("x", "<leader>y", '"+y', { noremap = true })
+  vim.keymap.set("n", "<leader>p", '"+p', { noremap = true })
 
   -- dont store {} on jumplist because i dont wanna
   vim.keymap.set("n", "}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<cr>', { noremap = true })
@@ -35,5 +35,8 @@ function M.setup()
 
   -- unload buffer
   vim.keymap.set("n", "<leader>q", "<cmd>bd<Cr>", { silent = true, noremap = true })
+
+  -- run make
+  vim.keymap.set("n", "<leader>m", "<cmd>make<Cr>", { silent = false, noremap = true })
 end
 return M
