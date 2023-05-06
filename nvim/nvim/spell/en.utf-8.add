@@ -14,3 +14,9 @@ bin
 !/usr/bin/env python3
 Zustandsautomat
 workspace
+traversability
+Autoencoder
+Wasserstein
+avoid/!
+avoid
+overfitting

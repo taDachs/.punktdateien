@@ -125,6 +125,11 @@ function M.setup()
   vim.cmd([[highlight IndentBlanklineChar guifg=]] .. M.colors.background_color[6] .. [[ gui=nocombine]])
   vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. M.colors.background_color[6] .. [[ gui=nocombine]])
   vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. M.colors.foreground_color[4] .. [[ gui=nocombine]])
+  vim.cmd([[highlight CursorLine guibg=]] .. M.colors.background_color[4])
+  vim.cmd([[highlight CursorLineNr guifg=]] .. M.colors.kit_exclusive_green[1])
+
+  vim.opt.cursorline = true
+  vim.o.signcolumn = "yes"
 end
 
 return M

@@ -42,6 +42,12 @@ function M.setup()
   vim.diagnostic.config { virtual_lines = false }
 
   vim.opt.updatetime = 500
+
+  -- gui stuff
+  vim.opt.guifont="BlexMono Nerd Font:9"
+
+  -- misc
+  vim.g.tex_flavor = "latex"
 end
 
 return M

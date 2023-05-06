@@ -1,4 +1,4 @@
-  local M = {}
+local M = {}
 
 M.dependencies = {
   {
@@ -25,7 +25,7 @@ M.dependencies = {
     config = function()
       vim.g.mkdp_auto_close = 1
       vim.g.mkdp_command_for_global = 1
-      vim.g.mkdp_browser = "brave-browser"
+      vim.g.mkdp_browser = "vimb"
     end,
     -- cmd = {"MarkdownPreview"},
   },
@@ -108,9 +108,9 @@ M.dependencies = {
     opts = {
       load = {
         ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.concealer"] = {}, -- Adds pretty icons to your documents
         -- ["core.norg.journal"] = {}, -- Adds journal
-        ["core.norg.dirman"] = { -- Manages Neorg workspaces
+        ["core.dirman"] = { -- Manages Neorg workspaces
           config = {
             workspaces = {
               notes = "~/Documents/Notes/neorg",
@@ -161,11 +161,12 @@ M.dependencies = {
     },
   },
 
-  { "dpelle/vim-LanguageTool",
+  {
+    "dpelle/vim-LanguageTool",
     config = function()
-        vim.g.languagetool_jar =  "/home/max/Downloads/LanguageTool-5.2/languagetool-commandline.jar"
+      vim.g.languagetool_jar = "/home/max/Downloads/LanguageTool-5.2/languagetool-commandline.jar"
     end,
-    },
+  },
 
   -- mystuff
   {
@@ -188,6 +189,33 @@ M.dependencies = {
         function()
           require("ros-nvim.ros").show_interface_definition()
         end,
+        silent = true,
+        noremap = true,
+      },
+    },
+  },
+
+  {
+    "untitled-ai/jupyter_ascending.vim",
+    init = function()
+      vim.g.jupyter_ascending_default_mappings = false
+    end,
+    keys = {
+      {
+        "<leader>jx",
+        "<Plug>JupyterExecute",
+        silent = true,
+        noremap = true,
+      },
+      {
+        "<leader>jax",
+        "<Plug>JupyterExecuteAll",
+        silent = true,
+        noremap = true,
+      },
+      {
+        "<leader>jr",
+        "<Plug>JupyterRestart",
         silent = true,
         noremap = true,
       },

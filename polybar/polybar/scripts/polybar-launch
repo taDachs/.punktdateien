@@ -1,8 +1,9 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 killall -q polybar
 
-echo "---" | tee -a /tmp/polybar-primary.log /tmp/polybar-secondary.log
+echo "---" | tee -a /tmp/polybar-primary.log /tmp/polybar-left.log tmp/polybar-right.log
 polybar primary 2>&1 | tee -a /tmp/polybar-primary.log & disown
-# polybar bar-secondary 2>&1 | tee -a /tmp/polybar-secondary.log & disown
+polybar left 2>&1 | tee -a /tmp/polybar-left.log & disown
+polybar right 2>&1 | tee -a /tmp/polybar-right.log & disown
 

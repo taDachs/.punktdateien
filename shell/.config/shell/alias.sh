@@ -19,3 +19,5 @@ alias gvm="source_gvm; gvm"
 alias gs="git status"
 
 alias emacs="emacs --no-window-system"
+
+alias fd='fdfind'

@@ -1,4 +1,5 @@
 local M = {}
+local util = require("core.util")
 
 function M.setup()
   vim.keymap.set("n", "<space>", "<nop>", { noremap = true })
@@ -38,5 +39,11 @@ function M.setup()
 
   -- run make
   vim.keymap.set("n", "<leader>m", "<cmd>make<Cr>", { silent = false, noremap = true })
+  -- set makeprg
+  vim.keymap.set("n", "<leader>sm", function()
+    local input = util.query_input("Set makeprg: ")
+    if input == nil or input == "" then return end
+    vim.opt.makeprg = input
+  end, { silent = false, noremap = true })
 end
 return M
