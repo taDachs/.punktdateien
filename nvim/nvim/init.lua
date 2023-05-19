@@ -1,10 +1,10 @@
 local modules = {
   "core_plugins",
   "treesitter",
-  "completion",
+  -- "completion",
   "ui",
-  "lsp",
-  "snippets",
+  -- "lsp",
+  -- "snippets",
 }
 
 -- core has to be loaded first to enable otps & co

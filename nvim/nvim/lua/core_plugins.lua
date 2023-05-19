@@ -2,56 +2,9 @@ local M = {}
 
 M.dependencies = {
   {
-    "tversteeg/registers.nvim",
-    config = true,
-  },
-  {
-    "windwp/nvim-autopairs",
-    config = true,
-    opts = { check_ts = true },
-  },
-  { "kshenoy/vim-signature" }, -- for marks in side column
-  { "dstein64/vim-startuptime", cmd = { "StartupTime" } },
-  {
     "ur4ltz/surround.nvim",
     config = true,
     opts = { mappings_style = "surround", map_insert_mode = false, context_offset = 1 },
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    config = function()
-      vim.g.mkdp_auto_close = 1
-      vim.g.mkdp_command_for_global = 1
-      vim.g.mkdp_browser = "vimb"
-    end,
-    -- cmd = {"MarkdownPreview"},
-  },
-  -- {
-  --   "xuhdev/vim-latex-live-preview",
-  --   ft = { "tex" },
-  --   config = function()
-  --     vim.g.livepreview_previewer = "zathura"
-  --   end,
-  -- },
-  {
-    "takac/vim-hardtime",
-    lazy = false,
-    config = function()
-      vim.g.hardtime_default_on = 1
-      vim.g.hardtime_ignore_buffer_patterns = { "Tele*", "NERD.*", "Tag*" }
-      vim.g.hardtime_ignore_quickfix = 1
-      vim.g.hardtime_showmsg = 1
-      vim.g.hardtime_allow_different_key = 1
-      vim.g.hardtime_maxcount = 3
-      vim.g.hardtime_motion_with_count_resets = 1
-    end,
-  },
-  {
-    "vim-scripts/DoxygenToolkit.vim",
-    cmd = { "Dox" },
   },
   {
     "norcalli/nvim-colorizer.lua",
@@ -60,14 +13,6 @@ M.dependencies = {
     end,
   },
   { "christoomey/vim-tmux-navigator" },
-  {
-    "lewis6991/gitsigns.nvim",
-    config = true,
-    lazy = false,
-    keys = {
-      { "<leader>gd", "<cmd>Gitsigns preview_hunk<cr>", mode = "n", noremap = true },
-    },
-  },
   {
     "numToStr/Comment.nvim",
     config = true,
@@ -175,67 +120,6 @@ M.dependencies = {
     config = true,
     opts = {
       show_current_context = true,
-    },
-  },
-
-  {
-    "dpelle/vim-LanguageTool",
-    config = function()
-      vim.g.languagetool_jar = "/home/max/Downloads/LanguageTool-5.2/languagetool-commandline.jar"
-    end,
-  },
-
-  -- mystuff
-  {
-    "tadachs/ros-nvim",
-    config = true,
-    opts = {},
-    dependencies = { "nvim-lua/plenary.nvim" },
-    dev = true,
-    keys = {
-      {
-        "<leader>rol",
-        function()
-          require("ros-nvim.ros").open_launch_include()
-        end,
-        silent = true,
-        noremap = true,
-      },
-      {
-        "<leader>rd",
-        function()
-          require("ros-nvim.ros").show_interface_definition()
-        end,
-        silent = true,
-        noremap = true,
-      },
-    },
-  },
-
-  {
-    "untitled-ai/jupyter_ascending.vim",
-    init = function()
-      vim.g.jupyter_ascending_default_mappings = false
-    end,
-    keys = {
-      {
-        "<leader>jx",
-        "<Plug>JupyterExecute",
-        silent = true,
-        noremap = true,
-      },
-      {
-        "<leader>jax",
-        "<Plug>JupyterExecuteAll",
-        silent = true,
-        noremap = true,
-      },
-      {
-        "<leader>jr",
-        "<Plug>JupyterRestart",
-        silent = true,
-        noremap = true,
-      },
     },
   },
 }

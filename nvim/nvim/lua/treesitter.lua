@@ -10,7 +10,7 @@ M.dependencies = {
     },
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = "all",
+        ensure_installed = nil,
 
         sync_install = false,
 
@@ -49,11 +49,6 @@ M.dependencies = {
         },
       }
     end,
-  },
-  {
-    "m-demare/hlargs.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = true,
   },
 }
 
