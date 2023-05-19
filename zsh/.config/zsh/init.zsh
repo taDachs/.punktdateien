@@ -92,4 +92,3 @@ eval "$(starship init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # fortune mechanicus
-cat ~/todo.txt

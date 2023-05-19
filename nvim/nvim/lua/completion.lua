@@ -15,7 +15,7 @@ M.dependencies = {
       "onsails/lspkind.nvim",
       "L3MON4D3/LuaSnip",
     },
-    dev = true,
+    dev = false,
     config = function()
       local cmp = require "cmp"
       local lspkind = require "lspkind"
@@ -50,6 +50,7 @@ M.dependencies = {
           { name = "luasnip" },
           -- { name = "emoji" },
           { name = "cmp_ros" },
+          { name = "neorg" },
         }, {
           -- { name = 'buffer' },
         }),

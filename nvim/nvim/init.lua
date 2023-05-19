@@ -46,7 +46,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(plugin_list, {
   dev = {
-    path = "~/Projects",
+    path = "~/dev",
   },
 })
 

@@ -8,7 +8,7 @@ M.dependencies = {
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
     dependencies = {
-      { dir = "~/Projects/musnips/" },
+      -- { dir = "~/Projects/musnips/" },
       { "rafamadriz/friendly-snippets" },
     },
     keys = {

@@ -5,6 +5,10 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/.config/i3/scripts/" ] ; then
+    PATH="$HOME/.config/i3/scripts:$PATH"
+fi
+
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
@@ -14,4 +18,5 @@ if [ -d "/var/lib/flatpak/exports/share" ] ; then
 fi
 
 export EDITOR="nvim"
+export BROWSER="firefox"
 . "$HOME/.cargo/env"

@@ -29,13 +29,13 @@ M.dependencies = {
     end,
     -- cmd = {"MarkdownPreview"},
   },
-  {
-    "xuhdev/vim-latex-live-preview",
-    ft = { "tex" },
-    config = function()
-      vim.g.livepreview_previewer = "zathura"
-    end,
-  },
+  -- {
+  --   "xuhdev/vim-latex-live-preview",
+  --   ft = { "tex" },
+  --   config = function()
+  --     vim.g.livepreview_previewer = "zathura"
+  --   end,
+  -- },
   {
     "takac/vim-hardtime",
     lazy = false,
@@ -63,6 +63,7 @@ M.dependencies = {
   {
     "lewis6991/gitsigns.nvim",
     config = true,
+    lazy = false,
     keys = {
       { "<leader>gd", "<cmd>Gitsigns preview_hunk<cr>", mode = "n", noremap = true },
     },
@@ -107,20 +108,36 @@ M.dependencies = {
     build = ":Neorg sync-parsers",
     opts = {
       load = {
-        ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.concealer"] = {}, -- Adds pretty icons to your documents
-        -- ["core.norg.journal"] = {}, -- Adds journal
-        ["core.dirman"] = { -- Manages Neorg workspaces
+        ["core.defaults"] = {},
+        ["core.concealer"] = {},
+        ["core.journal"] = {
           config = {
-            workspaces = {
-              notes = "~/Documents/Notes/neorg",
-            },
-            default_workspace = "notes",
+            journal_folder = "journal",
+            workspace = "personal",
+          }
+        },
+        ["core.completion"] = {
+          config = {
+            engine = "nvim-cmp",
           },
         },
+        ["core.dirman"] = {
+          config = {
+            workspaces = {
+              kitcar = "~/notes/kitcar",
+              fzi = "~/notes/fzi",
+              personal = "~/notes/personal",
+              studium = "~/notes/studium",
+            },
+            default_workspace = "personal",
+          },
+        },
+        ["core.summary"] = {},
       },
     },
     dependencies = { { "nvim-lua/plenary.nvim" } },
+    cmd = { "Neorg" },
+    ft = { "norg" },
   },
 
   -- telescope

@@ -1,4 +1,6 @@
 alias v='nvim'
+alias neorg='nvim -c "Neorg index"'
+alias journal='nvim -c "Neorg journal today"'
 alias z='zathura'
 alias prettyj='python -mjson.tool'
 alias ls='ls --color=auto'
@@ -6,6 +8,7 @@ alias grep='grep --color=auto'
 alias pzf="fzf --height 100% --preview 'bat --color=always --style=full --line-range=:500 {}'"
 alias open='xdg-open'
 alias ip='ip -c'
+alias cdros='roscd; cd ..'
 
 alias fzirob="source_robot_folders fzirob"
 alias catmux="tmux -L catmux"
