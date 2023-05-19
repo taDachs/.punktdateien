@@ -117,3 +117,9 @@ gocover() {
   t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
 }
+
+journal-sync() {
+  git -C "$HOME/notes" commit -m "updates notes"
+  git -C "$HOME/notes" pull
+  git -C "$HOME/notes" push
+}
