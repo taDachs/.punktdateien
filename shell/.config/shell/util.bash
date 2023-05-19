@@ -119,6 +119,7 @@ gocover() {
 }
 
 journal-sync() {
+  git -C "$HOME/notes" add .
   git -C "$HOME/notes" commit -m "updates notes"
   git -C "$HOME/notes" pull
   git -C "$HOME/notes" push
