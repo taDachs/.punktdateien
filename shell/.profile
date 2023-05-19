@@ -11,6 +11,7 @@ fi
 
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
+    source "$HOME/.cargo/env"
 fi
 
 if [ -d "/var/lib/flatpak/exports/share" ] ; then
@@ -19,4 +20,3 @@ fi
 
 export EDITOR="nvim"
 export BROWSER="firefox"
-. "$HOME/.cargo/env"
