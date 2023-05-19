@@ -61,11 +61,11 @@ M.dependencies = {
             workspace = "personal",
           }
         },
-        ["core.completion"] = {
-          config = {
-            engine = "nvim-cmp",
-          },
-        },
+        -- ["core.completion"] = {
+        --   config = {
+        --     engine = "nvim-cmp",
+        --   },
+        -- },
         ["core.dirman"] = {
           config = {
             workspaces = {
