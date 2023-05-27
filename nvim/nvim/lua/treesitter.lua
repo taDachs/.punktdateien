@@ -92,8 +92,8 @@ local function jump_to_previous_node()
 end
 
 M.setup = function()
-  vim.keymap.set("n", "<leader>nn", jump_to_next_node, { silent = true, noremap = true })
-  vim.keymap.set("n", "<leader>pn", jump_to_previous_node, { silent = true, noremap = true })
+  -- vim.keymap.set("n", "<leader>nn", jump_to_next_node, { silent = true, noremap = true })
+  -- vim.keymap.set("n", "<leader>pn", jump_to_previous_node, { silent = true, noremap = true })
 end
 
 return M

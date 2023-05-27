@@ -24,3 +24,5 @@ alias gs="git status"
 alias emacs="emacs --no-window-system"
 
 alias fd='fdfind'
+
+alias ls=lsd

@@ -25,43 +25,61 @@ M.dependencies = {
         theme = {
           normal = {
             a = { bg = M.colors.kit_exclusive_green[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[4], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[4] },
+            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[4] },
           },
           insert = {
             a = { bg = M.colors.kit_orange[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[4], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[4] },
+            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[4] },
           },
           visual = {
             a = { bg = M.colors.kit_yellow[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[4], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
           },
           replace = {
             a = { bg = M.colors.kit_red[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[4], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
           },
           command = {
             a = { bg = M.colors.kit_lila[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[4], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
           },
           inactive = {
             a = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[2], gui = "bold" },
-            b = { bg = M.colors.background_color[4], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
+            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
           },
         },
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "|", right = "|" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {},
         always_divide_middle = true,
         globalstatus = false,
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(s, ctx)
+              local symbols = {
+                NORMAL      = " N ",
+                VISUAL      = " V ",
+                ["V-LINE"]  = " V ",
+                ["V-BLOCK"] = " V ",
+                INSERT      = " I ",
+                REPLACE     = " R ",
+              }
+              if symbols[s] then
+                  return symbols[s]
+              end
+              return s
+            end,
+          },
+        },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = {},
         lualine_x = {
@@ -73,17 +91,16 @@ M.dependencies = {
               return workspace
             end
           end,
-          "encoding",
-          "fileformat",
           "filetype",
+          "progress",
         },
         lualine_y = {
-          "progress",
           function()
             return vim.fn.line "." .. "/" .. vim.fn.line "$"
           end,
         },
-        lualine_z = { "location" },
+        lualine_z = {
+        },
       },
       inactive_sections = {
         lualine_a = {},
@@ -95,17 +112,21 @@ M.dependencies = {
       },
       tabline = {
         lualine_a = {
-          {
-          "tabs",
-          mode = 1, -- 0: Shows tab_nr
-          }
         },
-        lualine_b = {},
-        lualine_c = {},
+        lualine_b = {
+        },
+        lualine_c = {
+          "filename"
+        },
         lualine_x = {},
-        lualine_y = {},
+        lualine_y = {
+        },
         lualine_z = {
-          -- { require("nvim-treesitter").statusline(90) }
+          -- { require("nvim-treesitter").statusline(90) },
+          {
+            "tabs",
+            mode = 0, -- 0: Shows tab_nr
+          },
         },
       },
       extensions = {},
@@ -134,6 +155,13 @@ function M.setup()
 
   vim.opt.cursorline = true
   vim.o.signcolumn = "yes"
+  vim.o.cmdheight = 0
+
+  if vim.g.neovide then
+    vim.o.guifont = "BlexMono Nerd Font:h8"
+    vim.g.neovide_scroll_animation_length = 0
+    vim.g.neovide_cursor_animation_length = 0
+  end
 end
 
 return M

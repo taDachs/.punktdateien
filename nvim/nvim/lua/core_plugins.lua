@@ -13,9 +13,14 @@ M.dependencies = {
   { "kshenoy/vim-signature" }, -- for marks in side column
   { "dstein64/vim-startuptime", cmd = { "StartupTime" } },
   {
-    "ur4ltz/surround.nvim",
-    config = true,
-    opts = { mappings_style = "surround", map_insert_mode = false, context_offset = 1 },
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -237,6 +242,13 @@ M.dependencies = {
         noremap = true,
       },
     },
+  },
+
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+    cmd = "Neogen"
   },
 }
 

@@ -3,7 +3,7 @@
 	name = Max Schik
 [pull]
 	rebase = true
-[includeIf "gitdir:~/Work/FZI/**"]
+[includeIf "gitdir:~/work/fzi/**"]
   path = ~/Work/FZI/.gitconfig
 [init]
 	defaultBranch = main

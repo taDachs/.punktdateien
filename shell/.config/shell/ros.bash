@@ -1,7 +1,7 @@
 source_robot_folders() {
   unalias fzirob
   unalias ce
-  source /home/max/Work/FZI/robot_folders/bin/fzirob_source.sh
+  source /home/max/work/fzi/robot_folders/bin/fzirob_source.sh
   $@
 }
 
