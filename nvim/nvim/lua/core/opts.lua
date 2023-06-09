@@ -43,11 +43,11 @@ function M.setup()
 
   vim.opt.updatetime = 500
 
-  -- gui stuff
-  vim.opt.guifont="BlexMono Nerd Font:9"
-
   -- misc
   vim.g.tex_flavor = "latex"
+
+  vim.opt.ignorecase = true
+  vim.opt.smartcase = true
 end
 
 return M

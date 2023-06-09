@@ -30,7 +30,7 @@ M.dependencies = {
     config = function()
       vim.g.mkdp_auto_close = 1
       vim.g.mkdp_command_for_global = 1
-      vim.g.mkdp_browser = "vimb"
+      vim.g.mkdp_browser = "firefox"
     end,
     -- cmd = {"MarkdownPreview"},
   },
@@ -250,6 +250,11 @@ M.dependencies = {
     config = true,
     cmd = "Neogen"
   },
+
+  -- {
+  --   "nvim-orgmode/orgmode",
+  --   setup = true,
+  -- },
 }
 
 return M

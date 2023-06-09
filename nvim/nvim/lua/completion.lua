@@ -51,6 +51,7 @@ M.dependencies = {
           -- { name = "emoji" },
           { name = "cmp_ros" },
           { name = "neorg" },
+          { name = 'orgmode' },
         }, {
           -- { name = 'buffer' },
         }),

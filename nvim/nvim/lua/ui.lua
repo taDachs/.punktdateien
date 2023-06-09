@@ -155,7 +155,7 @@ function M.setup()
 
   vim.opt.cursorline = true
   vim.o.signcolumn = "yes"
-  vim.o.cmdheight = 0
+  -- vim.o.cmdheight = 0
 
   if vim.g.neovide then
     vim.o.guifont = "BlexMono Nerd Font:h8"
