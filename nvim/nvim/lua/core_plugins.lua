@@ -251,6 +251,8 @@ M.dependencies = {
     cmd = "Neogen"
   },
 
+  { "nicwest/vim-camelsnek" }
+
   -- {
   --   "nvim-orgmode/orgmode",
   --   setup = true,
