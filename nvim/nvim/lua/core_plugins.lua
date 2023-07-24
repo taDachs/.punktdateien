@@ -10,7 +10,6 @@ M.dependencies = {
     config = true,
     opts = { check_ts = true },
   },
-  { "kshenoy/vim-signature" }, -- for marks in side column
   { "dstein64/vim-startuptime", cmd = { "StartupTime" } },
   {
     "kylechui/nvim-surround",
@@ -32,15 +31,8 @@ M.dependencies = {
       vim.g.mkdp_command_for_global = 1
       vim.g.mkdp_browser = "firefox"
     end,
-    -- cmd = {"MarkdownPreview"},
+    cmd = {"MarkdownPreview"},
   },
-  -- {
-  --   "xuhdev/vim-latex-live-preview",
-  --   ft = { "tex" },
-  --   config = function()
-  --     vim.g.livepreview_previewer = "zathura"
-  --   end,
-  -- },
   {
     "takac/vim-hardtime",
     lazy = false,
@@ -108,47 +100,11 @@ M.dependencies = {
     "romainl/vim-cool",
   },
 
-  {
-    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    opts = {
-      load = {
-        ["core.defaults"] = {},
-        ["core.concealer"] = {},
-        ["core.journal"] = {
-          config = {
-            journal_folder = "journal",
-            workspace = "personal",
-          }
-        },
-        ["core.completion"] = {
-          config = {
-            engine = "nvim-cmp",
-          },
-        },
-        ["core.dirman"] = {
-          config = {
-            workspaces = {
-              kitcar = "~/notes/kitcar",
-              fzi = "~/notes/fzi",
-              personal = "~/notes/personal",
-              studium = "~/notes/studium",
-            },
-            default_workspace = "personal",
-          },
-        },
-        ["core.summary"] = {},
-      },
-    },
-    dependencies = { { "nvim-lua/plenary.nvim" } },
-    cmd = { "Neorg" },
-    ft = { "norg" },
-  },
-
   -- telescope
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    build =
+    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -164,14 +120,14 @@ M.dependencies = {
       },
     },
     keys = {
-      { "<leader>ta", "<cmd>Telescope find_files<cr>", mode = "n", noremap = true },
-      { "<leader>tf", "<cmd>Telescope live_grep<cr>", mode = "n", noremap = true },
-      { "<leader>tb", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
-      { "<leader><leader>", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
-      { "<leader>th", "<cmd>Telescope help_tags<cr>", mode = "n", noremap = true },
-      { "<leader>tr", "<cmd>Telescope ros ros<cr>", mode = "n", noremap = true },
-      { "<leader>tds", "<cmd>Telescope lsp_document_symbols<cr>", mode = "n", noremap = true },
-      { "<leader>tws", "<cmd>Telescope lsp_workspace_symbols<cr>", mode = "n", noremap = true },
+      { "<leader>ta",       "<cmd>Telescope find_files<cr>",            mode = "n", noremap = true },
+      { "<leader>tf",       "<cmd>Telescope live_grep<cr>",             mode = "n", noremap = true },
+      { "<leader>tb",       "<cmd>Telescope buffers<cr>",               mode = "n", noremap = true },
+      { "<leader><leader>", "<cmd>Telescope buffers<cr>",               mode = "n", noremap = true },
+      { "<leader>th",       "<cmd>Telescope help_tags<cr>",             mode = "n", noremap = true },
+      { "<leader>tr",       "<cmd>Telescope ros ros<cr>",               mode = "n", noremap = true },
+      { "<leader>tds",      "<cmd>Telescope lsp_document_symbols<cr>",  mode = "n", noremap = true },
+      { "<leader>tws",      "<cmd>Telescope lsp_workspace_symbols<cr>", mode = "n", noremap = true },
     },
   },
 
@@ -183,13 +139,6 @@ M.dependencies = {
     },
   },
 
-  {
-    "dpelle/vim-LanguageTool",
-    config = function()
-      vim.g.languagetool_jar = "/home/max/Downloads/LanguageTool-5.2/languagetool-commandline.jar"
-    end,
-  },
-
   -- mystuff
   {
     "tadachs/ros-nvim",
@@ -197,6 +146,7 @@ M.dependencies = {
     opts = {},
     dependencies = { "nvim-lua/plenary.nvim" },
     dev = true,
+    ft = "launch",
     keys = {
       {
         "<leader>rol",
@@ -252,11 +202,6 @@ M.dependencies = {
   },
 
   { "nicwest/vim-camelsnek" }
-
-  -- {
-  --   "nvim-orgmode/orgmode",
-  --   setup = true,
-  -- },
 }
 
 return M

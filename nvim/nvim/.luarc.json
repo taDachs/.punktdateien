@@ -42,6 +42,7 @@
         "/home/max/.local/share/nvim/lazy/cmp-under-comparator/lua",
         "/home/max/.local/share/nvim/lazy/cmp-nvim-lsp/lua",
         "/home/max/.punktdateien/nvim/nvim/lua",
-        "${3rd}/luv/library"
+        "${3rd}/luv/library",
+        "${3rd}/luassert/library"
     ]
 }

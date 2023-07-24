@@ -49,7 +49,7 @@ function M.setup()
   vim.opt.ignorecase = true
   vim.opt.smartcase = true
 
-  vim.opt.conceallevel = 3
+  -- vim.opt.conceallevel = 3
 end
 
 return M

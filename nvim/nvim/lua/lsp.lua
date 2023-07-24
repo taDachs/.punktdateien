@@ -83,6 +83,7 @@ M.dependencies = {
   },
   {
     "folke/neodev.nvim",
+    opts = {},
     config = true,
   },
   {
@@ -96,6 +97,7 @@ M.dependencies = {
   {
     "j-hui/fidget.nvim",
     config = true,
+    tag = "legacy",
   },
 }
 
@@ -135,7 +137,7 @@ end
 
 function M.setup()
   vim.diagnostic.config {
-    virtual_text = true,
+    virtual_text = false,
     severity_sort = true,
   }
 

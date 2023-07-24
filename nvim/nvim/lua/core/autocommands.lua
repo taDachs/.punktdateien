@@ -12,6 +12,7 @@ function M.setup()
     command = [[%s/\s\+$//e]],
     group = bufWriteGrp,
   })
+
 end
 
 return M

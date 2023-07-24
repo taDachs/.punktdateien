@@ -5,6 +5,7 @@ local modules = {
   "ui",
   "lsp",
   "snippets",
+  "latex",
 }
 
 -- core has to be loaded first to enable otps & co
