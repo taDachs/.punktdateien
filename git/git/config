@@ -4,8 +4,19 @@
 [pull]
 	rebase = true
 [includeIf "gitdir:~/work/fzi/**"]
-  path = ~/Work/FZI/.gitconfig
+  path = ~/work/fzi/.gitconfig
 [init]
 	defaultBranch = main
 [core]
 	excludesfile = ~/.config/git/gitignore
+
+[merge]
+	tool = "nvim"
+
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+

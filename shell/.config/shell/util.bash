@@ -49,15 +49,15 @@ setup_android() {
 }
 
 git_sparse_clone() (
-  rurl="$1" localdir="$2" && shift 2
+rurl="$1" localdir="$2" && shift 2
 
-  mkdir -p "$localdir"
-  cd "$localdir"
+mkdir -p "$localdir"
+cd "$localdir"
 
-  git init
-  git remote add -f origin "$rurl"
+git init
+git remote add -f origin "$rurl"
 
-  git config core.sparseCheckout true
+git config core.sparseCheckout true
 
   # Loops over remaining args
   for i; do
@@ -80,11 +80,11 @@ get_days_until() {
 }
 
 pdf-ack-grep() {
-  if hash pdftotext 2>/dev/null; then
-    find . -name '*.pdf' -exec sh -c 'pdftotext "{}" - | grep --with-filename --label="{}" --color '"$1" \;
-  else
-    echo "pdftotext not found. Please install the pdftotext utility to use this function."
-  fi
+if hash pdftotext 2>/dev/null; then
+  find . -name '*.pdf' -exec sh -c 'pdftotext "{}" - | grep --with-filename --label="{}" --color '"$1" \;
+else
+  echo "pdftotext not found. Please install the pdftotext utility to use this function."
+fi
 }
 
 insult() {
@@ -119,8 +119,58 @@ gocover() {
 }
 
 journal-sync() {
-  git -C "$HOME/notes" add .
-  git -C "$HOME/notes" commit -m "updates notes"
-  git -C "$HOME/notes" pull
-  git -C "$HOME/notes" push
+git -C "$HOME/notes" add .
+git -C "$HOME/notes" commit -m "updates notes"
+git -C "$HOME/notes" pull
+git -C "$HOME/notes" push
+}
+
+setup-wacom-xournal() {
+xsetwacom set "Wacom Intuos BT M Pen stylus" MapToOutput "DP-1-3"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 1 "key +ctrl z -ctrl"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 2 "key +ctrl y -ctrl"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 3 "key +ctrl - -ctrl"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 8 "key +ctrl +shift + -shift -ctrl"
+}
+
+setup-wacom-obsidian() {
+xsetwacom set "Wacom Intuos BT M Pen stylus" MapToOutput "DP-1-3"
+xsetwacom set "Wacom Intuos BT M Pen stylus" Button 1 "button +1"
+xsetwacom set "Wacom Intuos BT M Pen stylus" Button 2 "button +2"
+xsetwacom set "Wacom Intuos BT M Pen stylus" Button 3 "button +3"
+
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 1 "key +ctrl z -ctrl"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 2 "key +ctrl +shift z -shift -ctrl"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 3 "key +ctrl - -ctrl"
+xsetwacom set "Wacom Intuos BT M Pad pad" Button 8 "key +ctrl +shift + -shift -ctrl"
+}
+
+cm() {
+  # Get the first argument (program name)
+  program="$1"
+
+  # Check if the program name is provided
+  if [ -z "$program" ]; then
+    echo "Error: Please provide a program name as the first argument."
+    return
+  fi
+
+  # Shift the arguments to remove the first argument (program name)
+  shift
+
+  compiler_found=false
+  for file_path in /usr/local/share/nvim/runtime/compiler/*.vim; do
+    file_name=$(basename "$file_path" .vim)
+    if [[ "$file_name" == "$program" ]]; then
+      echo "File found: $file_path"
+      compiler_found=true
+      break
+    fi
+  done
+
+  if [[ "$compiler_found" == "true" ]]; then
+    nvim --cmd "compiler $file_name" -q <("$program" "$@" 2>&1)
+  else
+    nvim -q <("$program" "$@" 2>&1)
+  fi
 }

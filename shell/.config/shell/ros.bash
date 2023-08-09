@@ -6,7 +6,7 @@ source_robot_folders() {
 }
 
 setup_anymal() {
-  export ROS_IP=192.168.42.166
+  export ROS_IP=192.168.42.92
   export ROS_MASTER_URI=http://192.168.151.51:11311
 }
 

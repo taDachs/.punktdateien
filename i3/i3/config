@@ -31,6 +31,7 @@ font pango:BlexMono Nerd Font 8
 exec --no-startup-id pasystray --notify=all
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
+exec --no-startup-id seafile-applet
 exec --no-startup-id dunst
 exec --no-startup-id redshift
 
@@ -115,7 +116,7 @@ set $ws1 "1: "
 set $ws2 "2: "
 set $ws3 "3: "
 set $ws4 "4: "
-set $ws5 "5:misc"
+set $ws5 "5:󰠮 "
 set $ws6 "6:misc"
 set $ws7 "7:misc"
 set $ws8 "8: "
@@ -190,13 +191,20 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-for_window [class=".*"] border pixel 4
-gaps inner 5
-gaps outer 1
-smart_gaps on
+for_window [class=".*"] border pixel 2
+# gaps inner 5
+# gaps outer 1
+# smart_gaps on
 hide_edge_borders smart
 
 workspace_auto_back_and_forth yes
+
+for_window [class="Seafile"] floating enable
+for_window [title="Quick Format Citation"] floating enable; move position center
+
+# screenshots
+bindsym Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Shift+Print exec --no-startup-id echo | dmenu -p "Filename:" | xargs -I{}  maim --select $HOME/Desktop/{}.png
 
 # no_focus [class=".*"]
 # focus_on_window_activation none
@@ -241,3 +249,6 @@ client.urgent           $red      $red      $white $red      $red
 client.placeholder      $black    $black    $white $black    $black
 
 client.background       $white
+
+exec_always --no-startup-id setxkbmap -layout us,de,ru -variant altgr-intl,nodeadkeys,phonetic_yazherty
+exec_always --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'

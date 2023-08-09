@@ -1,7 +1,17 @@
-source ~/.shellrc
-
 export CONFIG_DIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh/"
+
+# Oh my zsh
+plugins=(
+	poetry
+	git
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+  vi-mode
+)
+source $ZSH/oh-my-zsh.sh
+
+source ~/.shellrc
 
 # i am an idiot
 function trash () {( set -e
@@ -46,17 +56,6 @@ function trash () {( set -e
 )}
 
 alias rm="trash"
-
-# Oh my zsh
-plugins=(
-	poetry
-	git
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-  vi-mode
-)
-
-source $ZSH/oh-my-zsh.sh
 
 # history file
 HISTFILE=~/.histfile

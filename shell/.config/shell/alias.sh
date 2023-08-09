@@ -25,4 +25,4 @@ alias emacs="emacs --no-window-system"
 
 alias fd='fdfind'
 
-alias ls=lsd
+alias weather='curl wttr.in/karlsruhe'

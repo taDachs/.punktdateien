@@ -5,9 +5,12 @@ M.dependencies = {
   {
     "L3MON4D3/LuaSnip",
     config = function()
-      -- require("luasnip").setup({
-      --   enable_autosnippets = true,
-      -- })
+      require("luasnip").setup({
+        enable_autosnippets = true,
+        update_events = {"TextChanged", "TextChangedI"},
+        region_check_events = {"CursorMoved", "CursorMovedI"},
+        delete_check_events = {"TextChanged", "TextChangedI"}
+      })
       vim.cmd([[
         imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
         " -1 for jumping backwards.
@@ -20,6 +23,8 @@ M.dependencies = {
         imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
         smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
       ]])
+
+      require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/luasnippets/"})
     end,
     dependencies = {
     },

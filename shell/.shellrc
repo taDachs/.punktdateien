@@ -12,6 +12,7 @@ fi
 
 source ~/.config/shell/alias.sh
 source ~/.config/shell/util.bash
+source ~/.config/shell/task.bash
 source ~/.config/shell/env.sh
 source ~/.config/shell/ros.bash
 source ~/.config/shell/completions/ros_fzf_completions.sh

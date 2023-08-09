@@ -16,10 +16,10 @@ M.dependencies = {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
+      require("nvim-surround").setup {
         -- Configuration here, or leave empty to use defaults
-      })
-    end
+      }
+    end,
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -31,7 +31,7 @@ M.dependencies = {
       vim.g.mkdp_command_for_global = 1
       vim.g.mkdp_browser = "firefox"
     end,
-    cmd = {"MarkdownPreview"},
+    -- cmd = {"MarkdownPreview"},
   },
   {
     "takac/vim-hardtime",
@@ -103,8 +103,7 @@ M.dependencies = {
   -- telescope
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    build =
-    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -120,14 +119,14 @@ M.dependencies = {
       },
     },
     keys = {
-      { "<leader>ta",       "<cmd>Telescope find_files<cr>",            mode = "n", noremap = true },
-      { "<leader>tf",       "<cmd>Telescope live_grep<cr>",             mode = "n", noremap = true },
-      { "<leader>tb",       "<cmd>Telescope buffers<cr>",               mode = "n", noremap = true },
-      { "<leader><leader>", "<cmd>Telescope buffers<cr>",               mode = "n", noremap = true },
-      { "<leader>th",       "<cmd>Telescope help_tags<cr>",             mode = "n", noremap = true },
-      { "<leader>tr",       "<cmd>Telescope ros ros<cr>",               mode = "n", noremap = true },
-      { "<leader>tds",      "<cmd>Telescope lsp_document_symbols<cr>",  mode = "n", noremap = true },
-      { "<leader>tws",      "<cmd>Telescope lsp_workspace_symbols<cr>", mode = "n", noremap = true },
+      { "<leader>ta", "<cmd>Telescope find_files<cr>", mode = "n", noremap = true },
+      { "<leader>tf", "<cmd>Telescope live_grep<cr>", mode = "n", noremap = true },
+      { "<leader>tb", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader><leader>", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader>th", "<cmd>Telescope help_tags<cr>", mode = "n", noremap = true },
+      { "<leader>tr", "<cmd>Telescope ros ros<cr>", mode = "n", noremap = true },
+      { "<leader>tds", "<cmd>Telescope lsp_document_symbols<cr>", mode = "n", noremap = true },
+      { "<leader>tws", "<cmd>Telescope lsp_workspace_symbols<cr>", mode = "n", noremap = true },
     },
   },
 
@@ -198,10 +197,34 @@ M.dependencies = {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = true,
-    cmd = "Neogen"
+    cmd = "Neogen",
   },
 
-  { "nicwest/vim-camelsnek" }
+  { "nicwest/vim-camelsnek" },
+  { "tpope/vim-eunuch" },
+  {
+    "jpalardy/vim-slime",
+    init = function()
+      vim.g.slime_no_mappings = 1
+      vim.g.slime_target = "tmux"
+      vim.g.slime_cell_delimiter = "# ---"
+      vim.cmd([[
+        xmap <c-s><c-s> <Plug>SlimeRegionSend
+
+        nmap <c-s><c-s> <Plug>SlimeParagraphSend
+
+        nmap <c-s><c-b> <Plug>SlimeSendCell
+
+        nmap <c-s>v <Plug>SlimeConfig
+      ]])
+    end,
+    -- keys = {
+    --   {"<c-s><c-s>", "<Plug>SlimeRegionSend", mode="x"},
+    --   {"<c-s><c-s>", "<Plug>SlimeParagraphSend", mode="n"},
+    --   {"<c-s><c-b>", "<Plug>SlimeSendCell", mode="n"},
+    -- }
+  },
+  { "drgarcia1986/python-compilers.vim" },
 }
 
 return M

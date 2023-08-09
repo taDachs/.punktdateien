@@ -45,5 +45,7 @@ function M.setup()
     if input == nil or input == "" then return end
     vim.opt.makeprg = input
   end, { silent = false, noremap = true })
+
+  vim.keymap.set("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { noremap = true })
 end
 return M
