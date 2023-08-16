@@ -45,7 +45,7 @@ function M.setup_snippets()
 			{ trig = "rossrv", dscr = "Registers a ros service" },
 			fmta(
 				[[
-      self.<>_srv = rospy.get_param("<>", <>, self.<>_srv_callback)
+      self.<>_srv = rospy.Service("<>", <>, self.<>_srv_callback)
       ]],
 				{
 					f(convert_ros_namespace_to_identifier, { 1 }),
@@ -92,7 +92,7 @@ function M.setup_snippets()
 			fmta(
 				[[
         try:
-            <> = self.cv_bridge.cv2_to_imgsmsg(<>, <>)
+            <> = self.cv_bridge.cv2_to_imgmsg(<>, <>)
         except CvBridgeError as e:
             <>
       ]],
