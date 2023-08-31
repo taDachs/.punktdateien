@@ -8,6 +8,7 @@ plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
   vi-mode
+  zlong_alert
 )
 source $ZSH/oh-my-zsh.sh
 

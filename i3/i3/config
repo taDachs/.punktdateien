@@ -232,7 +232,7 @@ exec_always --no-startup-id /home/max/.config/polybar/scripts/polybar-launch
 
 exec --no-startup-id autorandr -c
 exec_always synclient TouchpadOff=1
-exec_always feh --bg-fill /home/max/Pictures/wallpapers/pluto.jpg
+exec_always feh --bg-fill /home/max/Pictures/wallpapers/_to_the_stars__by_era7_ddempfj-pre.jpg
 
 set $red #C62033
 set $green #00A88F

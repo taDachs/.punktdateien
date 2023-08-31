@@ -13,6 +13,13 @@ function M.setup()
     group = bufWriteGrp,
   })
 
+  local filetypeGrp = vim.api.nvim_create_augroup("BufferWrite", { clear = true })
+
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "*.rule" },
+    command = "setf rule",
+    group = filetypeGrp,
+  })
 end
 
 return M

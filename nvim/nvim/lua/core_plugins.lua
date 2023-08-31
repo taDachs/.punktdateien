@@ -145,7 +145,8 @@ M.dependencies = {
     opts = {},
     dependencies = { "nvim-lua/plenary.nvim" },
     dev = true,
-    ft = "launch",
+    ft = { "launch", "msg", "srv", "action" },
+    lazy = false,
     keys = {
       {
         "<leader>rol",

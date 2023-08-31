@@ -4,6 +4,7 @@ local util = require("core.util")
 function M.setup()
   vim.keymap.set("n", "<space>", "<nop>", { noremap = true })
   vim.g.mapleader = " "
+  vim.g.maplocalleader = "\\"
   -- vim.cmd("let mapleader=\"\\<Space>\"")
 
   -- remap esc to jk

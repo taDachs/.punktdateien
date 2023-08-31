@@ -1,6 +1,6 @@
 M = {}
 
-M.colors = {
+local colors = {
   background_color = { "#000000", "#050505", "#111111", "#222222", "#333333", "#444444" },
   foreground_color = { "#ffffff", "#dddddd", "#bbbbbb", "#999999", "#777777", "#555555" },
   kit_exclusive_green = { "#00a88f", "#00bca9", "#72ccbf", "#acdfd6", "#d4ede9" },
@@ -24,34 +24,34 @@ M.dependencies = {
         icons_enabled = true,
         theme = {
           normal = {
-            a = { bg = M.colors.kit_exclusive_green[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[4] },
+            a = { bg = colors.kit_exclusive_green[1], fg = colors.background_color[1], gui = "bold" },
+            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+            c = { bg = colors.background_color[2], fg = colors.foreground_color[4] },
           },
           insert = {
-            a = { bg = M.colors.kit_orange[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[4] },
+            a = { bg = colors.kit_orange[1], fg = colors.background_color[1], gui = "bold" },
+            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+            c = { bg = colors.background_color[2], fg = colors.foreground_color[4] },
           },
           visual = {
-            a = { bg = M.colors.kit_yellow[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
+            a = { bg = colors.kit_yellow[1], fg = colors.background_color[1], gui = "bold" },
+            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
           },
           replace = {
-            a = { bg = M.colors.kit_red[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
+            a = { bg = colors.kit_red[1], fg = colors.background_color[1], gui = "bold" },
+            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
           },
           command = {
-            a = { bg = M.colors.kit_lila[1], fg = M.colors.background_color[1], gui = "bold" },
-            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
+            a = { bg = colors.kit_lila[1], fg = colors.background_color[1], gui = "bold" },
+            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
           },
           inactive = {
-            a = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[2], gui = "bold" },
-            b = { bg = M.colors.background_color[3], fg = M.colors.foreground_color[1] },
-            c = { bg = M.colors.background_color[2], fg = M.colors.foreground_color[1] },
+            a = { bg = colors.background_color[2], fg = colors.foreground_color[2], gui = "bold" },
+            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
           },
         },
         component_separators = { left = "|", right = "|" },
@@ -66,15 +66,15 @@ M.dependencies = {
             "mode",
             fmt = function(s, ctx)
               local symbols = {
-                NORMAL      = " N ",
-                VISUAL      = " V ",
-                ["V-LINE"]  = " V ",
+                NORMAL = " N ",
+                VISUAL = " V ",
+                ["V-LINE"] = " V ",
                 ["V-BLOCK"] = " V ",
-                INSERT      = " I ",
-                REPLACE     = " R ",
+                INSERT = " I ",
+                REPLACE = " R ",
               }
               if symbols[s] then
-                  return symbols[s]
+                return symbols[s]
               end
               return s
             end,
@@ -99,8 +99,7 @@ M.dependencies = {
             return vim.fn.line "." .. "/" .. vim.fn.line "$"
           end,
         },
-        lualine_z = {
-        },
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},
@@ -111,16 +110,13 @@ M.dependencies = {
         lualine_z = {},
       },
       tabline = {
-        lualine_a = {
-        },
-        lualine_b = {
-        },
+        lualine_a = {},
+        lualine_b = {},
         lualine_c = {
-          "filename"
+          "filename",
         },
         lualine_x = {},
-        lualine_y = {
-        },
+        lualine_y = {},
         lualine_z = {
           -- { require("nvim-treesitter").statusline(90) },
           {
@@ -133,7 +129,7 @@ M.dependencies = {
     },
   },
 
-  -- colorschemes
+    -- colorschemes
   "phanviet/vim-monokai-pro",
   {
     "tadachs/kit.vim",
@@ -147,11 +143,11 @@ M.dependencies = {
 
 function M.setup()
   vim.cmd.colorscheme "kit"
-  vim.cmd([[highlight IndentBlanklineChar guifg=]] .. M.colors.background_color[6] .. [[ gui=nocombine]])
-  vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. M.colors.background_color[6] .. [[ gui=nocombine]])
-  vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. M.colors.foreground_color[4] .. [[ gui=nocombine]])
-  vim.cmd([[highlight CursorLine guibg=]] .. M.colors.background_color[4])
-  vim.cmd([[highlight CursorLineNr guifg=]] .. M.colors.kit_exclusive_green[1])
+  vim.cmd([[highlight IndentBlanklineChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
+  vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
+  vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
+  vim.cmd([[highlight CursorLine guibg=]] .. colors.background_color[4])
+  vim.cmd([[highlight CursorLineNr guifg=]] .. colors.kit_exclusive_green[1])
 
   vim.opt.cursorline = true
   vim.o.signcolumn = "yes"

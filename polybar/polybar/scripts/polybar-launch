@@ -2,8 +2,17 @@
 
 killall -q polybar
 
-echo "---" | tee -a /tmp/polybar-primary.log /tmp/polybar-left.log tmp/polybar-right.log
-polybar primary 2>&1 | tee -a /tmp/polybar-primary.log & disown
-polybar left 2>&1 | tee -a /tmp/polybar-left.log & disown
-polybar right 2>&1 | tee -a /tmp/polybar-right.log & disown
+# Get the count of connected displays
+DISPLAY_COUNT=$(xrandr --query | grep ' connected' | wc -l)
 
+echo "---" | tee -a /tmp/polybar-primary.log
+
+# Always start primary polybar
+polybar primary 2>&1 | tee -a /tmp/polybar-primary.log & disown
+
+# If more than one display is connected, start the other bars as well
+if [ "$DISPLAY_COUNT" -gt 1 ]; then
+    echo "---" | tee -a /tmp/polybar-vertical.log /tmp/polybar-laptop.log
+    polybar vertical 2>&1 | tee -a /tmp/polybar-vertical.log & disown
+    polybar laptop 2>&1 | tee -a /tmp/polybar-laptop.log & disown
+fi
