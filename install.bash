@@ -3,6 +3,8 @@ set -x
 
 stow --target ~ zsh
 stow --target ~/.config alacritty
+stow --target ~/.config sway
+stow --target ~/.config waybar
 stow --target ~/.config i3
 stow --target ~/.config i3status
 stow --target ~/.config awesome

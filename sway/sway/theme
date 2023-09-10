@@ -1,0 +1,25 @@
+for_window [class=".*"] border pixel 2
+hide_edge_borders smart
+font pango:BlexMono Nerd Font 8
+
+gaps inner 5
+gaps outer 5
+smart_gaps on
+
+exec_always swaybg --image Pictures/wallpapers/pluto.jpg --mode fill
+
+set $red #C62033
+set $green #00A88F
+set $black #000000
+set $gray #888888
+set $darkgray #222222
+set $white #FFFFFF
+
+# class                 border    bground   text   indicator child_border
+client.focused          $green    $green    $black $green    $green
+client.focused_inactive $darkgray $darkgray $white $darkgray $darkgray
+client.unfocused        $darkgray $darkgray $gray  $darkgray $darkgray
+client.urgent           $red      $red      $white $red      $red
+client.placeholder      $black    $black    $white $black    $black
+
+client.background       $white

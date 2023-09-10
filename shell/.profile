@@ -23,4 +23,5 @@ fi
 
 export EDITOR="nvim"
 export BROWSER="firefox"
+export MOZ_ENABLE_WAYLAND=1
 . "$HOME/.cargo/env"
