@@ -5,6 +5,12 @@ source_robot_folders() {
   $@
 }
 
+
+setup_drdrift() {
+  export ROS_IP=10.10.0.190
+  export ROS_MASTER_URI=http://10.10.0.1:11311
+}
+
 setup_anymal() {
   export ROS_IP=192.168.42.92
   export ROS_MASTER_URI=http://192.168.151.51:11311
@@ -37,4 +43,14 @@ link_compile_commands() {
 
   ln -s "$compile_commands_path" ./compile_commands.json
 
+}
+
+ros2cd() {
+  pkg_path="$(muros2 find $1)"
+  cd $pkg_path
+}
+
+ros2ed() {
+  file_path=$(find $(muros2 find $1) -name $2)
+  $EDITOR $file_path
 }

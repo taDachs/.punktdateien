@@ -53,7 +53,7 @@ _fzf_complete_roscd() {
   { rospack list-names }
   )
 }
-_fzf_complete_ros2_topic() {
+_fzf_complete_ros2_topic_echo() {
   ARGS="$@"
   _fzf_complete "--sort" "$@" < <(
   { ros2 topic list }
