@@ -51,21 +51,6 @@ M.dependencies = {
     config = true,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      local null_ls = require "null-ls"
-      null_ls.setup {
-        sources = {
-          -- null_ls.builtins.formatting.stylua,
-          -- null_ls.builtins.formatting.clang_format,
-          -- null_ls.builtins.formatting.black.with {
-          --   args = { "--stdin-filename", "$FILENAME", "--quiet", "--line-length", "100", "-" },
-          -- },
-        },
-      }
-    end,
-  },
-  {
     "folke/trouble.nvim",
     config = true,
     keys = {

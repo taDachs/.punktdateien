@@ -18,6 +18,7 @@ M.dependencies = {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
+    enabled=false,
     config = true,
     opts = {
       options = {
@@ -137,17 +138,17 @@ M.dependencies = {
       vim.g.kit_italic = 1
       vim.g.kit_bold = 1
     end,
-    dev = false,
+    dev = true,
   },
 }
 
 function M.setup()
   vim.cmd.colorscheme "kit"
-  vim.cmd([[highlight IndentBlanklineChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
-  vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
-  vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
-  vim.cmd([[highlight CursorLine guibg=]] .. colors.background_color[4])
-  vim.cmd([[highlight CursorLineNr guifg=]] .. colors.kit_exclusive_green[1])
+  -- vim.cmd([[highlight IndentBlanklineChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
+  -- vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
+  -- vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
+  -- vim.cmd([[highlight CursorLine guibg=]] .. colors.background_color[4])
+  -- vim.cmd([[highlight CursorLineNr guifg=]] .. colors.kit_exclusive_green[1])
 
   vim.opt.cursorline = true
   vim.o.signcolumn = "yes"

@@ -13,15 +13,19 @@ M.dependencies = {
 		"tadachs/luasnip-latex-snippets.nvim",
 		dependencies = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
 		config = function()
-			require("luasnip-latex-snippets").setup()
+			require("luasnip-latex-snippets").setup({ use_treesitter = true })
 		end,
 		ft = { "tex", "markdown" },
 		lazy = false,
-		dev = false,
+		dev = true,
 	},
 	{
     "vim-pandoc/vim-pandoc",
-    dependencies = { "vim-pandoc/vim-pandoc-syntax" }
+    dependencies = { "vim-pandoc/vim-pandoc-syntax" },
+    config = function()
+      vim.cmd([[let g:pandoc#command#autoexec_command="Pandoc pdf --pdf-engine=pdflatex"]])
+      vim.cmd([[let g:pandoc#command#autoexec_on_writes=1]])
+    end
   },
 }
 
