@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+set -ex
 
 stow --target $HOME zsh
 stow --target $HOME/.config alacritty
