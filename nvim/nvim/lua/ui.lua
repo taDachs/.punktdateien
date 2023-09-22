@@ -138,7 +138,7 @@ M.dependencies = {
       vim.g.kit_italic = 1
       vim.g.kit_bold = 1
     end,
-    dev = true,
+    dev = false,
   },
 }
 
