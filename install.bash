@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -x
 
-sh -c "$(curl -fsSL https://starship.rs/install.sh)" "" --help
-
 stow --target ~ zsh
 stow --target ~/.config alacritty
 stow --target ~/.config sway
