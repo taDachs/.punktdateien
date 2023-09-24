@@ -9,16 +9,12 @@ if [ -d "$HOME/.config/i3/scripts/" ] ; then
     PATH="$HOME/.config/i3/scripts:$PATH"
 fi
 
+if [ -d "$HOME/.scripts" ] ; then
+    PATH="$HOME/.scripts:$PATH"
+fi
+
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-if [ -d "$HOME/.spicetify" ] ; then
-    PATH="$HOME/.spicetify:$PATH"
-fi
-
-if [ -d "/var/lib/flatpak/exports/share" ] ; then
-    XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
 fi
 
 if [ -d "$HOME/.cargo" ] ; then

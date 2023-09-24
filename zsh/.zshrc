@@ -1,4 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh/"
+[ ! -d "$HOME/.cache/zsh/zcompdump" ] && mkdir -p "$HOME/.cache/zsh/zcompdump" 
+export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
 
 if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -47,7 +49,6 @@ bindkey -M viins 'jk' vi-cmd-mode
 bindkey "^p" history-search-backward
 bindkey "^n" history-search-forward
 
-
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd " " edit-command-line
@@ -55,8 +56,6 @@ bindkey -M vicmd " " edit-command-line
 
 # Make colors work with tmux
 # if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
-[ ! -d "$HOME/.cache/zsh/zcompdump" ] && mkdir -p "$HOME/.cache/zsh/zcompdump" 
-export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
 
 # Promt
 # enable colors
