@@ -18,7 +18,7 @@ M.dependencies = {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
-    enabled=false,
+    enabled=true,
     config = true,
     opts = {
       options = {
@@ -138,7 +138,7 @@ M.dependencies = {
       vim.g.kit_italic = 1
       vim.g.kit_bold = 1
     end,
-    dev = false,
+    dev = true,
   },
 }
 

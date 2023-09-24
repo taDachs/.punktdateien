@@ -17,7 +17,7 @@ M.dependencies = {
 		end,
 		ft = { "tex", "markdown" },
 		lazy = false,
-		dev = false,
+		dev = true,
 	},
 	{
     "vim-pandoc/vim-pandoc",
