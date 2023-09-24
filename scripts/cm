@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+# Get the first argument (program name)
+program="$1"
+
+# Check if the program name is provided
+if [ -z "$program" ]; then
+  echo "Error: Please provide a program name as the first argument."
+  return
+fi
+
+# Shift the arguments to remove the first argument (program name)
+shift
+
+compiler_found=false
+for file_path in /usr/local/share/nvim/runtime/compiler/*.vim; do
+  file_name=$(basename "$file_path" .vim)
+  if [[ "$file_name" == "$program" ]]; then
+    echo "File found: $file_path"
+    compiler_found=true
+    break
+  fi
+done
+
+if [[ "$compiler_found" == "true" ]]; then
+  nvim --cmd "compiler $file_name" -q <("$program" "$@" 2>&1)
+else
+  nvim -q <("$program" "$@" 2>&1)
+fi

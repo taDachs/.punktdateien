@@ -31,6 +31,8 @@ alias pzf="fzf --height 100% --preview 'bat --color=always --style=full --line-r
 alias ip='ip -c'
 alias weather='curl wttr.in/karlsruhe'
 
+alias rm="$HOME/.local/bin/safe-rm"
+
 #  ____  _    _   _  ____ ___ _   _ ____  
 # |  _ \| |  | | | |/ ___|_ _| \ | / ___| 
 # | |_) | |  | | | | |  _ | ||  \| \___ \ 
@@ -49,4 +51,9 @@ fi
 
 if [ -f ~/.local_shellrc ]; then
     source ~/.local_shellrc
+fi
+
+if [ ! -f "$HOME/.local/bin/safe-rm" ]; then
+  wget --output-document "$HOME/.local/bin/safe-rm"  "https://raw.githubusercontent.com/kaelzhang/shell-safe-rm/master/bin/rm.sh"
+  chmod +x "$HOME/.local/bin/safe-rm" 
 fi
