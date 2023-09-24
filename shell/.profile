@@ -21,7 +21,10 @@ if [ -d "/var/lib/flatpak/exports/share" ] ; then
     XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
 fi
 
+if [ -d "$HOME/.cargo" ] ; then
+  . "$HOME/.cargo/env"
+fi
+
 export EDITOR="nvim"
+export MANPAGER='nvim +Man!'
 export BROWSER="firefox"
-export MOZ_ENABLE_WAYLAND=1
-. "$HOME/.cargo/env"

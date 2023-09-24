@@ -1,5 +1,46 @@
 #/* vim: set filetype=sh : */
 
+#  ____  _   _ _____ _     _     ____   ____ 
+# / ___|| | | | ____| |   | |   |  _ \ / ___|
+# \___ \| |_| |  _| | |   | |   | |_) | |    
+#  ___) |  _  | |___| |___| |___|  _ <| |___ 
+# |____/|_| |_|_____|_____|_____|_| \_\\____|
+
+#  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
+# |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
+# | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+# |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
+# |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
+
+mcd() {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+#     _    _     ___    _    ____  _____ ____  
+#    / \  | |   |_ _|  / \  / ___|| ____/ ___| 
+#   / _ \ | |    | |  / _ \ \___ \|  _| \___ \ 
+#  / ___ \| |___ | | / ___ \ ___) | |___ ___) |
+# /_/   \_\_____|___/_/   \_\____/|_____|____/ 
+
+alias v='nvim'
+alias z='zathura'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias pzf="fzf --height 100% --preview 'bat --color=always --style=full --line-range=:500 {}'"
+alias ip='ip -c'
+alias weather='curl wttr.in/karlsruhe'
+
+#  ____  _    _   _  ____ ___ _   _ ____  
+# |  _ \| |  | | | |/ ___|_ _| \ | / ___| 
+# | |_) | |  | | | | |  _ | ||  \| \___ \ 
+# |  __/| |__| |_| | |_| || || |\  |___) |
+# |_|   |_____\___/ \____|___|_| \_|____/ 
+
+for plugin_file in $HOME/.profile_plugins/* ; do
+  . $plugin_file
+done
+
 if [ ! -f ~/.fzf.zsh ]; then
   echo "Performing initial setup of fzf"
   # We install without shell setup as we do this in our individual shells
@@ -9,11 +50,3 @@ fi
 if [ -f ~/.local_shellrc ]; then
     source ~/.local_shellrc
 fi
-
-source ~/.config/shell/alias.sh
-source ~/.config/shell/util.bash
-source ~/.config/shell/task.bash
-source ~/.config/shell/env.sh
-source ~/.config/shell/ros.bash
-source ~/.config/shell/completions/ros_fzf_completions.sh
-source ~/.config/shell/completions/git_fzf_completions.sh
