@@ -43,6 +43,7 @@ format="[$user]($style)@"
 
 [hostname]
 style = "bold #00a88f"
+ssh_symbol = "☎ "
 ssh_only = false
 disabled=false
 
