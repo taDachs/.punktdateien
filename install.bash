@@ -17,3 +17,4 @@ stow --target $HOME/.config rofi
 stow --target $HOME shell
 stow --target $HOME/.config latexmk
 stow --target $HOME/.config zathura
+stow --target $HOME/.config robot_folders

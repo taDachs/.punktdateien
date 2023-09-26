@@ -15,3 +15,4 @@ stow --delete --target $HOME/.config rofi
 stow --delete --target $HOME shell
 stow --delete --target $HOME/.config latexmk
 stow --delete --target $HOME/.config zathura
+stow --delete --target $HOME/.config robot_folders
