@@ -86,7 +86,7 @@ _fzf_complete_roscd() {
 source_robot_folders() {
   unalias fzirob
   unalias ce
-  echo "source ${HOME}/.local/pipx/venvs/robot-folders/bin/rob_folders_source.sh"
+  source ${HOME}/.local/pipx/venvs/robot-folders/bin/rob_folders_source.sh
   $@
 }
 

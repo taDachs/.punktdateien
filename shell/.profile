@@ -24,3 +24,4 @@ fi
 export EDITOR="nvim"
 export MANPAGER='nvim +Man!'
 export BROWSER="firefox"
+export GOPATH="$HOME/.go"

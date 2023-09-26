@@ -18,6 +18,10 @@ if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin" ]] ; 
   git clone https://github.com/unixorn/fzf-zsh-plugin ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
 fi
 
+if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/lxd-completion-zsh" ]] ; then
+  git clone https://github.com/endaaman/lxd-completion-zsh ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/lxd-completion-zsh
+fi
+
 # Oh my zsh
 plugins=(
 	git
@@ -26,6 +30,7 @@ plugins=(
   vi-mode
   zlong_alert
   fzf-zsh-plugin
+  lxd-completion-zsh
 )
 
 if [ ! -d $ZSH ]; then
