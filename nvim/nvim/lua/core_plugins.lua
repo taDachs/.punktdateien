@@ -226,6 +226,15 @@ M.dependencies = {
     -- }
   },
   { "drgarcia1986/python-compilers.vim" },
+
+  { "nvim-tree/nvim-tree.lua", 
+    config = true,
+    opts = {},
+    -- dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      {"<leader>tt", ":NvimTreeFindFileToggle<cr>", mode="n"},
+    }
+  }
 }
 
 return M

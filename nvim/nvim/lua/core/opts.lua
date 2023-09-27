@@ -1,6 +1,10 @@
 local M = {}
 
 function M.setup()
+  -- disable netrw
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+
   -- color stuff
   vim.opt.termguicolors = true
   vim.opt.syntax = "enabled"

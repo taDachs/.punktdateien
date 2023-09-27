@@ -1,3 +1,4 @@
 .zcompdump*
 .zcompcache
 __pycache__/
+lazy-lock.json
