@@ -64,7 +64,7 @@ symbol = " "
 
 [custom.fzirob]
 command = "echo $ROB_FOLDERS_ACTIVE_ENV"
-symbol = "󰚩 "
+symbol = "󰚩"
 format = "[$symbol $output]($style) "
 style = "bold #c2028a"
 when = "[[ -n $ROB_FOLDERS_ACTIVE_ENV ]]"
