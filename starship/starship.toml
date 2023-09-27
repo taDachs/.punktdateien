@@ -33,8 +33,8 @@ symbol = "✖ "
 disabled = false
 
 [os.symbols]
-Ubuntu = " "
-Arch = " "
+Ubuntu = " "
+Arch = "󰣇 "
 
 
 [time]
