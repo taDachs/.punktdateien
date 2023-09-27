@@ -9,7 +9,7 @@ build: {
 
 directories: {
     # if left blank, the default ~/checkout will be used
-    checkout_dir: ,
+    checkout_dir: ~/shared/checkout,
     catkin_names: ["catkin_workspace", "catkin_ws"],
     colcon_names: ["colcon_workspace", "colcon_ws", "dev_ws"]
 }
