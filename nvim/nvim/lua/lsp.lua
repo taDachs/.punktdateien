@@ -84,6 +84,10 @@ M.dependencies = {
     config = true,
     tag = "legacy",
   },
+  { 
+    "simrat39/symbols-outline.nvim",
+    config = true,
+  },
 }
 
 function M.setup_keymaps()
