@@ -1,9 +1,0 @@
-config: {}
-description: ""
-devices:
-  shared:
-    path: /home/ubuntu/shared
-    source: /home/max/kitcar/shared
-    type: disk
-name: kitcar
-used_by: []

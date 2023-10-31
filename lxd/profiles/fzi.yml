@@ -1,9 +1,0 @@
-config: {}
-description: ""
-devices:
-  shared:
-    path: /home/ubuntu/shared
-    source: /home/max/work/fzi/shared
-    type: disk
-name: fzi
-used_by: []
