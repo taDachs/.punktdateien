@@ -1,0 +1,10 @@
+config:
+  raw.idmap: both 1000 1000
+description: ""
+devices:
+  x11-socket:
+    path: /tmp/.X11-unix
+    source: /tmp/.X11-unix/
+    type: disk
+name: dev
+used_by: []

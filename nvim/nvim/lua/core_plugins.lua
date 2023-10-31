@@ -236,7 +236,8 @@ M.dependencies = {
     keys = {
       {"<leader>tt", ":NvimTreeFindFileToggle<cr>", mode="n"},
     }
-  }
+  },
+  { "pearofducks/ansible-vim" },
 }
 
 return M

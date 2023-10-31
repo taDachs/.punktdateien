@@ -149,6 +149,7 @@ function M.setup()
   -- vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
   -- vim.cmd([[highlight CursorLine guibg=]] .. colors.background_color[4])
   -- vim.cmd([[highlight CursorLineNr guifg=]] .. colors.kit_exclusive_green[1])
+  vim.cmd([[hi! link Conceal Special]])
 
   vim.opt.cursorline = true
   vim.o.signcolumn = "yes"

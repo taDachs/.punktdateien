@@ -30,8 +30,11 @@ alias grep='grep --color=auto'
 alias pzf="fzf --height 100% --preview 'bat --color=always --style=full --line-range=:500 {}'"
 alias ip='ip -c'
 alias weather='curl wttr.in/karlsruhe'
+alias clip='xclip -sel clip'
+alias tl='tree -L 1'
 
 alias rm="$HOME/.local/bin/safe-rm"
+
 
 #  ____  _    _   _  ____ ___ _   _ ____  
 # |  _ \| |  | | | |/ ___|_ _| \ | / ___| 

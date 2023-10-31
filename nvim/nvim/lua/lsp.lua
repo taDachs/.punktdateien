@@ -29,6 +29,8 @@ M.dependencies = {
       require("lspconfig").texlab.setup {}
       require("lspconfig").gopls.setup {}
       require("lspconfig").rust_analyzer.setup {}
+      require'lspconfig'.ansiblels.setup {}
+      require'lspconfig'.bashls.setup {}
     end,
   },
   {

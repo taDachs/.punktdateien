@@ -15,17 +15,18 @@ M.dependencies = {
 		config = function()
 			require("luasnip-latex-snippets").setup({ use_treesitter = true })
 		end,
-		ft = { "tex", "markdown" },
+    ft = { "tex", "markdown", "pandoc" },
 		lazy = false,
 		dev = false,
 	},
 	{
     "vim-pandoc/vim-pandoc",
     dependencies = { "vim-pandoc/vim-pandoc-syntax" },
-    config = function()
+    init = function()
       vim.cmd([[let g:pandoc#command#autoexec_command="Pandoc pdf --pdf-engine=pdflatex"]])
-      vim.cmd([[let g:pandoc#command#autoexec_on_writes=1]])
-    end
+      vim.cmd([[let g:pandoc#command#autoexec_on_writes=0]])
+      vim.cmd([[let g:pandoc#filetypes#pandoc_markdown=0]])
+    end,
   },
 }
 
