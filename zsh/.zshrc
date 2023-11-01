@@ -18,19 +18,13 @@ if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin" ]] ; 
   git clone https://github.com/unixorn/fzf-zsh-plugin ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
 fi
 
-if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/lxd-completion-zsh" ]] ; then
-  git clone https://github.com/endaaman/lxd-completion-zsh ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/lxd-completion-zsh
-fi
-
 # Oh my zsh
 plugins=(
 	git
 	zsh-autosuggestions
 	zsh-syntax-highlighting
-  vi-mode
   zlong_alert
   fzf-zsh-plugin
-  lxd-completion-zsh
 )
 
 if [ ! -d $ZSH ]; then
@@ -49,15 +43,6 @@ setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt autocd
-bindkey -v
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey "^p" history-search-backward
-bindkey "^n" history-search-forward
-
-autoload -z edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd " " edit-command-line
-
 
 # Make colors work with tmux
 # if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
@@ -70,5 +55,3 @@ eval "$(starship init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source ~/.shellrc
-
-cowsay "TRACK YOUR TIME"
