@@ -1,3 +1,4 @@
+DISABLE_AUTO_UPDATE="true"
 export ZSH="$HOME/.oh-my-zsh/"
 [ ! -d "$HOME/.cache/zsh/zcompdump" ] && mkdir -p "$HOME/.cache/zsh/zcompdump" 
 export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
