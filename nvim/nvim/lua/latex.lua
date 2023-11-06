@@ -15,8 +15,8 @@ M.dependencies = {
 		config = function()
 			require("luasnip-latex-snippets").setup({ use_treesitter = true })
 		end,
-    ft = { "tex", "markdown", "pandoc" },
-		lazy = false,
+    ft = { "tex", "pandoc" },
+		lazy = true,
 		dev = false,
 	},
 	{

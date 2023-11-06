@@ -2,9 +2,16 @@ config:
   raw.idmap: both 1000 1000
 description: ""
 devices:
+  mygpu:
+    type: gpu
   x11-socket:
     path: /tmp/.X11-unix
     source: /tmp/.X11-unix/
     type: disk
 name: dev
-used_by: []
+used_by:
+- /1.0/instances/kitcar-ros-focal
+- /1.0/instances/fzi-ros-focal
+- /1.0/instances/fzi-ros-jammy
+- /1.0/instances/ros-control-jammy
+- /1.0/instances/kitcar-ros-jammy

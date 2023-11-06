@@ -9,6 +9,7 @@
 	defaultBranch = main
 [core]
 	excludesfile = ~/.config/git/gitignore
+	editor = nano
 
 [merge]
 	tool = "nvim"
@@ -20,3 +21,8 @@
 [mergetool "nvim"]
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

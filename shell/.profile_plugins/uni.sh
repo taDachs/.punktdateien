@@ -1,3 +1,5 @@
+# stuff for automating my study material
+
 export UNI_DIR="$HOME/studium"
 
 # open url in browser
@@ -7,7 +9,7 @@ function ilias() {
 }
 
 # get full name of course
-  function coursetitle() {
+function coursetitle() {
   COURSE="$(basename $1)"
   echo "$(yq '.title' $UNI_DIR/current_semester/"$COURSE"/info.yaml | tr -d '"')"
 }
