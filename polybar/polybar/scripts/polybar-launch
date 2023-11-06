@@ -13,6 +13,6 @@ polybar --config=$HOME/.config/polybar/config.ini primary 2>&1 | tee -a /tmp/pol
 # If more than one display is connected, start the other bars as well
 if [ "$DISPLAY_COUNT" -gt 1 ]; then
     echo "---" | tee -a /tmp/polybar-vertical.log /tmp/polybar-laptop.log
-    polybar --config=$HOME/max/.config/polybar/config.ini vertical 2>&1 | tee -a /tmp/polybar-vertical.log & disown
-    polybar --config=$HOME/max/.config/polybar/config.ini laptop 2>&1 | tee -a /tmp/polybar-laptop.log & disown
+    polybar --config=$HOME/.config/polybar/config.ini vertical 2>&1 | tee -a /tmp/polybar-vertical.log & disown
+    polybar --config=$HOME/.config/polybar/config.ini laptop 2>&1 | tee -a /tmp/polybar-laptop.log & disown
 fi
