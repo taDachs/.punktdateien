@@ -9,7 +9,7 @@
 	defaultBranch = main
 [core]
 	excludesfile = ~/.config/git/gitignore
-	editor = nano
+	editor = nvim
 
 [merge]
 	tool = "nvim"
