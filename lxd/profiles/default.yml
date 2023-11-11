@@ -1,13 +1,15 @@
-config:
-  environment.DISPLAY: :0
-  raw.idmap: both 1000 1000
-description: ""
+config: {}
+description: Default LXD profile
 devices:
-  X0:
-    path: /tmp/.X11-unix/X0
-    source: /tmp/.X11-unix/X1
+  eth0:
+    name: eth0
+    network: lxdbr0
+    type: nic
+  root:
+    path: /
+    pool: default
     type: disk
-name: dev
+name: default
 used_by:
 - /1.0/instances/base-ros1-focal
 - /1.0/instances/base-ros2-focal
