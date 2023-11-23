@@ -31,6 +31,7 @@ M.dependencies = {
       require("lspconfig").rust_analyzer.setup {}
       require'lspconfig'.ansiblels.setup {}
       require'lspconfig'.bashls.setup {}
+      require'lspconfig'.marksman.setup {}
     end,
   },
   {

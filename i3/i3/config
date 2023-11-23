@@ -203,6 +203,7 @@ workspace_auto_back_and_forth yes
 
 for_window [class="Seafile"] floating enable
 for_window [title="Quick Format Citation"] floating enable; move position center
+for_window [instance=".*\.py"] floating enable
 
 # screenshots
 bindsym Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
@@ -234,7 +235,7 @@ exec_always --no-startup-id /home/max/.config/polybar/scripts/polybar-launch
 
 exec --no-startup-id autorandr -c
 exec_always synclient TouchpadOff=1
-exec_always feh --bg-fill /home/max/Pictures/wallpapers/Znurt.png
+exec_always feh --bg-fill /home/max/Pictures/wallpapers/rosconde23_2k.png
 
 set $red #C62033
 set $green #00A88F

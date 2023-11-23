@@ -18,7 +18,7 @@ function M.setup()
   vim.keymap.set("x", "H", "<`[V`]", { noremap = true })
   vim.keymap.set("x", "J", "dp`[V`]", { noremap = true })
   vim.keymap.set("x", "K", "dkP`[V`]", { noremap = true })
-
+  
   -- copy to clipboard
   vim.keymap.set("n", "<leader>y", '"+yy', { noremap = true })
   vim.keymap.set("x", "<leader>y", '"+y', { noremap = true })
