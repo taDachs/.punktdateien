@@ -77,5 +77,9 @@ export CLICOLOR=1
 source ~/.shellrc
 
 if [ -x "$(command -v cowsay)" ]; then 
-  cowsay "TRACK YOUR TIME"
+  if [ -f ~/.cowmsg ]; then
+    cat ~/.cowmsg | cowsay 
+  else
+    cowsay "Junge ich liebe kitcar"
+  fi
 fi
