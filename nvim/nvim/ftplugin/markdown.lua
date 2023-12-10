@@ -7,7 +7,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.cmd("let g:markdown_fenced_languages = ['html', 'js=javascript', 'ruby', 'python']")
 
-vim.opt.conceallevel=3
+vim.opt.conceallevel=2
 
 vim.cmd([[hi! link Conceal Special]])
 
