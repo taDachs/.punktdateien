@@ -9,7 +9,7 @@ function M.setup()
 
   -- remap esc to jk
   vim.keymap.set("i", "jk", "<esc>", { noremap = true })
-  vim.keymap.set("i", "<esc>", "<nop>", { noremap = true })
+  -- vim.keymap.set("i", "<esc>", "<nop>", { noremap = true })
 
   -- move text
   vim.keymap.set("n", "L", ">>", { noremap = true })

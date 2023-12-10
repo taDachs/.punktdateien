@@ -28,8 +28,8 @@ plugins=(
 	git
 	zsh-autosuggestions
 	zsh-syntax-highlighting
-  vi-mode
-  zlong_alert
+  # vi-mode
+  # zlong_alert
   fzf-zsh-plugin
   lxd-completion-zsh
 )
@@ -55,16 +55,14 @@ setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt autocd
-bindkey -e
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey "jk" vi-cmd-mode
+
 bindkey "^p" history-search-backward
 bindkey "^n" history-search-forward
 bindkey "^Xa" _expand_alias
 
 autoload -z edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd " " edit-command-line
+# bindkey -M vicmd " " edit-command-line
 
 
 # Make colors work with tmux
