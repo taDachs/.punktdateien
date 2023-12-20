@@ -122,7 +122,7 @@ M.dependencies = {
       { "<leader>ta", "<cmd>Telescope find_files theme=dropdown<cr>", mode = "n", noremap = true },
       { "<leader>tf", "<cmd>Telescope live_grep theme=dropdown<cr>", mode = "n", noremap = true },
       { "<leader>tb", "<cmd>Telescope buffers theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader><leader>", " theme=dropdown<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader><leader>", "<cmd>Telescope buffers theme=dropdown<cr>", mode = "n", noremap = true },
       { "<leader>th", "<cmd>Telescope help_tags theme=dropdown<cr>", mode = "n", noremap = true },
       { "<leader>tr", "<cmd>Telescope ros ros theme=dropdown<cr>", mode = "n", noremap = true },
       { "<leader>tds", "<cmd>Telescope lsp_document_symbols theme=dropdown<cr>", mode = "n", noremap = true },
