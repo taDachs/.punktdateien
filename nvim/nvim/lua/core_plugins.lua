@@ -110,6 +110,14 @@ M.dependencies = {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
     opts = {
+      defaults = {
+        layout_strategy = 'vertical',
+        layout_config = {
+          vertical = {
+            width = 0.7,
+          },
+        },
+      },
       extensions = {
         fzf = {
           fuzzy = true,
@@ -119,14 +127,14 @@ M.dependencies = {
       },
     },
     keys = {
-      { "<leader>ta", "<cmd>Telescope find_files theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader>tf", "<cmd>Telescope live_grep theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader>tb", "<cmd>Telescope buffers theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader><leader>", "<cmd>Telescope buffers theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader>th", "<cmd>Telescope help_tags theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader>tr", "<cmd>Telescope ros ros theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader>tds", "<cmd>Telescope lsp_document_symbols theme=dropdown<cr>", mode = "n", noremap = true },
-      { "<leader>tws", "<cmd>Telescope lsp_workspace_symbols theme=dropdown<cr>", mode = "n", noremap = true },
+      { "<leader>ta", "<cmd>Telescope find_files<cr>", mode = "n", noremap = true },
+      { "<leader>tf", "<cmd>Telescope live_grep<cr>", mode = "n", noremap = true },
+      { "<leader>tb", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader><leader>", "<cmd>Telescope buffers<cr>", mode = "n", noremap = true },
+      { "<leader>th", "<cmd>Telescope help_tags<cr>", mode = "n", noremap = true },
+      { "<leader>tr", "<cmd>Telescope ros ros<cr>", mode = "n", noremap = true },
+      { "<leader>tds", "<cmd>Telescope lsp_document_symbols<cr>", mode = "n", noremap = true },
+      { "<leader>tws", "<cmd>Telescope lsp_workspace_symbols<cr>", mode = "n", noremap = true },
     },
   },
 
