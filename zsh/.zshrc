@@ -67,7 +67,8 @@ bindkey -M vicmd " " edit-command-line
 # enable colors
 export CLICOLOR=1
 
-eval "$(starship init zsh)"
+[ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source ~/.shellrc

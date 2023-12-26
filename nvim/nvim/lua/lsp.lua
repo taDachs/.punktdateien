@@ -5,6 +5,7 @@ M.dependencies = {
     "williamboman/mason-lspconfig.nvim",
     config = true,
     opts = {
+      ensure_installed = { "clangd", },
       automatic_installation = false,
     },
   },

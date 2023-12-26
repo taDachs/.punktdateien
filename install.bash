@@ -3,6 +3,8 @@ set -ex
 
 rm -rf $HOME/.zshrc $HOME/.bashrc $HOME/.profile
 
+mkdir -p $HOME/.config
+
 stow --target $HOME zsh
 stow --target $HOME/.config alacritty
 stow --target $HOME/.config i3
