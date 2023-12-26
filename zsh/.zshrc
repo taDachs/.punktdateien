@@ -76,4 +76,6 @@ export CLICOLOR=1
 
 source ~/.shellrc
 
-[ -x "$(command -v cowsay)" ] && cowsay "TRACK YOUR TIME"
+if [ -x "$(command -v cowsay)" ]; then 
+  cowsay "TRACK YOUR TIME"
+fi
