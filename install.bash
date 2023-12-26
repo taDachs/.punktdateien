@@ -20,3 +20,6 @@ stow --target $HOME shell
 stow --target $HOME/.config latexmk
 stow --target $HOME/.config zathura
 stow --target $HOME/.config robot_folders
+
+mkdir -p $HOME/.local/bin
+stow --target $HOME/.local/bin scripts
