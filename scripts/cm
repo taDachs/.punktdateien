@@ -26,9 +26,10 @@ done
 
 output_file=$(mktemp)
 "$program" "$@" 2>&1 | tee "$output_file"
+escaped_program="$(echo "$program $@" | sed 's/ /\\ /g')"
 
 if [[ "$compiler_found" == "true" ]]; then
-  nvim --cmd "compiler $file_name" -q $output_file
+  nvim --cmd "compiler $file_name | set makeprg=$escaped_program" -q $output_file
 else
-  nvim -q $output_file
+  nvim --cmd "set makeprg=$escaped_program" -q $output_file
 fi
