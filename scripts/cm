@@ -24,8 +24,11 @@ for file_path in /usr/local/share/nvim/runtime/compiler/*.vim; do
   fi
 done
 
+output_file=$(mktemp)
+"$program" "$@" 2>&1 | tee "$output_file"
+
 if [[ "$compiler_found" == "true" ]]; then
-  nvim --cmd "compiler $file_name" -q <("$program" "$@" 2>&1)
+  nvim --cmd "compiler $file_name" -q $output_file
 else
-  nvim -q <("$program" "$@" 2>&1)
+  nvim -q $output_file
 fi
