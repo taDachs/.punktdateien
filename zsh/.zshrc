@@ -38,6 +38,11 @@ if [ ! -d $ZSH ]; then
   echo "Performing initial setup of oh-my-zsh"
   git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 fi
+if [ -x "$(command -v starship)" ]; then
+  eval "$(starship init zsh)"
+else
+  ZSH_THEME=robbyrussell
+fi
 source $ZSH/oh-my-zsh.sh
 
 # history file
@@ -66,8 +71,6 @@ bindkey -M vicmd " " edit-command-line
 # Promt
 # enable colors
 export CLICOLOR=1
-
-[ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
