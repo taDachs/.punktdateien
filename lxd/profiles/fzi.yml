@@ -1,10 +1,13 @@
 config: {}
 description: ""
 devices:
-  shared:
-    path: /home/ubuntu/shared
-    source: /home/max/work/fzi/shared
+  fzirob_checkout:
+    path: /home/ubuntu/checkout
+    source: /home/max/work/checkout/
     type: disk
 name: fzi
 used_by:
 - /1.0/instances/fzi-ros-focal
+- /1.0/instances/fzi-ros-jammy
+- /1.0/instances/torch-boniki
+- /1.0/instances/fzi-boniki

@@ -3,8 +3,20 @@ config:
   nvidia.runtime: "true"
 description: ""
 devices:
+  cuda:
+    path: /usr/local/cuda/
+    source: /usr/local/cuda-12.3/
+    type: disk
   mygpu:
     type: gpu
 name: gpu
 used_by:
 - /1.0/instances/fzi-ros-focal
+- /1.0/instances/fzi-ros-jammy
+- /1.0/instances/kitcar-ros-focal
+- /1.0/instances/kitcar-ros-jammy
+- /1.0/instances/anymal-simulation
+- /1.0/instances/torch-boniki
+- /1.0/instances/simopt
+- /1.0/instances/minecraft
+- /1.0/instances/fzi-boniki
