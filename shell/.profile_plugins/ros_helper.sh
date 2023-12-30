@@ -75,6 +75,13 @@ _fzf_complete_roscd() {
 }
 [ -n "$BASH" ] && complete -F _fzf_complete_roscd -o default -o bashdefault roscd
 
+_fzf_complete_colcon_cd() {
+  _fzf_complete "--sort" "$@" < <(
+    rospack list-names
+  )
+}
+[ -n "$BASH" ] && complete -F _fzf_complete_colcon_cd -o default -o bashdefault colcon cd
+
 
 #  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
 # |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
@@ -107,3 +114,4 @@ alias roscdd='roscd && cd ..'
 alias fzirob="source_robot_folders fzirob"
 alias ce="source_robot_folders fzirob change_environment"
 alias catmux="tmux -L catmux"
+alias ros2build="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install"
