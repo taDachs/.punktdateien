@@ -54,7 +54,9 @@ function _course_completion() {
 }
 
 # add completions
-compdef _course_completion ilias
-compdef _course_completion coursetitle
-compdef _course_completion cdc
-compdef _course_completion scc
+if [ -n "ZSH" ]; then
+  compdef _course_completion ilias
+  compdef _course_completion coursetitle
+  compdef _course_completion cdc
+  compdef _course_completion scc
+fi
