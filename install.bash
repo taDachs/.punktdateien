@@ -13,7 +13,7 @@ stow --target $HOME/.config polybar
 stow --target $HOME/.config git
 stow --target $HOME tmux
 stow --target $HOME/.config starship
-stow --target $HOME/.config xdg
+stow --target $HOME/.config xdg | echo "xdg failed, but it always fails"
 stow --target $HOME/.config gtk-3.0
 stow --target $HOME/.config rofi
 stow --target $HOME shell
