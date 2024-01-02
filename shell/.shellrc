@@ -33,7 +33,15 @@ alias weather='curl wttr.in/karlsruhe'
 alias clip='xclip -sel clip'
 alias tl='tree -L 1'
 
-alias rm="$HOME/.local/bin/safe-rm"
+if [ "$(hostname)" = "KekPad" ]; then
+  alias rm="$HOME/.local/bin/safe-rm"
+
+  if [ ! -f "$HOME/.local/bin/safe-rm" ]; then
+    mkdir -p $HOME/.local/bin
+    wget --output-document "$HOME/.local/bin/safe-rm"  "https://raw.githubusercontent.com/kaelzhang/shell-safe-rm/master/bin/rm.sh"
+    chmod +x "$HOME/.local/bin/safe-rm" 
+  fi
+fi
 
 
 #  ____  _    _   _  ____ ___ _   _ ____  
@@ -54,10 +62,4 @@ fi
 
 if [ -f ~/.local_shellrc ]; then
     source ~/.local_shellrc
-fi
-
-if [ ! -f "$HOME/.local/bin/safe-rm" ]; then
-  mkdir -p $HOME/.local/bin
-  wget --output-document "$HOME/.local/bin/safe-rm"  "https://raw.githubusercontent.com/kaelzhang/shell-safe-rm/master/bin/rm.sh"
-  chmod +x "$HOME/.local/bin/safe-rm" 
 fi
