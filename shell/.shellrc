@@ -33,7 +33,7 @@ alias weather='curl wttr.in/karlsruhe'
 alias clip='xclip -sel clip'
 alias tl='tree -L 1'
 
-if [ "$(hostname)" = "KekPad" ]; then
+if [ "$(hostname)" = "KekPad" ] && [ ! -f "/.dockerenv" ]; then
   alias rm="$HOME/.local/bin/safe-rm"
 
   if [ ! -f "$HOME/.local/bin/safe-rm" ]; then
