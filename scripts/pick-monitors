@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+CONFIG="$(ls $HOME/.screenlayout/ | dmenu)"
+
+sh "$HOME/.screenlayout/$CONFIG"
+
+sleep 3
+
+$HOME/.config/polybar/scripts/polybar-launch
