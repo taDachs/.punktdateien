@@ -32,6 +32,7 @@ plugins=(
   zlong_alert
   fzf-zsh-plugin
   lxd-completion-zsh
+  virtualenvwrapper
 )
 
 if [ ! -d $ZSH ]; then

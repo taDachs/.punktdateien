@@ -253,6 +253,5 @@ client.placeholder      $black    $black    $white $black    $black
 
 client.background       $white
 
-# exec_always --no-startup-id setxkbmap -layout us,de,ru -variant altgr-intl,nodeadkeys,phonetic_yazherty
-exec_always --no-startup-id setxkbmap -layout us,de -variant altgr-intl,nodeadkeys
+exec_always --no-startup-id setxkbmap -option 'grp:alt_shift_toggle' -layout us,de,ru -variant altgr-intl,nodeadkeys,phonetic
 exec_always --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'

@@ -36,7 +36,7 @@ M.dependencies = {
   {
     "takac/vim-hardtime",
     lazy = false,
-    config = function()
+    init = function()
       vim.g.hardtime_default_on = 1
       vim.g.hardtime_ignore_buffer_patterns = { "Tele*", "NERD.*", "Tag*" }
       vim.g.hardtime_ignore_quickfix = 1
