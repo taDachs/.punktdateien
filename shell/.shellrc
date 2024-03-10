@@ -71,7 +71,7 @@ if [ "$(hostname)" = "KekPad" ] && [ ! -f "/.dockerenv" ]; then
      RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
      if [ "$RUNNING_AGENT" = "0" ]; then
           # Launch a new instance of the agent
-          ssh-agent -s &> $HOME/.ssh/ssh-agent
+          ssh-agent -a /tmp/ssh-agent -s &> $HOME/.ssh/ssh-agent
           # add all ssh keys
           eval `cat $HOME/.ssh/ssh-agent` > /dev/null
           find ~/.ssh -type f -name '*_id_*' ! -name "*.pub" | xargs ssh-add > /dev/null

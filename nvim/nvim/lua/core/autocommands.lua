@@ -15,9 +15,14 @@ function M.setup()
 
   local filetypeGrp = vim.api.nvim_create_augroup("BufferWrite", { clear = true })
 
-    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = { "*.rule" },
     command = "setf rule",
+    group = filetypeGrp,
+  })
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "devcontainer.json", ".devcontainer.json" },
+    command = "setf jsonc",
     group = filetypeGrp,
   })
 end
