@@ -1,0 +1,3 @@
+wm.bar.status_command: ~/.config/polybar/scripts/polybar-launch
+
+wm.binding.display: F1

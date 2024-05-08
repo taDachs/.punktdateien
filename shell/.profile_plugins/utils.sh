@@ -8,3 +8,7 @@ count_pages() {
 
   echo "All pdf files in this directory have $sum_pages pages."
 }
+
+merge_compile_commands() {
+  jq -s 'map(.[])' $1/**/compile_commands.json > compile_commands.json
+}
