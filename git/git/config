@@ -1,6 +1,3 @@
-[user]
-	email = max.schik@googlemail.com
-	name = Max Schik
 [pull]
 	rebase = true
 [includeIf "gitdir:~/work/**"]
