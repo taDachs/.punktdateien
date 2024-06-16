@@ -52,6 +52,7 @@ M.dependencies = {
           { name = "cmp_ros" },
           { name = "neorg" },
           { name = 'orgmode' },
+          { name = "copilot" },
         }, {
           -- { name = 'buffer' },
         }),
@@ -93,6 +94,10 @@ M.dependencies = {
       local cmp_autopairs = require "nvim-autopairs.completion.cmp"
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = true,
   },
 }
 

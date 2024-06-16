@@ -25,6 +25,7 @@ M.dependencies = {
         },
       }
       -- require("lspconfig").pyright.setup {}
+      require("lspconfig").tsserver.setup {}
       require("lspconfig").lua_ls.setup {}
       require("lspconfig").clangd.setup {}
       require("lspconfig").texlab.setup {}
@@ -86,7 +87,17 @@ M.dependencies = {
   {
     "j-hui/fidget.nvim",
     config = true,
-    tag = "legacy",
+    -- tag = "legacy",
+  },
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+        require('lspsaga').setup({})
+    end,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter', -- optional
+        'nvim-tree/nvim-web-devicons',     -- optional
+    }
   },
 }
 

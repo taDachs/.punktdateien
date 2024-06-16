@@ -35,6 +35,7 @@ M.dependencies = {
   },
   {
     "takac/vim-hardtime",
+    enabled = false,
     lazy = false,
     init = function()
       vim.g.hardtime_default_on = 1
@@ -170,33 +171,6 @@ M.dependencies = {
         function()
           require("ros-nvim.ros").show_interface_definition()
         end,
-        silent = true,
-        noremap = true,
-      },
-    },
-  },
-
-  {
-    "untitled-ai/jupyter_ascending.vim",
-    init = function()
-      vim.g.jupyter_ascending_default_mappings = false
-    end,
-    keys = {
-      {
-        "<leader>jx",
-        "<Plug>JupyterExecute",
-        silent = true,
-        noremap = true,
-      },
-      {
-        "<leader>jax",
-        "<Plug>JupyterExecuteAll",
-        silent = true,
-        noremap = true,
-      },
-      {
-        "<leader>jr",
-        "<Plug>JupyterRestart",
         silent = true,
         noremap = true,
       },
