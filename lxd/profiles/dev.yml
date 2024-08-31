@@ -1,23 +1,28 @@
 config:
-  environment.DISPLAY: :0
-  raw.idmap: both 1000 1000
-description: ""
+    environment.DISPLAY: :1
+    environment.XDG_RUNTIME_DIR: /home/ubuntu/1000
+    nvidia.driver.capabilities: all
+    nvidia.runtime: "false"
+    raw.idmap: both 1000 1000
+    user.user-data: |
+        #cloud-config
+        packages:
+            - x11-apps
+            - mesa-utils
+description: GUI LXD profile
 devices:
-  X0:
-    path: /tmp/.X11-unix/X0
-    source: /tmp/.X11-unix/X1
-    type: disk
-name: dev
-used_by:
-- /1.0/instances/base-ros-focal
-- /1.0/instances/base-ros-jammy
-- /1.0/instances/fzi-ros-focal
-- /1.0/instances/fzi-ros-jammy
-- /1.0/instances/kitcar-ros-focal
-- /1.0/instances/kitcar-ros-jammy
-- /1.0/instances/anymal-simulation
-- /1.0/instances/torch-boniki
-- /1.0/instances/simopt
-- /1.0/instances/minecraft
-- /1.0/instances/fzi-boniki
-- /1.0/instances/ros2-control
+    X0:
+        bind: container
+        connect: unix:@/tmp/.X11-unix/X1
+        listen: unix:@/tmp/.X11-unix/X1
+        security.gid: "1000"
+        security.uid: "1000"
+        type: proxy
+    mygpu:
+        type: gpu
+    u1000:
+        path: /home/ubuntu/1000
+        source: /run/user/1000
+        type: disk
+name: nvidia
+used_by: [] 

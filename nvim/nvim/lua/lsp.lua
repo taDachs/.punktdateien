@@ -12,19 +12,27 @@ M.dependencies = {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("lspconfig").pylsp.setup {
+      -- require("lspconfig").pylsp.setup {
+      --   settings = {
+      --     pylsp = {
+      --       plugins = {
+      --         pycodestyle = {
+      --           ignore = { "E203", "W503", "E701" },
+      --           maxLineLength = 100,
+      --         },
+      --       },
+      --     },
+      --   },
+      -- }
+      require("lspconfig").basedpyright.setup {
         settings = {
-          pylsp = {
-            plugins = {
-              pycodestyle = {
-                ignore = { "E203", "W503", "E701" },
-                maxLineLength = 100,
-              },
-            },
-          },
-        },
+          basedpyright = {
+          analysis = {
+            typeCheckingMode = "off"
+          }
+        }
       }
-      -- require("lspconfig").pyright.setup {}
+      }
       require("lspconfig").lemminx.setup {}
       require("lspconfig").tsserver.setup {}
       require("lspconfig").lua_ls.setup {}
