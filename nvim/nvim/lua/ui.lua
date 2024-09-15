@@ -160,6 +160,10 @@ function M.setup()
     vim.g.neovide_scroll_animation_length = 0
     vim.g.neovide_cursor_animation_length = 0
   end
+
+  -- highlight trailing whitespace
+  vim.cmd [[highlight ExtraWhitespace ctermbg=red guibg=red]]
+  vim.cmd [[match ExtraWhitespace /\s\+$/]]
 end
 
 return M

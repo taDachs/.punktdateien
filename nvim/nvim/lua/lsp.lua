@@ -34,7 +34,7 @@ M.dependencies = {
       }
       }
       require("lspconfig").lemminx.setup {}
-      require("lspconfig").tsserver.setup {}
+      require("lspconfig").ts_ls.setup {}
       require("lspconfig").lua_ls.setup {}
       require("lspconfig").clangd.setup {}
       require("lspconfig").texlab.setup {}
@@ -43,6 +43,7 @@ M.dependencies = {
       require'lspconfig'.ansiblels.setup {}
       require'lspconfig'.bashls.setup {}
       require'lspconfig'.marksman.setup {}
+      require'lspconfig'.julials.setup {}
     end,
   },
   {
