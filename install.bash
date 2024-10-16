@@ -14,7 +14,11 @@ ln -sf ${PWD}/git ${HOME}/.config
 ln -sf ${PWD}/tmux/.tmux.conf ${HOME}
 ln -sf ${PWD}/starship/starship.toml ${HOME}/.config
 
-ln -sf ${PWD}/shell/.* ${HOME}
+ln -sf ${PWD}/shell/.bashrc ${HOME}
+ln -sf ${PWD}/shell/.profile ${HOME}
+ln -sf ${PWD}/shell/.profile_plugins ${HOME}
+ln -sf ${PWD}/shell/.shellrc ${HOME}
+ln -sf ${PWD}/shell/.zprofile ${HOME}
 
 ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
 
