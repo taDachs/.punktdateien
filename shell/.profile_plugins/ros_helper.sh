@@ -93,7 +93,11 @@ _fzf_complete_colcon_cd() {
 source_robot_folders() {
   unalias fzirob
   unalias ce
-  source ${HOME}/.local/pipx/venvs/robot-folders/bin/rob_folders_source.sh
+  if [ -f ${HOME}/.local/pipx/venvs/robot-folders/bin/rob_folders_source.sh ]; then
+    source ${HOME}/.local/pipx/venvs/robot-folders/bin/rob_folders_source.sh
+  elif [ -f /source-robot-folders ]; then
+    source /source-robot-folders
+  fi
   $@
 }
 
