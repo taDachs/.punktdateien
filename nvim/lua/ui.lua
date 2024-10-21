@@ -133,6 +133,7 @@ M.dependencies = {
     -- colorschemes
   "phanviet/vim-monokai-pro",
   "projekt0n/github-nvim-theme",
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "tadachs/kit.vim",
     init = function()
@@ -145,7 +146,7 @@ M.dependencies = {
 
 function M.setup()
   -- vim.cmd.colorscheme "kit"
-  vim.cmd.colorscheme "github_light_high_contrast"
+  vim.cmd.colorscheme "catppuccin-latte"
   -- vim.cmd([[highlight IndentBlanklineChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
   -- vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
   -- vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
