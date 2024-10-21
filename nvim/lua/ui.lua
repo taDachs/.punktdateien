@@ -23,38 +23,38 @@ M.dependencies = {
     opts = {
       options = {
         icons_enabled = true,
-        theme = {
-          normal = {
-            a = { bg = colors.kit_exclusive_green[1], fg = colors.background_color[1], gui = "bold" },
-            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
-            c = { bg = colors.background_color[2], fg = colors.foreground_color[4] },
-          },
-          insert = {
-            a = { bg = colors.kit_orange[1], fg = colors.background_color[1], gui = "bold" },
-            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
-            c = { bg = colors.background_color[2], fg = colors.foreground_color[4] },
-          },
-          visual = {
-            a = { bg = colors.kit_yellow[1], fg = colors.background_color[1], gui = "bold" },
-            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
-            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
-          },
-          replace = {
-            a = { bg = colors.kit_red[1], fg = colors.background_color[1], gui = "bold" },
-            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
-            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
-          },
-          command = {
-            a = { bg = colors.kit_lila[1], fg = colors.background_color[1], gui = "bold" },
-            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
-            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
-          },
-          inactive = {
-            a = { bg = colors.background_color[2], fg = colors.foreground_color[2], gui = "bold" },
-            b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
-            c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
-          },
-        },
+        -- theme = {
+        --   normal = {
+        --     a = { bg = colors.kit_exclusive_green[1], fg = colors.background_color[1], gui = "bold" },
+        --     b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+        --     c = { bg = colors.background_color[2], fg = colors.foreground_color[4] },
+        --   },
+        --   insert = {
+        --     a = { bg = colors.kit_orange[1], fg = colors.background_color[1], gui = "bold" },
+        --     b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+        --     c = { bg = colors.background_color[2], fg = colors.foreground_color[4] },
+        --   },
+        --   visual = {
+        --     a = { bg = colors.kit_yellow[1], fg = colors.background_color[1], gui = "bold" },
+        --     b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+        --     c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
+        --   },
+        --   replace = {
+        --     a = { bg = colors.kit_red[1], fg = colors.background_color[1], gui = "bold" },
+        --     b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+        --     c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
+        --   },
+        --   command = {
+        --     a = { bg = colors.kit_lila[1], fg = colors.background_color[1], gui = "bold" },
+        --     b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+        --     c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
+        --   },
+        --   inactive = {
+        --     a = { bg = colors.background_color[2], fg = colors.foreground_color[2], gui = "bold" },
+        --     b = { bg = colors.background_color[3], fg = colors.foreground_color[1] },
+        --     c = { bg = colors.background_color[2], fg = colors.foreground_color[1] },
+        --   },
+        -- },
         component_separators = { left = "|", right = "|" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {},
@@ -132,6 +132,7 @@ M.dependencies = {
 
     -- colorschemes
   "phanviet/vim-monokai-pro",
+  "projekt0n/github-nvim-theme",
   {
     "tadachs/kit.vim",
     init = function()
@@ -143,7 +144,8 @@ M.dependencies = {
 }
 
 function M.setup()
-  vim.cmd.colorscheme "kit"
+  -- vim.cmd.colorscheme "kit"
+  vim.cmd.colorscheme "github_light_high_contrast"
   -- vim.cmd([[highlight IndentBlanklineChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
   -- vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
   -- vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
