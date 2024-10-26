@@ -1,0 +1,42 @@
+#!/bin/bash
+set -e
+alacritty_light="themes/alacritty-theme/themes/github_light.toml"
+alacritty_dark="themes/alacritty-theme/themes/github_dark_high_contrast.toml"
+
+# Function to detect and set the color mode based on gsettings
+detect_and_set_color_mode() {
+  # Get the current GTK theme from gsettings
+  gtk_theme=$(gsettings get org.gnome.desktop.interface gtk-theme | tr -d "'")
+
+  # Determine the color mode based on the GTK theme name
+  if [[ $gtk_theme == *"-dark" ]]; then
+    color_mode="dark"
+  else
+    color_mode="light"
+  fi
+
+  echo "Detected color mode: $color_mode"
+
+  # Apply the detected color mode to Alacritty
+  if [[ $color_mode == "light" ]]; then
+    # Switch to the light theme
+    sed -i "s:$alacritty_dark:$alacritty_light:g" ${HOME}/.config/alacritty/alacritty.toml
+  elif [[ $color_mode == "dark" ]]; then
+    # Switch to the dark theme
+    sed -i "s:$alacritty_light:$alacritty_dark:g" ${HOME}/.config/alacritty/alacritty.toml
+  fi
+}
+
+listen_change_color_themes() {
+  # Initial run to set the theme based on the current mode
+  detect_and_set_color_mode
+
+  # Monitor GTK theme changes using gsettings monitor
+  gsettings monitor org.gnome.desktop.interface gtk-theme | while read -r line; do
+    # Re-detect and set the color mode on change
+    detect_and_set_color_mode
+  done
+}
+
+# Run the function to start monitoring
+listen_change_color_themes

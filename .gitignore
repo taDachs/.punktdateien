@@ -2,3 +2,4 @@
 .zcompcache
 __pycache__/
 lazy-lock.json
+systemd/user/default.target.wants/

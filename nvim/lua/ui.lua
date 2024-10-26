@@ -133,6 +133,7 @@ M.dependencies = {
     -- colorschemes
   "phanviet/vim-monokai-pro",
   "projekt0n/github-nvim-theme",
+  "nyoom-engineering/oxocarbon.nvim",
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "tadachs/kit.vim",
@@ -144,14 +145,61 @@ M.dependencies = {
   },
 }
 
+local function detect_color_scheme()
+  -- user gsettings get org.gnome.desktop.interface gtk-theme instead, which returns something ending on '-dark' if a dark mode is picked
+  local handle = io.popen('gsettings get org.gnome.desktop.interface gtk-theme')
+
+  if handle == nil then
+    return "dark"
+  end
+
+  local result = handle:read("*a")
+  handle:close()
+
+  if string.find(result, "-dark") then
+    return "dark"
+  else
+    return "light"
+  end
+end
+
+COLOR_MODE = nil
+
+local function set_color_scheme()
+  local current_color_mode = detect_color_scheme()
+
+  if COLOR_MODE == nil then
+    COLOR_MODE = current_color_mode
+  elseif COLOR_MODE == current_color_mode then
+    return
+  else
+    COLOR_MODE = current_color_mode
+  end
+
+  if COLOR_MODE == "light" then
+    vim.opt.background = "light"
+    vim.cmd("colorscheme github_light")
+  elseif COLOR_MODE == "dark" then
+    vim.opt.background = "dark"
+    vim.cmd("colorscheme github_dark_high_contrast")
+  end
+end
+
 function M.setup()
-  -- vim.cmd.colorscheme "kit"
-  vim.cmd.colorscheme "catppuccin-latte"
-  -- vim.cmd([[highlight IndentBlanklineChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
-  -- vim.cmd([[highlight IndentBlanklineSpaceChar guifg=]] .. colors.background_color[6] .. [[ gui=nocombine]])
-  -- vim.cmd([[highlight IndentBlanklineContextChar guifg=]] .. colors.foreground_color[4] .. [[ gui=nocombine]])
-  -- vim.cmd([[highlight CursorLine guibg=]] .. colors.background_color[4])
-  -- vim.cmd([[highlight CursorLineNr guifg=]] .. colors.kit_exclusive_green[1])
+  set_color_scheme()
+
+  -- Create an autocommand group
+  vim.api.nvim_create_augroup("MyUiCommands", { clear = true })
+
+  -- Set up an autocommand that triggers on write to any file
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    group = "MyUiCommands",
+    pattern = "*", -- You can specify a pattern like "*.txt" to limit the files
+    callback = function(args)
+      set_color_scheme()
+    end,
+  })
+
   vim.cmd([[hi! link Conceal Special]])
 
   vim.opt.cursorline = true

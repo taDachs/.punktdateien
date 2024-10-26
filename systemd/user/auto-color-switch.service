@@ -1,0 +1,10 @@
+[Unit]
+Description=Automatic color switch based on system color scheme
+After=graphical.target
+
+[Service]
+ExecStart=/home/max/.local/bin/change_color_mode
+Restart=always
+
+[Install]
+WantedBy=default.target
