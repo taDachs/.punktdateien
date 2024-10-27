@@ -1,7 +1,4 @@
-local M = {}
-
-M.dependencies = {
-  -- treesitter
+return {
   {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -50,50 +47,4 @@ M.dependencies = {
       }
     end,
   },
-  {
-    "m-demare/hlargs.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = true,
-  },
 }
-
-local function jump_to_next_node()
-  local ts_util = require "nvim-treesitter.ts_utils"
-  local curr = ts_util.get_node_at_cursor(0)
-  if curr == nil then
-    return
-  end
-  local next_node = ts_util.get_next_node(curr, true, true)
-  if next_node == nil then
-    return
-  end
-  if ts_util.is_parent(curr, next_node) then
-    return
-  end
-
-  ts_util.goto_node(next_node, false, false)
-end
-
-local function jump_to_previous_node()
-  local ts_util = require "nvim-treesitter.ts_utils"
-  local curr = ts_util.get_node_at_cursor(0)
-  if curr == nil then
-    return
-  end
-  local next_node = ts_util.get_previous_node(curr, true, true)
-  if ts_util.is_parent(curr, next_node) then
-    return
-  end
-  if next_node == nil then
-    return
-  end
-
-  ts_util.goto_node(next_node, false, false)
-end
-
-M.setup = function()
-  -- vim.keymap.set("n", "<leader>nn", jump_to_next_node, { silent = true, noremap = true })
-  -- vim.keymap.set("n", "<leader>pn", jump_to_previous_node, { silent = true, noremap = true })
-end
-
-return M

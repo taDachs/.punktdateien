@@ -1,59 +1,23 @@
-local modules = {
-  "core_plugins",
-  "treesitter",
-  "completion",
-  "ui",
-  "lsp",
-  "snippets",
-  "latex",
-  "ai",
-}
+require "opts"
+require "autocommands"
+require "keymaps"
 
--- core has to be loaded first to enable otps & co
-require("core").setup()
 
-local loaded_modules = {}
+-- highlight trailing whitespace
+vim.cmd [[highlight ExtraWhitespace ctermbg=red guibg=red]]
+vim.cmd [[match ExtraWhitespace /\s\+$/]]
 
-for _, module in pairs(modules) do
-  local ok, plugins = pcall(require, module)
-  if ok then
-    table.insert(loaded_modules, plugins)
-  else
-    vim.notify("Failed loading module: " .. module)
-  end
-end
-
-local plugin_list = {}
-
-for _, module in pairs(loaded_modules) do
-  if module.dependencies ~= nil then
-    for _, v in pairs(module.dependencies) do
-      table.insert(plugin_list, v)
-    end
-  end
-end
-
+-- plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  }
-end
-
-vim.opt.rtp:prepend(lazypath)
-require("lazy").setup(plugin_list, {
-  dev = {
-    path = "~/dev",
-  },
-})
-
-for _, module in pairs(loaded_modules) do
-  if module.setup ~= nil then
-    module.setup()
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath }
+  if vim.v.shell_error ~= 0 then
+    error("Error cloning lazy.nvim:\n" .. out)
   end
-end
+end ---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  { import = "plugins" },
+})
