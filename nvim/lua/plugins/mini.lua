@@ -22,7 +22,7 @@ return {
           find = '', -- Find surrounding (to the right)
           find_left = '', -- Find surrounding (to the left)
           highlight = '', -- Highlight surrounding
-          replace = 'rs', -- Replace surrounding
+          replace = 'cs', -- Replace surrounding
           update_n_lines = '', -- Update `n_lines`
 
           suffix_last = 'l', -- Suffix to search with "prev" method
