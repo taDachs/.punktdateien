@@ -179,18 +179,18 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        pylsp = {
-          settings = {
-            pylsp = {
-              plugins = {
-                pycodestyle = {
-                  ignore = { "E203", "W503", "E701" },
-                  maxLineLength = 100,
-                },
-              },
-            },
-          },
-        },
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         pycodestyle = {
+        --           ignore = { "E203", "W503", "E701" },
+        --           maxLineLength = 100,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
         basedpyright = {
           settings = {
             basedpyright = {
