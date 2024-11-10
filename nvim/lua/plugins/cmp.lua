@@ -48,7 +48,7 @@ return {
       "hrsh7th/cmp-cmdline",
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-emoji",
-      "zbirenbaum/copilot-cmp",
+      { "zbirenbaum/copilot-cmp", config=true },
     },
     config = function()
       -- See `:help cmp`
