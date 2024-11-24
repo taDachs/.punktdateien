@@ -49,6 +49,7 @@ return {
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-emoji",
       { "zbirenbaum/copilot-cmp", config=true },
+      "kdheepak/cmp-latex-symbols",
     },
     config = function()
       -- See `:help cmp`
@@ -126,6 +127,12 @@ return {
           { name = 'luasnip' },
           { name = 'path' },
           { name = "copilot" },
+          {
+            name = "latex_symbols",
+            option = {
+              strategy = 0, -- mixed
+            },
+          },
         },
         formatting = {
           format = lspkind.cmp_format(),
