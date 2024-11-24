@@ -110,15 +110,12 @@ return {
           --  For example, in C this would take you to the header.
           map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-          -- Go to next diagnostic message
-          map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
           -- Show full diagnostic in floating window.
           map("<leader>sd", vim.diagnostic.open_float, "[S]how [Diagnostic]")
 
           -- Jump to next diagnostic
-          map("<leader>n", function() vim.diagnostic.jump({count = 1}) end, "[N]ext Diagnostic")
-          map("<leader>p", function() vim.diagnostic.jump({count = -1}) end, "[P]revious Diagnostic")
+          map("<leader>nd", function() vim.diagnostic.jump({count = 1}) end, "[N]ext Diagnostic")
+          map("<leader>pd", function() vim.diagnostic.jump({count = -1}) end, "[P]revious Diagnostic")
 
 
           -- The following two autocommands are used to highlight references of the
@@ -216,6 +213,7 @@ return {
             },
           },
         },
+        julials = {},
       }
 
       -- Ensure the servers and tools above are installed
