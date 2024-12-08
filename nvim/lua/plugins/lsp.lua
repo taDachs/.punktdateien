@@ -197,6 +197,7 @@ return {
           }
         },
         clangd = {},
+        lemminx = {},
 
         lua_ls = {
           -- cmd = {...},
