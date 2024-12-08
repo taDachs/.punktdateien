@@ -1,4 +1,3 @@
-
 return {
   -- LSP Plugins
   {
@@ -114,8 +113,8 @@ return {
           map("<leader>sd", vim.diagnostic.open_float, "[S]how [Diagnostic]")
 
           -- Jump to next diagnostic
-          map("<leader>nd", function() vim.diagnostic.jump({count = 1}) end, "[N]ext Diagnostic")
-          map("<leader>pd", function() vim.diagnostic.jump({count = -1}) end, "[P]revious Diagnostic")
+          map("<leader>dn", function() vim.diagnostic.jump({count = 1}) end, "[N]ext Diagnostic")
+          map("<leader>dp", function() vim.diagnostic.jump({count = -1}) end, "[P]revious Diagnostic")
 
 
           -- The following two autocommands are used to highlight references of the
@@ -282,5 +281,10 @@ return {
         desc = "[Q]ick [F]ix (Trouble)"
       },
     },
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
 }
