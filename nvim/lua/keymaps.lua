@@ -32,3 +32,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('n', '<leader>m', '<cmd>make<CR>', { desc = '[M]ake command' })
+
+-- use leader + j/k for changing buffers
+vim.keymap.set('n', '<leader>j', '<cmd>bn<CR>', { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<leader>k', '<cmd>bp<CR>', { desc = 'Go to previous buffer' })
