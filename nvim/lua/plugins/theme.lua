@@ -5,6 +5,7 @@ end
 
 return {
   "projekt0n/github-nvim-theme",
+  "EdenEast/nightfox.nvim",
   {
     "f-person/auto-dark-mode.nvim",
     config = true,
@@ -21,11 +22,11 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.api.nvim_set_option_value('background', 'dark', {})
-        vim.cmd("colorscheme github_dark_high_contrast")
+        vim.cmd("colorscheme carbonfox")
       end,
       set_light_mode = function()
         vim.api.nvim_set_option_value('background', 'light', {})
-        vim.cmd("colorscheme github_light")
+        vim.cmd("colorscheme carbonfox")
       end,
     },
   },
