@@ -107,6 +107,11 @@ return {
             return items
           end,
         },
+        snippets = {
+          opts = {
+            search_paths = {"~/.config/nvim/snippets"},
+          }
+        }
       },
     },
   },

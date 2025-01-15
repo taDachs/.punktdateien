@@ -1,0 +1,1 @@
+{"keymap":{"body":"vim.keymap.set('${3:mode}', '${1:keymap}', ${2:function}, { desc = '${4:description}' })","prefix":"keymap"}}
