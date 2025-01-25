@@ -24,4 +24,14 @@ function _crun_complete_zsh() {
     fi
 }
 
+function fzirobdev() {
+  devcontainer up --workspace-folder $HOME/work/fzi/devcontainers/robot_folders --dotfiles-repository=https://github.com/taDachs/.punktdateien.git --dotfiles-install-command=install.bash
+  devcontainer exec --workspace-folder $HOME/work/fzi/devcontainers/robot_folders zsh
+}
+
+alias devup='devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/taDachs/.punktdateien.git --dotfiles-install-command=install.bash'
+alias devnew='devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/taDachs/.punktdateien.git --dotfiles-install-command=install.bash --remove-existing-container'
+alias devrun='devcontainer exec --workspace-folder .'
+alias devsh='devcontainer exec --workspace-folder . zsh'
+
 compdef _crun_complete_zsh crun
