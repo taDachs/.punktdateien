@@ -1,13 +1,6 @@
 -- keybinds
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
 
-vim.keymap.set("n", "L", ">>", { noremap = true })
-vim.keymap.set("n", "H", "<<", { noremap = true })
-vim.keymap.set("x", "L", ">`[V`]", { noremap = true })
-vim.keymap.set("x", "H", "<`[V`]", { noremap = true })
-vim.keymap.set("x", "J", "dp`[V`]", { noremap = true })
-vim.keymap.set("x", "K", "dkP`[V`]", { noremap = true })
-
 vim.keymap.set("n", "<leader>y", '"+yy', { noremap = true })
 vim.keymap.set("x", "<leader>y", '"+y', { noremap = true })
 vim.keymap.set("n", "<leader>p", '"+p', { noremap = true })

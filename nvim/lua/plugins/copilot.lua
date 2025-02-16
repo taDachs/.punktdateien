@@ -1,3 +1,5 @@
+local utils = require("..utils")
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -10,6 +12,7 @@ return {
     },
     filetypes = {
       ["*"] = true
-    }
+    },
+    cond = utils.is_personal(),
   },
 }

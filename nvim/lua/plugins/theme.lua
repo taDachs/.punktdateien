@@ -1,34 +1,35 @@
-local function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
+local utils = require("..utils")
 
 return {
   "projekt0n/github-nvim-theme",
-  "EdenEast/nightfox.nvim",
+  {
+    "EdenEast/nightfox.nvim",
+    init = function()
+      vim.cmd("colorscheme carbonfox")
+      -- highlight trailing whitespace
+      vim.cmd [[highlight Whitespace ctermbg=red guibg=red]]
+    end,
+  },
   {
     "f-person/auto-dark-mode.nvim",
     config = true,
     opts = {
-      fallback = (function()
-      local preferred_color_mode
-      if vim.fn.system("hostname"):gsub("%s+", "") == "KekPad" and not file_exists("/.dockerenv")then
-        preferred_color_mode = "light"
-      else
-        preferred_color_mode = "dark"
-      end
-        return preferred_color_mode
-      end)(),
+      fallback = "dark",
       update_interval = 1000,
       set_dark_mode = function()
         vim.api.nvim_set_option_value('background', 'dark', {})
         vim.cmd("colorscheme carbonfox")
+        -- highlight trailing whitespace
+      vim.cmd [[highlight Whitespace ctermbg=red guibg=red]]
       end,
       set_light_mode = function()
         vim.api.nvim_set_option_value('background', 'light', {})
-        vim.cmd("colorscheme carbonfox")
+        vim.cmd("colorscheme dayfox")
+        -- highlight trailing whitespace
+        vim.cmd [[highlight Whitespace ctermbg=red guibg=red]]
       end,
     },
+    cond = utils.is_personal(),
   },
   {
     "folke/lsp-colors.nvim",

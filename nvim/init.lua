@@ -2,10 +2,11 @@ require "opts"
 require "autocommands"
 require "keymaps"
 
+local personal_config = require "personal_config"
 
--- highlight trailing whitespace
-vim.cmd [[highlight ExtraWhitespace ctermbg=red guibg=red]]
-vim.cmd [[match ExtraWhitespace /\s\+$/]]
+personal_config.picker = "snacks"
+personal_config.use_mini_statusline = true
+personal_config.splashscreen = true
 
 -- plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -19,5 +20,11 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { import = "plugins" },
+  spec = { import = "plugins" },
+  install = { colorscheme = { "carbonfox" } },
+  dev = {
+    path = "~/development/",
+    patterns = {"tadachs"},
+    fallback = true,
+  },
 })

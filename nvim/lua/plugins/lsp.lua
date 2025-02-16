@@ -1,3 +1,4 @@
+local personal_config = require "personal_config"
 return {
   -- LSP Plugins
   --
@@ -25,9 +26,8 @@ return {
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
-      { "j-hui/fidget.nvim",       opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
       "saghen/blink.cmp",
     },
     opts = {
@@ -87,30 +87,55 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
+          local picker = (function()
+            if personal_config.picker == "telescope" then
+              local telescope = require("telescope.builtin")
+              return {
+                definition = telescope.lsp_definitions,
+                references = telescope.lsp_references,
+                implementation = telescope.implementations,
+                type_definition = telescope.type_definitions,
+                document_symbol = telescope.lsp_document_symbols,
+                workspace_symbol = telescope.lsp_dynamic_workspace_symbols,
+              }
+            elseif personal_config.picker == "snacks" then
+              return {
+                definition = Snacks.picker.lsp_definitions,
+                references = Snacks.picker.lsp_references,
+                implementation = Snacks.picker.lsp_implementations,
+                type_definition = Snacks.picker.lsp_type_definitions,
+                document_symbol = Snacks.picker.lsp_symbols,
+                workspace_symbol = Snacks.picker.lsp_workspace_symbols,
+              }
+            else
+              return vim.lsp.buf
+            end
+          end)()
+
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+          map("gd", picker.definition, "[G]oto [D]efinition")
 
           -- Find references for the word under your cursor.
-          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+          map("gr", picker.references, "[G]oto [R]eferences")
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+          map("gI", picker.implementation, "[G]oto [I]mplementation")
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you"re not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+          map("<leader>D", picker.type_definition, "Type [D]efinition")
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+          map("<leader>ds", picker.document_symbol, "[D]ocument [S]ymbols")
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+          map("<leader>ws", picker.workspace_symbol, "[W]orkspace [S]ymbols")
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
@@ -192,7 +217,7 @@ return {
       local ensure_installed = vim.tbl_keys(opts.servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
-        "black", -- Python formatter
+        "black",  -- Python formatter
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 

@@ -1,10 +1,15 @@
+local utils = require "..utils"
+
 return {
   'saghen/blink.cmp',
-  -- optional: provides snippets for the snippet source
-  dependencies = {
+  dependencies = utils.filter_personal_plugins({
+    -- optional: provides snippets for the snippet source
     'rafamadriz/friendly-snippets',
-    "giuxtaposition/blink-cmp-copilot",
-  },
+    {
+      "giuxtaposition/blink-cmp-copilot",
+      cond = utils.is_personal()
+    },
+  }),
 
   -- use a release tag to download pre-built binaries
   version = '*',
@@ -76,7 +81,7 @@ return {
       },
       menu = {
         draw = {
-          columns =  { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+          columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
         }
       }
 
@@ -90,29 +95,37 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
-      providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 100,
-          async = true,
-          transform_items = function(_, items)
-            local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-            local kind_idx = #CompletionItemKind + 1
-            CompletionItemKind[kind_idx] = "Copilot"
-            for _, item in ipairs(items) do
-              item.kind = kind_idx
-            end
-            return items
-          end,
-        },
-        snippets = {
-          opts = {
-            search_paths = {"~/.config/nvim/snippets"},
+      default = utils.filter_personal_plugins({ 'lsp', 'path', 'snippets', 'buffer', 'copilot' }),
+      providers = (function()
+        local providers = {
+          snippets = {
+            opts = {
+              search_paths = { "~/.config/nvim/snippets" },
+            }
           }
         }
-      },
+        if utils.is_personal() then
+          providers = vim.tbl_extend("force", providers,
+          {
+            copilot = {
+              name = "copilot",
+              module = "blink-cmp-copilot",
+              score_offset = 100,
+              async = true,
+              transform_items = function(_, items)
+                local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+                local kind_idx = #CompletionItemKind + 1
+                CompletionItemKind[kind_idx] = "Copilot"
+                for _, item in ipairs(items) do
+                  item.kind = kind_idx
+                end
+                return items
+              end,
+            },
+          })
+        end
+        return providers
+      end)(),
     },
   },
   opts_extend = { "sources.default" }
