@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -d "/usr/bin/games" ] ; then
-    PATH="/usr/bin/games:$PATH"
+if [ -d "/usr/games" ] ; then
+    PATH="/usr/games:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
