@@ -48,10 +48,10 @@ return {
           settings = {
             basedpyright = {
               analysis = {
-                typeCheckingMode = "off"
-              }
-            }
-          }
+                typeCheckingMode = "off",
+              },
+            },
+          },
         },
         clangd = {},
         lemminx = {},
@@ -71,7 +71,7 @@ return {
           },
         },
         julials = {},
-      }
+      },
     },
     config = function(_, opts)
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -89,7 +89,7 @@ return {
 
           local picker = (function()
             if personal_config.picker == "telescope" then
-              local telescope = require("telescope.builtin")
+              local telescope = require "telescope.builtin"
               return {
                 definition = telescope.lsp_definitions,
                 references = telescope.lsp_references,
@@ -153,9 +153,12 @@ return {
           map("<leader>sd", vim.diagnostic.open_float, "[S]how [Diagnostic]")
 
           -- Jump to next diagnostic
-          map("<leader>dn", function() vim.diagnostic.jump({ count = 1 }) end, "[N]ext Diagnostic")
-          map("<leader>dp", function() vim.diagnostic.jump({ count = -1 }) end, "[P]revious Diagnostic")
-
+          map("<leader>dn", function()
+            vim.diagnostic.jump { count = 1 }
+          end, "[N]ext Diagnostic")
+          map("<leader>dp", function()
+            vim.diagnostic.jump { count = -1 }
+          end, "[P]revious Diagnostic")
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -202,11 +205,11 @@ return {
       --  By default, Neovim doesn"t support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local lspconfig = require('lspconfig')
+      local lspconfig = require "lspconfig"
       for server, config in pairs(opts.servers) do
         -- passing config.capabilities to blink.cmp merges with the capabilities in your
         -- `opts[server].capabilities, if you've defined it
-        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
         lspconfig[server].setup(config)
       end
 
@@ -217,7 +220,7 @@ return {
       local ensure_installed = vim.tbl_keys(opts.servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
-        "black",  -- Python formatter
+        "black", -- Python formatter
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
@@ -228,6 +231,18 @@ return {
           server.capabilities = vim.tbl_deep_extend("force", {}, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,
+      }
+
+      -- prettier diagnostic signs
+      vim.diagnostic.config {
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "󰌵",
+          },
+        },
       }
     end,
   },
@@ -243,7 +258,7 @@ return {
         mode = "n",
         noremap = true,
         silent = true,
-        desc = "[S]how [T]rouble"
+        desc = "[S]how [T]rouble",
       },
       {
         "<leader>qf",
@@ -253,13 +268,13 @@ return {
         mode = "n",
         noremap = true,
         silent = true,
-        desc = "[Q]ick [F]ix (Trouble)"
+        desc = "[Q]ick [F]ix (Trouble)",
       },
     },
   },
   {
-    'mrcjkb/rustaceanvim',
-    version = '^5', -- Recommended
-    lazy = false,   -- This plugin is already lazy
+    "mrcjkb/rustaceanvim",
+    version = "^5", -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
 }
