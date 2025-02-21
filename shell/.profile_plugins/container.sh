@@ -35,4 +35,6 @@ alias devnew='devcontainer up --workspace-folder . --dotfiles-repository=https:/
 alias devrun='devcontainer exec --workspace-folder .'
 alias devsh='devcontainer exec --workspace-folder . zsh'
 
-compdef _crun_complete_zsh crun
+if [ -n "$ZSH" ]; then
+  compdef _crun_complete_zsh crun
+fi
