@@ -15,6 +15,7 @@ ln -sf ${PWD}/tmux/.tmux.conf ${HOME}
 ln -sf ${PWD}/starship/starship.toml ${HOME}/.config
 
 ln -sf ${PWD}/shell/.bashrc ${HOME}
+ln -sf ${PWD}/shell/.bash_profile ${HOME}
 ln -sf ${PWD}/shell/.profile ${HOME}
 ln -sf ${PWD}/shell/.profile_plugins ${HOME}
 ln -sf ${PWD}/shell/.shellrc ${HOME}
