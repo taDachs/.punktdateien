@@ -9,8 +9,16 @@ return {
         -- You can customize some of the format options for the filetype (:help conform.format)
         rust = { "rustfmt", lsp_format = "fallback" },
         cpp = { "clang-format", lsp_format = "fallback" },
+        bash = { "beautysh" },
+        sh = { "beautysh" },
+        zsh = { "beautysh" },
+        json = { "jq" },
+        jsonc = { "jq" },
       },
       formatters = {
+        beautysh = {
+          prepend_args = { "--indent-size", "2" },
+        },
         isort = {
           prepend_args = { "--profile", "black" },
         },
