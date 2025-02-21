@@ -1,4 +1,5 @@
 local utils = require "..utils"
+local personal_config = require "personal_config"
 
 return {
   {
@@ -38,10 +39,12 @@ return {
         -- vim.o contains a value, vim.opt can contain a table
         if vim.o.showtabline == 2 then
           -- 1 only enables it if there are two tabs
+          vim.cmd("color " .. personal_config.current_theme)
           vim.opt.showtabline = 1
         else
           -- 2 is always enabled
           vim.opt.showtabline = 2
+          vim.cmd("color " .. personal_config.current_theme)
         end
       end,
       desc = "[T]oggle [B]uffer [L]ine",
