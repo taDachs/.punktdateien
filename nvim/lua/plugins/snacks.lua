@@ -8,7 +8,6 @@ return {
     opts = {
       bigfile = {},
       picker = {},
-      statuscolumn = {},
       dashboard = {
         enabled = personal_config.splashscreen,
         sections = {
