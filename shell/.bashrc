@@ -106,3 +106,5 @@ fi
 
 source $HOME/.shellrc
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
