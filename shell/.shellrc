@@ -54,7 +54,7 @@ for plugin_file in $HOME/.profile_plugins/* ; do
   . $plugin_file
 done
 
-if [ ! -f ~/.fzf.zsh ] || [ ! -f ~/.fzf.bash ]; then
+if [ ! -f ~/.fzf.zsh ] && [ ! -f ~/.fzf.bash ]; then
   echo "Performing initial setup of fzf"
   # We install without shell setup as we do this in our individual shells
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
