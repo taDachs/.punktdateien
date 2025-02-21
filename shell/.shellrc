@@ -1,27 +1,27 @@
 #/* vim: set filetype=sh : */
 
-#  ____  _   _ _____ _     _     ____   ____ 
+#  ____  _   _ _____ _     _     ____   ____
 # / ___|| | | | ____| |   | |   |  _ \ / ___|
-# \___ \| |_| |  _| | |   | |   | |_) | |    
-#  ___) |  _  | |___| |___| |___|  _ <| |___ 
+# \___ \| |_| |  _| | |   | |   | |_) | |
+#  ___) |  _  | |___| |___| |___|  _ <| |___
 # |____/|_| |_|_____|_____|_____|_| \_\\____|
 
-#  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
-# |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
-# | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+#  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____
+# |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___|
+# | |_  | | | |  \| | |     | |  | | | | |  \| \___ \
 # |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
-# |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
+# |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/
 
 mcd() {
   mkdir -p "$1"
   cd "$1"
 }
 
-#     _    _     ___    _    ____  _____ ____  
-#    / \  | |   |_ _|  / \  / ___|| ____/ ___| 
-#   / _ \ | |    | |  / _ \ \___ \|  _| \___ \ 
+#     _    _     ___    _    ____  _____ ____
+#    / \  | |   |_ _|  / \  / ___|| ____/ ___|
+#   / _ \ | |    | |  / _ \ \___ \|  _| \___ \
 #  / ___ \| |___ | | / ___ \ ___) | |___ ___) |
-# /_/   \_\_____|___/_/   \_\____/|_____|____/ 
+# /_/   \_\_____|___/_/   \_\____/|_____|____/
 
 alias v='nvim'
 alias z='zathura'
@@ -39,43 +39,43 @@ if [ "$(hostname)" = "KekPad" ] && [ ! -f "/.dockerenv" ]; then
   if [ ! -f "$HOME/.local/bin/safe-rm" ]; then
     mkdir -p $HOME/.local/bin
     wget --output-document "$HOME/.local/bin/safe-rm"  "https://raw.githubusercontent.com/kaelzhang/shell-safe-rm/master/bin/rm.sh"
-    chmod +x "$HOME/.local/bin/safe-rm" 
+    chmod +x "$HOME/.local/bin/safe-rm"
   fi
 fi
 
 
-#  ____  _    _   _  ____ ___ _   _ ____  
-# |  _ \| |  | | | |/ ___|_ _| \ | / ___| 
-# | |_) | |  | | | | |  _ | ||  \| \___ \ 
+#  ____  _    _   _  ____ ___ _   _ ____
+# |  _ \| |  | | | |/ ___|_ _| \ | / ___|
+# | |_) | |  | | | | |  _ | ||  \| \___ \
 # |  __/| |__| |_| | |_| || || |\  |___) |
-# |_|   |_____\___/ \____|___|_| \_|____/ 
+# |_|   |_____\___/ \____|___|_| \_|____/
 
 for plugin_file in $HOME/.profile_plugins/* ; do
   . $plugin_file
 done
 
-if [ ! -f ~/.fzf.zsh ]; then
+if [ ! -f ~/.fzf.zsh ] || [ ! -f ~/.fzf.bash ]; then
   echo "Performing initial setup of fzf"
   # We install without shell setup as we do this in our individual shells
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 fi
 
 if [ -f ~/.local_shellrc ]; then
-    source ~/.local_shellrc
+  source ~/.local_shellrc
 fi
 
 # SSH Agent
 if [ "$(hostname)" = "KekPad" ] && [ ! -f "/.dockerenv" ]; then
   if [ -z "$SSH_AUTH_SOCK" ]; then
-     # Check for a currently running instance of the agent
-     RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
-     if [ "$RUNNING_AGENT" = "0" ]; then
-          # Launch a new instance of the agent
-          ssh-agent -a /tmp/ssh-agent -s &> $HOME/.ssh/ssh-agent
-          # add all ssh keys
-          eval `cat $HOME/.ssh/ssh-agent` > /dev/null
-          find ~/.ssh -type f -name '*_id_*' ! -name "*.pub" | xargs ssh-add > /dev/null
-     fi
-     eval `cat $HOME/.ssh/ssh-agent` > /dev/null
+    # Check for a currently running instance of the agent
+    RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
+    if [ "$RUNNING_AGENT" = "0" ]; then
+      # Launch a new instance of the agent
+      ssh-agent -a /tmp/ssh-agent -s &> $HOME/.ssh/ssh-agent
+      # add all ssh keys
+      eval `cat $HOME/.ssh/ssh-agent` > /dev/null
+      find ~/.ssh -type f -name '*_id_*' ! -name "*.pub" | xargs ssh-add > /dev/null
+    fi
+    eval `cat $HOME/.ssh/ssh-agent` > /dev/null
   fi
 fi
