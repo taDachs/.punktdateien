@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh/"
 export DISABLE_AUTO_UPDATE=true
-[ ! -d "$HOME/.cache/zsh/zcompdump" ] && mkdir -p "$HOME/.cache/zsh/zcompdump" 
+[ ! -d "$HOME/.cache/zsh/zcompdump" ] && mkdir -p "$HOME/.cache/zsh/zcompdump"
 export ZSH_COMPDUMP=$HOME/.cache/zsh/zcompdump/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}
 
 if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]] ; then
@@ -25,9 +25,9 @@ fi
 
 # Oh my zsh
 plugins=(
-	git
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   vi-mode
   zlong_alert
   fzf-zsh-plugin
@@ -79,6 +79,6 @@ export CLICOLOR=1
 
 source ~/.shellrc
 
-if [ -x "$(command -v cowsay)" ]; then 
+if [ -x "$(command -v cowsay)" ]; then
   cowsay "TRACK YOUR TIME"
 fi
