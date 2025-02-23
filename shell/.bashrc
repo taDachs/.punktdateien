@@ -33,6 +33,9 @@ bind "set show-all-if-ambiguous on"
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind "set mark-symlinked-directories on"
 
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
 ## SANE HISTORY DEFAULTS ##
 
 # Append to the history file, don't overwrite it
