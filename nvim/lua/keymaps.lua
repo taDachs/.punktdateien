@@ -28,3 +28,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- use leader + j/k for changing buffers
 vim.keymap.set('n', '<leader>j', '<cmd>bn<CR>', { desc = 'Go to next buffer' })
 vim.keymap.set('n', '<leader>k', '<cmd>bp<CR>', { desc = 'Go to previous buffer' })
+
+-- resize windows
+vim.keymap.set('n', '<C-RIGHT>', '<C-w>>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<C-LEFT>', '<C-w><', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<C-UP>', '<C-w>+', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-DOWN>', '<C-w>-', { desc = 'Decrease window height' })

@@ -50,7 +50,7 @@ return {
 
       require('mini.splitjoin').setup({
         mappings = {
-          toggle = 'gS',
+          toggle = '<leader>tl',
           split = '',
           join = '',
         },
