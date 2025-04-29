@@ -32,19 +32,12 @@ return {
     },
     opts = {
       servers = {
-        -- pylsp = {
-        --   settings = {
-        --     pylsp = {
-        --       plugins = {
-        --         pycodestyle = {
-        --           ignore = { "E203", "W503", "E701" },
-        --           maxLineLength = 100,
-        --         },
-        --       },
-        --     },
-        --   },
-        -- },
         basedpyright = {
+          root_dir = function(fname)
+            local util = require 'lspconfig.util'
+            local f = util.root_pattern("pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git")(fname)
+            return f
+          end,
           settings = {
             basedpyright = {
               analysis = {
