@@ -23,6 +23,10 @@ if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/lxd-completion-zsh" ]
   git clone https://github.com/endaaman/lxd-completion-zsh ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/lxd-completion-zsh
 fi
 
+if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion" ]] ; then
+  git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+fi
+
 # Oh my zsh
 plugins=(
   git
@@ -33,6 +37,7 @@ plugins=(
   fzf-zsh-plugin
   lxd-completion-zsh
   virtualenvwrapper
+  conda-zsh-completion
 )
 
 if [ ! -d $ZSH ]; then

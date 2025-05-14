@@ -20,8 +20,8 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- Useful status updates for LSP.
@@ -218,14 +218,14 @@ return {
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
-      require("mason-lspconfig").setup {}
-      require("mason-lspconfig").setup_handlers {
-        function(server_name)
-          local server = opts.servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend("force", {}, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      }
+      require("mason-lspconfig").setup { automatic_enable = true }
+      -- require("mason-lspconfig").setup_handlers {
+      --   function(server_name)
+      --     local server = opts.servers[server_name] or {}
+      --     server.capabilities = vim.tbl_deep_extend("force", {}, server.capabilities or {})
+      --     require("lspconfig")[server_name].setup(server)
+      --   end,
+      -- }
 
       -- prettier diagnostic signs
       vim.diagnostic.config {
