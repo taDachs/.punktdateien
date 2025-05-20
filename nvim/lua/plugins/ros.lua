@@ -27,12 +27,6 @@ return {
         noremap = true,
         desc = "[R]os interface [D]efinition"
       },
-      {
-        "<leader>frf",
-        "<cmd>Telescope ros<cr>",
-        noremap = true,
-        desc = "[F]ind [R]os [F]iles",
-      }
     },
     cmd = { "Rosed" },
   },

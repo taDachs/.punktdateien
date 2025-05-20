@@ -86,7 +86,7 @@ return {
         desc = "[F]ind recent files",
       },
       {
-        "<leader>frr",
+        "<leader>fr",
         function()
           Snacks.picker.resume()
         end,

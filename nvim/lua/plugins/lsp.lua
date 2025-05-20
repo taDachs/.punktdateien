@@ -81,17 +81,7 @@ return {
           end
 
           local picker = (function()
-            if personal_config.picker == "telescope" then
-              local telescope = require "telescope.builtin"
-              return {
-                definition = telescope.lsp_definitions,
-                references = telescope.lsp_references,
-                implementation = telescope.implementations,
-                type_definition = telescope.type_definitions,
-                document_symbol = telescope.lsp_document_symbols,
-                workspace_symbol = telescope.lsp_dynamic_workspace_symbols,
-              }
-            elseif personal_config.picker == "snacks" then
+            if personal_config.picker == "snacks" then
               return {
                 definition = Snacks.picker.lsp_definitions,
                 references = Snacks.picker.lsp_references,

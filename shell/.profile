@@ -29,3 +29,5 @@ export EDITOR="nvim"
 export MANPAGER='nvim +Man!'
 export BROWSER="firefox"
 export GOPATH="$HOME/.go"
+
+export PROFILE_IS_SOURCED=1

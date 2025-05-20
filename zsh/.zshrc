@@ -87,3 +87,5 @@ source ~/.shellrc
 if [ -x "$(command -v cowsay)" ]; then
   cowsay "TRACK YOUR TIME"
 fi
+
+[ -z $PROFILE_IS_SOURCED ] && source ~/.profile
