@@ -165,10 +165,10 @@ function rossbuild() {
                                  ####                     ##
                                   ####                    ###
                                                           ####
-                                                           ##
+                                        Lesa Cafferty      ##
 "
   echo "Building ROS workspace..."
-  base_command="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install'"
+  base_command="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install"
   if [ -z "$1" ]; then
     $base_command
   else
