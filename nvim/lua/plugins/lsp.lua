@@ -101,18 +101,18 @@ return {
           map("gd", picker.definition, "[G]oto [D]efinition")
 
           -- Find references for the word under your cursor.
-          map("gr", picker.references, "[G]oto [R]eferences")
+          map("grr", picker.references, "[G]oto [R]eferences")
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map("gI", picker.implementation, "[G]oto [I]mplementation")
+          map("gri", picker.implementation, "[G]oto [I]mplementation")
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you"re not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map("<leader>D", picker.type_definition, "Type [D]efinition")
 
-          -- Fuzzy find all the symbols in your current document.
+          -- [ find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
           map("<leader>ds", picker.document_symbol, "[D]ocument [S]ymbols")
 
@@ -122,11 +122,11 @@ return {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+          map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+          map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -135,21 +135,13 @@ return {
           -- Show full diagnostic in floating window.
           map("<leader>sd", vim.diagnostic.open_float, "[S]how [Diagnostic]")
 
-          -- Jump to next diagnostic
-          map("<leader>dn", function()
-            vim.diagnostic.jump { count = 1 }
-          end, "[N]ext Diagnostic")
-          map("<leader>dp", function()
-            vim.diagnostic.jump { count = -1 }
-          end, "[P]revious Diagnostic")
-
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -176,7 +168,7 @@ return {
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map("<leader>th", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, "[T]oggle Inlay [H]ints")
@@ -209,13 +201,6 @@ return {
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
       require("mason-lspconfig").setup { automatic_enable = true }
-      -- require("mason-lspconfig").setup_handlers {
-      --   function(server_name)
-      --     local server = opts.servers[server_name] or {}
-      --     server.capabilities = vim.tbl_deep_extend("force", {}, server.capabilities or {})
-      --     require("lspconfig")[server_name].setup(server)
-      --   end,
-      -- }
 
       -- prettier diagnostic signs
       vim.diagnostic.config {
@@ -226,6 +211,9 @@ return {
             [vim.diagnostic.severity.INFO] = "",
             [vim.diagnostic.severity.HINT] = "󰌵",
           },
+        },
+        jump = {
+          float = true,
         },
       }
     end,
@@ -255,10 +243,5 @@ return {
         desc = "[Q]ick [F]ix (Trouble)",
       },
     },
-  },
-  {
-    "mrcjkb/rustaceanvim",
-    version = "^5", -- Recommended
-    lazy = false, -- This plugin is already lazy
   },
 }

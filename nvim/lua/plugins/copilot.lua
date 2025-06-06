@@ -1,4 +1,4 @@
-local utils = require("..utils")
+local utils = require "..utils"
 
 return {
   {
@@ -7,11 +7,22 @@ return {
     event = "InsertEnter",
     config = true,
     opts = {
-      suggestion = { enabled = false },
+      suggestion = {
+        enabled = true,
+        autotrigger = false,
+        keymap = {
+          accept = "<M-l>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+      },
       panel = { enabled = false },
     },
     filetypes = {
-      ["*"] = true
+      ["*"] = true,
     },
     cond = utils.is_personal(),
   },
