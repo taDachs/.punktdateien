@@ -1,6 +1,6 @@
 {
   "RCLCPP Subscriber Declaration": {
-    "body": "rclcpp::Subscription<${1:std_msgs::msg::String}>::SharedPtr ${0:sub};",
+    "body": "rclcpp::Subscription<${1:std_msgs::msg::String}>::SharedPtr ${2:sub};",
     "prefix": "subd"
   },
   "RCLCPP Subscriber Definition": {
@@ -10,14 +10,14 @@
   "RCLCPP Subscriber Callback": {
     "body": [
       "void ${1:callback}(const ${2:std_msgs::msg::String}::SharedPtr msg) {",
-      "\t${0:RCLCPP_INFO(this->get_logger(), \"Received message: '%s'\", msg->data.c_str());}",
+      "\t${3:RCLCPP_INFO(this->get_logger(), \"Received message: '%s'\", msg->data.c_str());}",
       "}"
     ],
     "prefix": "subcb"
   },
 
   "RCLCPP Publisher Declaration": {
-    "body": "rclcpp::Publisher<${1:std_msgs::msg::String}> ${0:pub};",
+    "body": "rclcpp::Publisher<${1:std_msgs::msg::String}> ${2:pub};",
     "prefix": "pubd"
   },
   "RCLCPP Publisher Definition": {
@@ -26,24 +26,24 @@
   },
 
   "RCLCPP Timer Declaration": {
-    "body": "rclcpp::TimerBase::SharedPtr ${0:timer};",
+    "body": "rclcpp::TimerBase::SharedPtr ${1:timer};",
     "prefix": "timed"
   },
   "RCLCPP Timer Definition": {
-    "body": "${1:timer} = this->create_wall_timer(${2:std::chrono::seconds(1)}, std::bind(&${3:ClassName}::${4:callback}, this));",
+   "body": "${1:timer} = this->create_wall_timer(${2:std::chrono::seconds(1)}, std::bind(&${3:ClassName}::${4:callback}, this));",
     "prefix": "time"
   },
   "RCLCPP Timer Callback": {
     "body": [
       "void ${1:callback}() {",
-      "\t${0:RCLCPP_INFO(this->get_logger(), \"Timer triggered\");}",
+      "\t${2:RCLCPP_INFO(this->get_logger(), \"Timer triggered\");}",
       "}"
     ],
     "prefix": "timecb"
   },
 
   "RCLCPP Service Declaration": {
-    "body": "rclcpp::Service<${1:std_srvs::srv::Empty}>::SharedPtr ${0:service};",
+    "body": "rclcpp::Service<${1:std_srvs::srv::Empty}>::SharedPtr ${2:service};",
     "prefix": "serviced"
   },
   "RCLCPP Service Definition": {
@@ -53,14 +53,14 @@
   "RCLCPP Service Callback": {
     "body": [
       "void ${1:callback}(const std::shared_ptr<${2:std_srvs::srv::Empty}::Request> request, std::shared_ptr<${2}::Response> response) {",
-      "${0:\tRCLCPP_INFO(this->get_logger(), \"Service called\");}",
+      "${3:\tRCLCPP_INFO(this->get_logger(), \"Service called\");}",
       "}"
     ],
     "prefix": "servicecb"
   },
 
   "RCLCPP Client Declaration": {
-    "body": "rclcpp::Client<${1:std_srvs::srv::Empty}>::SharedPtr ${0:client};",
+    "body": "rclcpp::Client<${1:std_srvs::srv::Empty}>::SharedPtr ${2:client};",
     "prefix": "clientd"
   },
   "RCLCPP Client Definition": {
