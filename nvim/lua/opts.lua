@@ -1,6 +1,6 @@
 -- options
-vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 vim.g.have_nerd_font = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -24,12 +24,19 @@ vim.opt.updatetime = 500
 vim.g.tex_flavor = "latex"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 vim.opt.showmode = false
 vim.opt.breakindent = true
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 vim.opt.timeoutlen = 300
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.inccommand = 'split'
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.inccommand = "split"
 vim.opt.cursorline = true
+
+-- improve cmd message handling if available
+local ok, extui = pcall(require, "vim._extui")
+if ok and type(extui.enable) == "function" then
+  vim.o.cmdheight = 0;
+  extui.enable({})
+end
