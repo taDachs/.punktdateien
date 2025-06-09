@@ -57,7 +57,6 @@ return {
       })
 
       if personal_config.use_mini_statusline then
-        vim.notify("Using mini.nvim statusline")
         -- Simple and easy statusline.
         --  You could remove this setup call if you don't like it,
         --  and try some other statusline plugin

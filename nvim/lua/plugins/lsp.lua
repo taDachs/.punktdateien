@@ -202,6 +202,8 @@ return {
 
       require("mason-lspconfig").setup { automatic_enable = true }
 
+      local diagnostic_jump_ns = vim.api.nvim_create_namespace 'on_diagnostic_jump'
+
       -- prettier diagnostic signs
       vim.diagnostic.config {
         signs = {
@@ -213,7 +215,16 @@ return {
           },
         },
         jump = {
-          float = true,
+          --- @param diagnostic? vim.Diagnostic
+          --- @param bufnr integer
+          on_jump = function(diagnostic, bufnr)
+            if not diagnostic then return end
+            vim.diagnostic.open_float({
+              bufnr = bufnr,
+              scope = 'cursor',
+              focus = false,
+            })
+          end,
         },
       }
     end,

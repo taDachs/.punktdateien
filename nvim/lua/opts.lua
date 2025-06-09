@@ -38,5 +38,18 @@ vim.opt.cursorline = true
 local ok, extui = pcall(require, "vim._extui")
 if ok and type(extui.enable) == "function" then
   vim.o.cmdheight = 0;
-  extui.enable({})
+  extui.enable({
+    enable = true,
+    msg = { -- Options related to the message module.
+      ---@type 'box'|'cmd' Type of window used to place messages, either in the
+      ---cmdline or in a separate ephemeral message box window.
+      pos = 'box',
+      box = { -- Options related to the message box window.
+        timeout = 4000, -- Time a message is visible.
+      },
+    },
+  })
 end
+
+-- highlight trailing whitespace
+vim.cmd [[match errorMsg /\s\+$/]]
