@@ -17,7 +17,7 @@
   },
 
   "RCLCPP Publisher Declaration": {
-    "body": "rclcpp::Publisher<${1:std_msgs::msg::String}> ${2:pub};",
+    "body": "rclcpp::Publisher<${1:std_msgs::msg::String}>::SharedPtr ${2:pub};",
     "prefix": "pubd"
   },
   "RCLCPP Publisher Definition": {
