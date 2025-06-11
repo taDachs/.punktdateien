@@ -19,7 +19,6 @@ vim.opt.foldlevel = 99
 vim.opt.undofile = true
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.diagnostic.config { virtual_lines = false }
 vim.opt.updatetime = 500
 vim.g.tex_flavor = "latex"
 vim.opt.ignorecase = true
