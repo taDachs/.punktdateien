@@ -1,6 +1,5 @@
 return {
   -- general QoL stuff
-  "tpope/vim-sleuth",
   "tpope/vim-eunuch",
   {
     "nicwest/vim-camelsnek",

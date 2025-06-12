@@ -56,6 +56,14 @@ return {
         },
       })
 
+      require('mini.splitjoin').setup({
+        mappings = {
+          toggle = '<leader>tl',
+          split = '',
+          join = '',
+        },
+      })
+
       if personal_config.use_mini_statusline then
         -- Simple and easy statusline.
         --  You could remove this setup call if you don't like it,

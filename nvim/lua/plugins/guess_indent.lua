@@ -4,5 +4,5 @@ return {
     auto_cmd = true,
   },
   config = true,
-  event = "VeryLazy",
+  lazy = false,
 }
