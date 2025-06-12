@@ -30,6 +30,7 @@ return {
 
       "saghen/blink.cmp",
     },
+    event = "VeryLazy",
     opts = {
       servers = {
         basedpyright = {

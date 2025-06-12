@@ -3,6 +3,7 @@ local function show_macro_recording()
   if reg == "" then return "" end -- not recording
   return "@" .. reg
 end
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
