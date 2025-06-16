@@ -40,12 +40,10 @@ if ok and type(extui.enable) == "function" then
   extui.enable({
     enable = true,
     msg = { -- Options related to the message module.
-      ---@type 'box'|'cmd' Type of window used to place messages, either in the
+      ---@type 'cmd'|'msg' Type of window used to place messages, either in the
       ---cmdline or in a separate ephemeral message box window.
-      pos = 'box',
-      box = { -- Options related to the message box window.
-        timeout = 4000, -- Time a message is visible.
-      },
+      target = 'msg',
+      timeout = 4000,
     },
   })
 end
