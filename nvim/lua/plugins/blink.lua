@@ -2,10 +2,9 @@ local utils = require "..utils"
 
 return {
   'saghen/blink.cmp',
-  dependencies = utils.filter_personal_plugins({
-    -- optional: provides snippets for the snippet source
-    'rafamadriz/friendly-snippets',
-  }),
+  dependencies = {
+    'L3MON4D3/LuaSnip',
+  },
 
   -- use a release tag to download pre-built binaries
   version = '*',
@@ -92,18 +91,9 @@ return {
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
+    snippets = { preset = 'luasnip' },
     sources = {
-      default = utils.filter_personal_plugins({ 'lsp', 'path', 'snippets', 'buffer'}),
-      providers = (function()
-        local providers = {
-          snippets = {
-            opts = {
-              search_paths = { "~/.config/nvim/snippets" },
-            }
-          }
-        }
-        return providers
-      end)(),
+      default = { 'lsp', 'path', 'snippets', 'buffer'},
     },
   },
   opts_extend = { "sources.default" }
