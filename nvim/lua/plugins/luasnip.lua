@@ -51,11 +51,17 @@ return {
       {
         "<Tab>",
         function()
-          require("luasnip").expand_or_jump()
+          local ls = require("luasnip")
+          if ls.expand_or_jumpable() then
+            return "<Plug>luasnip-expand-or-jump"
+          else
+            return "<Tab>"
+          end
         end,
         mode = { "i", "s" },
         desc = "Expand Snippet Or Jump",
         silent = true,
+        expr = true,
       },
       {
         "<S-Tab>",
