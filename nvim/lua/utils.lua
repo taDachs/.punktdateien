@@ -2,7 +2,7 @@ local utils = {}
 
 function utils.is_personal()
   local personal_machines = {
-    "kekpad"
+    "kekpad", "ids-car"
   }
   for _, machine in ipairs(personal_machines) do
     if vim.fn.hostname():lower() == machine then

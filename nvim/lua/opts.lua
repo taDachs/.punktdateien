@@ -34,6 +34,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
+vim.opt.wrap = false
 
 -- improve cmd message handling if available
 local ok, extui = pcall(require, "vim._extui")
