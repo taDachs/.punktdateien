@@ -36,7 +36,6 @@ plugins=(
   zlong_alert
   fzf-zsh-plugin
   lxd-completion-zsh
-  virtualenvwrapper
   conda-zsh-completion
 )
 
@@ -85,7 +84,7 @@ export CLICOLOR=1
 source ~/.shellrc
 
 if [ -x "$(command -v cowsay)" ]; then
-  cowsay "TRACK YOUR TIME"
+  cowsay "Nur unter Druck entstehen Diamanten!"
 fi
 
 [ -z $PROFILE_IS_SOURCED ] && source ~/.profile
