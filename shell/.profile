@@ -1,24 +1,24 @@
 #!/bin/bash
 
 if [ -d "/usr/games" ] ; then
-    PATH="/usr/games:$PATH"
+    PATH="$PATH:/usr/games"
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+    PATH="$PATH:$HOME/.local/bin"
 fi
 
 if [ -d "$HOME/.config/i3/scripts/" ] ; then
-    PATH="$HOME/.config/i3/scripts:$PATH"
+    PATH="$PATH:$HOME/.config/i3/scripts"
 fi
 
 if [ -d "$HOME/.scripts" ] ; then
-    PATH="$HOME/.scripts:$PATH"
+    PATH="$PATH:$HOME/.scripts"
 fi
 
 if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$HOME/.cargo/bin:$PATH"
+    PATH="$PATH:$HOME/.cargo/bin"
 fi
 
 if [ -d "$HOME/.cargo" ] ; then
