@@ -13,12 +13,12 @@ vim.keymap.set("n", "<C-w>z", "<C-w>|")
 
 vim.keymap.set("n", "<leader>qq", "<cmd>bd<Cr>", { silent = true, noremap = true })
 
-vim.keymap.set("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { noremap = true })
+vim.keymap.set("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { noremap = true, desc = "Fix last spelling error" })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uick[f]ix list' })
-vim.keymap.set('n', '<leader>m', '<cmd>make<CR>', { desc = '[M]ake command' })
+vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
+vim.keymap.set('n', '<leader>m', '<cmd>make<CR>', { desc = 'Make' })
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
