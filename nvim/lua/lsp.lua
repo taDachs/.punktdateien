@@ -12,6 +12,39 @@ vim.lsp.enable({
   "lemminx",
 })
 
+local completion_kind_styling = {
+  Text = { icon = '󰉿', hl = "@lsp.type.string" },
+  Method = { icon = '󰊕', hl = "@lsp.type.method" },
+  Function = { icon = '󰊕', hl = "@lsp.type.function" },
+  Constructor = { icon = '󰒓', hl = "@lsp.type.method" },
+
+  Field = { icon = '󰜢', hl = "@lsp.type.property" },
+  Variable = { icon = '󰆦', hl = "@lsp.type.variable" },
+  Property = { icon = '󰖷', hl = "@lsp.type.property" },
+
+  Class = { icon = '󱡠', hl = "@lsp.type.class" },
+  Interface = { icon = '󱡠', hl = "@lsp.type.interface" },
+  Struct = { icon = '󱡠', hl = "@lsp.type.struct" },
+  Module = { icon = '󰅩', hl = "@lsp.type.module" },
+
+  Unit = { icon = '󰪚', hl = "PmenuKind" },
+  Value = { icon = '󰦨', hl = "PmenuKind" },
+  Enum = { icon = '󰦨', hl = "@lsp.type.enum" },
+  EnumMember = { icon = '󰦨', hl = "@lsp.type.enumMember" },
+
+  Keyword = { icon = '󰻾', hl = "@lsp.type.keyword" },
+  Constant = { icon = '󰏿', hl = "@lsp.type.enumMember" },
+
+  Snippet = { icon = '󱄽', hl = "PmenuKind" },
+  Color = { icon = '󰏘', hl = "PmenuKind" },
+  File = { icon = '󰈔', hl = "PmenuKind" },
+  Reference = { icon = '󰬲', hl = "PmenuKind" },
+  Folder = { icon = '󰉋', hl = "PmenuKind" },
+  Event = { icon = '󱐋', hl = "@lsp.type.event" },
+  Operator = { icon = '󰪚', hl = "@lsp.type.operator" },
+  TypeParameter = { icon = '󰬛', hl = "@lsp.type.typeParameter" },
+}
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("config-lsp-attach", { clear = true }),
   callback = function(event)
@@ -35,36 +68,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end
     end)()
 
-    -- Jump to the definition of the word under your cursor.
-    --  This is where a variable was first declared, or where a function is defined, etc.
-    --  To jump back, press <C-t>.
     map("grd", picker.definition, "Goto Definition")
-
-    -- Find references for the word under your cursor.
     map("grr", picker.references, "Goto References")
-
-    -- Jump to the implementation of the word under your cursor.
-    --  Useful when your language has ways of declaring types without an actual implementation.
     map("gri", picker.implementation, "Goto Implementation")
-
-    -- WARN: This is not Goto Definition, this is Goto Declaration.
-    --  For example, in C this would take you to the header.
     map("grD", vim.lsp.buf.declaration, "Goto Declaration")
-
     map("grt", picker.type_definition, "Type Definition")
     map("<leader>ds", picker.document_symbol, "Document Symbols")
     map("<leader>ws", picker.workspace_symbol, "Workspace Symbols")
     map("grn", vim.lsp.buf.rename, "Rename")
     map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
 
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if not client then return end
+
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
     --    See `:help CursorHold` for information about when this is executed
     --
     -- When you move your cursor, the highlights will be cleared (the second autocommand).
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-    if not client then return end
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
       local highlight_augroup = vim.api.nvim_create_augroup("config-lsp-highlight", { clear = false })
       vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -94,23 +115,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end, "Toggle Inlay Hints")
     end
 
-    vim.o.complete = ".,o"   -- use buffer and omnifunc
-    vim.o.completeopt = "fuzzy,menuone,noselect,popup"
-    vim.o.autocomplete = true
-    vim.o.pumheight = 7
     vim.lsp.completion.enable(true, client.id, event.buf, {
-      autotrigger = true,
+      autotrigger = false,
       convert = function(item)
         local abbr = item.label
-        abbr = abbr:gsub("%b()", ""):gsub("%b{}", "")
-        abbr = abbr:match("[%w_.]+.*") or abbr
-        abbr = #abbr > 15 and abbr:sub(1, 14) .. "…" or abbr
 
-        -- Cap return value field to 15 chars
-        local menu = item.detail or ""
-        menu = #menu > 15 and menu:sub(1, 14) .. "…" or menu
+        local kind = vim.tbl_get(vim.lsp.protocol.CompletionItemKind, item.kind) or ""
+        local styling = vim.tbl_get(completion_kind_styling, kind) or {}
+        local kind_icon = vim.tbl_get(styling, "icon") or ""
+        local kind_hl = vim.tbl_get(styling, "hl") or ""
 
-        return { abbr = abbr, menu = menu }
+        return { abbr = abbr, kind = kind_icon .. " " .. kind, kind_hlgroup = kind_hl }
       end,
     })
 
