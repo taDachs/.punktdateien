@@ -60,6 +60,6 @@ pick.setup({})
 
 vim.keymap.set("n", "<leader>fh", pick.builtin.help, { desc = "Find Help", })
 vim.keymap.set("n", "<leader>ff", pick.builtin.files, { desc = "Find Files", })
-vim.keymap.set("n", "<leader>fg", pick.builtin.live_grep, { desc = "Find Grep", })
+vim.keymap.set("n", "<leader>fg", pick.builtin.grep_live, { desc = "Find Grep", })
 vim.keymap.set("n", "<leader>fr", pick.builtin.resume, { desc = "Find Resume", })
 vim.keymap.set("n", "<leader><space>", pick.builtin.buffers, { desc = "Find existing buffers", })
