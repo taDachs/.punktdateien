@@ -5,16 +5,16 @@ vim.pack.add {
 -- Better Around/Inside textobjects
 --
 -- Examples:
---  - va)  - [V]isually select [A]round [)]paren
---  - yinq - [Y]ank [I]nside [N]ext [Q]uote
---  - ci'  - [C]hange [I]nside [']quote
+--  - va)  - Visually select Around )paren
+--  - yinq - Yank Inside Next Quote
+--  - ci'  - Change Inside 'quote
 require('mini.ai').setup { n_lines = 500 }
 
 -- Add/delete/replace surroundings (brackets, quotes, etc.)
 --
--- - asiw) - [Yank] [S]urrounding [I]nner [W]ord [)]Paren (like in surround)
--- - ds'   - [D]elete [S]urround [']quotes
--- - rs)'  - [R]eplace [S]urround [)] [']
+-- - asiw) - [Yank] Surrounding Inner Word )Paren (like in surround)
+-- - ds'   - Delete Surround 'quotes
+-- - rs)'  - Replace Surround ) '
 require('mini.surround').setup({
   mappings = {
     add = 'ys',              -- Add surrounding in Normal and Visual modes
@@ -54,3 +54,12 @@ require('mini.splitjoin').setup({
     join = '',
   },
 })
+
+local pick = require('mini.pick')
+pick.setup({})
+
+vim.keymap.set("n", "<leader>fh", pick.builtin.help, { desc = "Find Help", })
+vim.keymap.set("n", "<leader>ff", pick.builtin.files, { desc = "Find Files", })
+vim.keymap.set("n", "<leader>fg", pick.builtin.live_grep, { desc = "Find Grep", })
+vim.keymap.set("n", "<leader>fr", pick.builtin.resume, { desc = "Find Resume", })
+vim.keymap.set("n", "<leader><space>", pick.builtin.buffers, { desc = "Find existing buffers", })
