@@ -1,5 +1,4 @@
 vim.pack.add {
-  "https://github.com/windwp/nvim-autopairs",
   "https://github.com/tpope/vim-eunuch",
   "https://github.com/folke/which-key.nvim",
   "https://github.com/nvim-lua/plenary.nvim",
@@ -9,7 +8,6 @@ vim.pack.add {
   "https://github.com/mason-org/mason.nvim",
 }
 
-require("nvim-autopairs").setup()
 require("which-key").setup()
 require("todo-comments").setup({ signs = false })
 require("stickybuf").setup()
