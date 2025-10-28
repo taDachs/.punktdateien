@@ -135,30 +135,43 @@ vim.api.nvim_create_autocmd("LspAttach", {
       callback = function()
         local info = vim.fn.complete_info({ 'selected' })
         local completionItem = vim.tbl_get(vim.v.completed_item, 'user_data', 'nvim', 'lsp', 'completion_item')
-        if nil == completionItem then
+        if completionItem == nil then
           return
         end
 
-        local cancel = vim.lsp.buf_request_all(
-          event.buf,
-          vim.lsp.protocol.Methods.completionItem_resolve,
-          completionItem,
-          function(resolvedItem)
-            local docs = vim.tbl_get(resolvedItem[event.data.client_id], 'result', 'documentation', 'value')
-            if nil == docs then
-              return
-            end
+        local set_doc_window = function(doc, kind)
+          local winData = vim.api.nvim__complete_set(info['selected'], { info = doc })
+          if not winData.winid or not vim.api.nvim_win_is_valid(winData.winid) then
+            return
+          end
 
-            local winData = vim.api.nvim__complete_set(info['selected'], { info = docs })
-            if not winData.winid or not vim.api.nvim_win_is_valid(winData.winid) then
-              return
-            end
-
-            vim.api.nvim_win_set_config(winData.winid, { border = 'rounded' })
+          vim.api.nvim_win_set_config(winData.winid, { border = 'rounded' })
+          if kind == "markdown" then
+            vim.api.nvim_set_option_value("filetype", "markdown", { buf = winData.bufnr })
             vim.treesitter.start(winData.bufnr, 'markdown')
             vim.wo[winData.winid].conceallevel = 3
           end
-        )
+        end
+
+
+        if completionItem["documentation"] ~= nil then
+          set_doc_window(completionItem["documentation"]["value"], completionItem["documentation"]["kind"])
+        elseif client:supports_method(vim.lsp.protocol.Methods.completionItem_resolve) then
+          local cancel = vim.lsp.buf_request_all(
+            event.buf,
+            vim.lsp.protocol.Methods.completionItem_resolve,
+            completionItem,
+            function(resolvedItem)
+              local docs = vim.tbl_get(resolvedItem[event.data.client_id], 'result', 'documentation', 'value')
+              local kind = vim.tbl_get(resolvedItem[event.data.client_id], 'result', 'documentation', 'kind')
+              if docs == nil then
+                return
+              end
+
+              set_doc_window(docs, kind)
+            end
+          )
+        end
       end
     })
   end,
