@@ -9,4 +9,7 @@ require "nvim-tree".setup({
   },
 })
 
-vim.keymap.set("n", "<leader>tt", ":NvimTreeFindFileToggle<cr>", { desc = "Toggle Tree" })
+vim.keymap.set("n", "<leader>tt", function()
+  local api = require("nvim-tree.api")
+  api.tree.toggle({ find_file = true, focus = true, update_root = false })
+end, { desc = "Toggle Tree" })
