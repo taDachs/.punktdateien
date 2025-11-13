@@ -15,6 +15,10 @@ local languages = {
   "yaml",
 }
 
+if next(ts.get_installed()) == nil then
+  ts.install("all")
+end
+
 ts.update(languages)
 
 vim.api.nvim_create_autocmd('FileType', {
