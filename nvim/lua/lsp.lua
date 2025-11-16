@@ -10,6 +10,9 @@ vim.lsp.enable({
   "clangd",
   "basedpyright",
   "lemminx",
+  "docker_language_server",
+  "docker_compose_language_server",
+  "dockerls",
 })
 
 local completion_kind_styling = {
@@ -140,6 +143,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         local set_doc_window = function(doc, kind)
+          doc = table.concat(vim.lsp.util.convert_input_to_markdown_lines(doc), "\n")
           local winData = vim.api.nvim__complete_set(info['selected'], { info = doc })
           if not winData.winid or not vim.api.nvim_win_is_valid(winData.winid) then
             return

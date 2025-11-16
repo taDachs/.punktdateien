@@ -5,4 +5,4 @@ require "autocommands"
 require "lsp"
 require "theme"
 
-require "plugins.markdown-preview"
+require "plugins"
