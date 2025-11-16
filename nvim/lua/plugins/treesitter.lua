@@ -3,23 +3,14 @@ vim.pack.add {
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 }
 
+if vim.fn.executable('tree-sitter') == 0 then
+  vim.cmd[[MasonInstall tree-sitter-cli]]
+end
+
 local ts = require("nvim-treesitter")
 ts.setup({
   install_dir = vim.fn.stdpath('data') .. '/site'
 })
-
-local languages = {
-  "lua",
-  "cpp",
-  "python",
-  "yaml",
-}
-
-if next(ts.get_installed()) == nil then
-  ts.install("all")
-end
-
-ts.update(languages)
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = ts.get_installed(),
