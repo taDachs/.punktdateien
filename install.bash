@@ -26,3 +26,6 @@ ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
 
 mkdir -p $HOME/.local/bin
 ln -sf ${PWD}/scripts/* ${HOME}/.local/bin
+
+# bootstrap nvim
+nvim -c "qall" --headless
