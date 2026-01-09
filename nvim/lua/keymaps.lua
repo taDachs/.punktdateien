@@ -20,10 +20,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 vim.keymap.set('n', '<leader>m', '<cmd>make<CR>', { desc = 'Make' })
 
--- use leader + j/k for changing buffers
-vim.keymap.set('n', '<leader>j', '<cmd>bn<CR>', { desc = 'Go to next buffer' })
-vim.keymap.set('n', '<leader>k', '<cmd>bp<CR>', { desc = 'Go to previous buffer' })
-
 -- resize windows
 vim.keymap.set('n', '<C-RIGHT>', '<C-w>>', { desc = 'Increase window width' })
 vim.keymap.set('n', '<C-LEFT>', '<C-w><', { desc = 'Decrease window width' })

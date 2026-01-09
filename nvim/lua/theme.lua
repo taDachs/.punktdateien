@@ -3,10 +3,21 @@ vim.pack.add({
   "https://github.com/folke/lsp-colors.nvim",
 })
 
-local colorscheme = "carbonfox"
+local darktheme = "carbonfox"
+local lighttheme = "dayfox"
+
+local colorscheme = darktheme
 
 require "lsp-colors".setup()
 vim.cmd("colorscheme " .. colorscheme)
+
+vim.keymap.set('n', '<leader>cc', function()
+  if vim.g.colors_name == darktheme then
+    vim.cmd("colorscheme " .. lighttheme)
+  else
+    vim.cmd("colorscheme " .. darktheme)
+  end
+end, { desc = 'Set darkmode' })
 
 -- improve cmd message handling if available
 local ok, extui = pcall(require, "vim._extui")
