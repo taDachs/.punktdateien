@@ -24,6 +24,7 @@ mcd() {
 # /_/   \_\_____|___/_/   \_\____/|_____|____/
 
 alias v='nvim'
+alias vim='nvim'
 alias z='zathura'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
