@@ -121,7 +121,7 @@ alias catmux="tmux -L catmux"
 alias ros2build="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install"
 
 
-function rossbuild() {
+function print_horse() {
   echo "
 
 
@@ -167,67 +167,55 @@ function rossbuild() {
                                                           ####
                                                            ##
 "
-  echo "Building ROS workspace..."
-  if [ -z "$1" ]; then
-    colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install
-  else
-    colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install --packages-select "$1"
-  fi
 }
 
-function rosstest() {
-  echo "
-
-
-                                                   #    #
-                                              %%% ##   ##
-                                           %%%%% ###%%###
-                                          %%%%% ### %%% #
-                                        %%%%%% ### %%% ###
-                                         %%%% ## %% #######
-                                        %%%%% # %% #O#####
-                                      %%%%%% # % #########
-                                     %%%%% ##### #########
-                           ###        %% ####### #########
-                  %%% ############    ########### ########
-               %%%% ############################### #######
-             %%%%% ################################## ######
-           %%%%%% #################################### #C###
-          %%%%%% #####################################  ###
-          %%%%% #######################################
-         %%%%%% ########################################
-      % %%%%%%% ########################################
-       %%%%%%%%% #######################################
-      %%%%%%%%%% ########################################
-   %%% %%%%%%%%   ###### ################################
-     %%%%%%%%      ###### #################### ##########
-  % %%%%%%%%        ####### ########### ###### ##########
-   %%%%%%%%%         #######  ########### ###### ########
-  %%%%%%%%%%          ##### ###  ######### ####### ######
-   %%%%%%%%%%          #### ##               ####### ####
-   %%%%%%%%%%%           ## #                  ##### ###
-    %%  %% % %%         # ##                      ## ###
-      %   %    %        # ###                      # ###
-                         # ###                     ## ###
-                         # ###                     ## ###
-                         # ####                   #### ##
-                        ### ###                  ##### ###
-                       ####  ###                 ####   ##
-                      #####   ###                 ##    ##
-                     #####    ####                      ###
-                      ##        ###                     ###
-                                 ####                     ##
-                                  ####                    ###
-                                                          ####
-                                                           ##
-"
-  echo "Building ROS workspace..."
-  if [ -z "$1" ]; then
-    colcon test --event-handlers console_cohesion+
-
+function rossbuild() {
+  print_horse
+  local build_dir
+  if [ -n "${COLCON_PREFIX_PATH:-}" ]; then
+    build_dir="$(realpath "$(dirname "$COLCON_PREFIX_PATH")")"
   else
-    colcon test --event-handlers console_cohesion+ --packages-select "$1"
+    build_dir="$(realpath "$(pwd)")"
   fi
+  echo "Building ROS workspace in ${build_dir}..."
+
+  (
+    cd "$build_dir" || exit 1
+
+    local -a args
+    args=(--cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 --symlink-install)
+
+    if [ -n "${1:-}" ]; then
+      args+=(--packages-select "$1")
+    fi
+
+    colcon build "${args[@]}"
+  )
+}
+
+rosstest() {
+  print_horse
+  echo "Testing ROS workspace..."
+
+  local test_dir
+  if [ -n "${COLCON_PREFIX_PATH:-}" ]; then
+    test_dir="$(realpath "$(dirname "$COLCON_PREFIX_PATH")")"
+  else
+    test_dir="$(realpath "$(pwd)")"
+  fi
+
+  (
+    cd "$test_dir" || exit 1
+
+    local -a args
+    args=(--event-handlers console_cohesion+)
+
+    if [ -n "${1:-}" ]; then
+      args+=(--packages-select "$1")
+    fi
+
+    colcon test "${args[@]}"
+  )
 }
 
 function rosdab() {
