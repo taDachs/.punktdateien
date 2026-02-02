@@ -36,9 +36,7 @@ return {
   settings = {
     basedpyright = {
       analysis = {
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        diagnosticMode = 'openFilesOnly',
+        ignore = { "*" },  -- handled by ruff
       },
     },
   },

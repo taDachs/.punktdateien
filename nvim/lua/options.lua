@@ -30,3 +30,4 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.winborder = "rounded"
+vim.opt.pummaxwidth=50

@@ -8,7 +8,8 @@ require "fidget".setup({})
 vim.lsp.enable({
   "lua_ls",
   "clangd",
-  "basedpyright",
+  "ruff",
+  "ty",
   "lemminx",
   "docker_language_server",
   "docker_compose_language_server",
