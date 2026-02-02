@@ -15,39 +15,6 @@ vim.lsp.enable({
   "dockerls",
 })
 
-local completion_kind_styling = {
-  Text = { icon = '󰉿', hl = "@lsp.type.string" },
-  Method = { icon = '󰊕', hl = "@lsp.type.method" },
-  Function = { icon = '󰊕', hl = "@lsp.type.function" },
-  Constructor = { icon = '󰒓', hl = "@lsp.type.method" },
-
-  Field = { icon = '󰜢', hl = "@lsp.type.property" },
-  Variable = { icon = '󰆦', hl = "@lsp.type.variable" },
-  Property = { icon = '󰖷', hl = "@lsp.type.property" },
-
-  Class = { icon = '󱡠', hl = "@lsp.type.class" },
-  Interface = { icon = '󱡠', hl = "@lsp.type.interface" },
-  Struct = { icon = '󱡠', hl = "@lsp.type.struct" },
-  Module = { icon = '󰅩', hl = "@lsp.type.module" },
-
-  Unit = { icon = '󰪚', hl = "PmenuKind" },
-  Value = { icon = '󰦨', hl = "PmenuKind" },
-  Enum = { icon = '󰦨', hl = "@lsp.type.enum" },
-  EnumMember = { icon = '󰦨', hl = "@lsp.type.enumMember" },
-
-  Keyword = { icon = '󰻾', hl = "@lsp.type.keyword" },
-  Constant = { icon = '󰏿', hl = "@lsp.type.enumMember" },
-
-  Snippet = { icon = '󱄽', hl = "PmenuKind" },
-  Color = { icon = '󰏘', hl = "PmenuKind" },
-  File = { icon = '󰈔', hl = "PmenuKind" },
-  Reference = { icon = '󰬲', hl = "PmenuKind" },
-  Folder = { icon = '󰉋', hl = "PmenuKind" },
-  Event = { icon = '󱐋', hl = "@lsp.type.event" },
-  Operator = { icon = '󰪚', hl = "@lsp.type.operator" },
-  TypeParameter = { icon = '󰬛', hl = "@lsp.type.typeParameter" },
-}
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("config-lsp-attach", { clear = true }),
   callback = function(event)
@@ -117,67 +84,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
       end, "Toggle Inlay Hints")
     end
-
-    vim.lsp.completion.enable(true, client.id, event.buf, {
-      autotrigger = false,
-      convert = function(item)
-        local abbr = item.label
-
-        local kind = vim.tbl_get(vim.lsp.protocol.CompletionItemKind, item.kind) or ""
-        local styling = vim.tbl_get(completion_kind_styling, kind) or {}
-        local kind_icon = vim.tbl_get(styling, "icon") or ""
-        local kind_hl = vim.tbl_get(styling, "hl") or ""
-
-        return { abbr = abbr, kind = kind_icon .. " " .. kind, kind_hlgroup = kind_hl }
-      end,
-    })
-
-    -- autocommand for showing documentation
-    vim.api.nvim_create_autocmd('CompleteChanged', {
-      buffer = event.buf,
-      callback = function()
-        local info = vim.fn.complete_info({ 'selected' })
-        local completionItem = vim.tbl_get(vim.v.completed_item, 'user_data', 'nvim', 'lsp', 'completion_item')
-        if completionItem == nil then
-          return
-        end
-
-        local set_doc_window = function(doc, kind)
-          doc = table.concat(vim.lsp.util.convert_input_to_markdown_lines(doc), "\n")
-          local winData = vim.api.nvim__complete_set(info['selected'], { info = doc })
-          if not winData.winid or not vim.api.nvim_win_is_valid(winData.winid) then
-            return
-          end
-
-          vim.api.nvim_win_set_config(winData.winid, { border = 'rounded' })
-          if kind == "markdown" then
-            vim.api.nvim_set_option_value("filetype", "markdown", { buf = winData.bufnr })
-            vim.treesitter.start(winData.bufnr, 'markdown')
-            vim.wo[winData.winid].conceallevel = 3
-          end
-        end
-
-
-        if completionItem["documentation"] ~= nil then
-          set_doc_window(completionItem["documentation"]["value"], completionItem["documentation"]["kind"])
-        elseif client:supports_method(vim.lsp.protocol.Methods.completionItem_resolve) then
-          local cancel = vim.lsp.buf_request_all(
-            event.buf,
-            vim.lsp.protocol.Methods.completionItem_resolve,
-            completionItem,
-            function(resolvedItem)
-              local docs = vim.tbl_get(resolvedItem[event.data.client_id], 'result', 'documentation', 'value')
-              local kind = vim.tbl_get(resolvedItem[event.data.client_id], 'result', 'documentation', 'kind')
-              if docs == nil then
-                return
-              end
-
-              set_doc_window(docs, kind)
-            end
-          )
-        end
-      end
-    })
   end,
 })
 
