@@ -71,6 +71,12 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd " " edit-command-line
 
+zvm_vi_yank () {
+	zvm_yank
+	printf %s "${CUTBUFFER}" | xclip -sel c
+	zvm_exit_visual_mode
+}
+
 
 # Make colors work with tmux
 # if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
