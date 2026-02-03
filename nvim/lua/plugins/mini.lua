@@ -106,12 +106,20 @@ require("mini.icons").tweak_lsp_kind()
 require("mini.snippets").setup {}
 
 local marvin_mode = {
-  timeout = 100,
-  enabled = true,
+  delay = {
+    completion = 100,
+    info = 100,
+    signatur = 50,
+  },
+  autocompletion_enabled = true,
 }
 local normal_mode = {
-  timeout = 10^7,
-  enabled = false,
+  delay = {
+    completion = 10^7,
+    info = 10^7,
+    signatur = 10^7,
+  },
+  autocompletion_enabled = false,
 }
 local mini_conf = normal_mode
 
@@ -119,7 +127,7 @@ require("mini.completion").setup {
   lsp_completion = {
     source_func = "omnifunc",
   },
-  delay = { completion = mini_conf.timeout, signature = mini_conf.timeout },
+  delay = mini_conf.delay,
   window = {
     info = { border = "none" },
     signature = { border = "none" },
@@ -132,12 +140,14 @@ require("mini.completion").setup {
   },
 }
 
-vim.opt_global.completeopt = {
-  "menuone",
-  "popup",
-}
+if not mini_conf.autocompletion_enabled then
+  vim.o.completeopt = "fuzzy,menuone,popup"
+else
+  vim.o.completeopt = "fuzzy,menuone,popup,noinsert"
+end
+
 -- We control the triggering manually
-vim.g.minicompletion_disable = mini_conf.enabled
+vim.g.minicompletion_disable = not mini_conf.autocompletion_enabled
 
 vim.opt.shortmess:append "c"
 vim.o.pumheight = 20
