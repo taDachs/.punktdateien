@@ -103,7 +103,6 @@ require("mini.icons").setup {
   style = "glyph",
 }
 require("mini.icons").tweak_lsp_kind()
-require("mini.snippets").setup {}
 
 local marvin_mode = {
   delay = {
