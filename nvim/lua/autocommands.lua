@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- setf .devcontainer.json and devcontainer.json to jsonc
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   desc = "Set filetype for .devcontainer.json and devcontainer.json to jsonc",
   group = vim.api.nvim_create_augroup("devcontainer-jsonc", { clear = true }),
   pattern = ".devcontainer.json,devcontainer.json",
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 -- make help window split vertical
 vim.api.nvim_create_autocmd("FileType", {
   desc = "make help split vertical",
-  pattern= {"help", "h"},
+  pattern = { "help", "h" },
   command = "wincmd L",
-  group = vim.api.nvim_create_augroup("VerticalHelp", { clear = true })
+  group = vim.api.nvim_create_augroup("VerticalHelp", { clear = true }),
 })

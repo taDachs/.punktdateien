@@ -29,5 +29,8 @@ mkdir -p $HOME/.local/bin
 ln -sf ${PWD}/scripts/* ${HOME}/.local/bin
 
 # bootstrap nvim
-nvim -c "qall" --headless
-nvim -c "MasonInstall ruff ty black" -c "TSInstall all" -c "qall" --headless
+nvim \
+  --headless \
+  -c "MasonInstall tree-sitter-cli ruff ty black" \
+  -c "lua require('nvim-treesitter').install('all'):wait(300000)" \
+  -c "qall"

@@ -6,9 +6,10 @@ vim.pack.add {
   "https://github.com/folke/todo-comments.nvim",
   "https://github.com/stevearc/stickybuf.nvim",
   "https://github.com/mason-org/mason.nvim",
+  "https://github.com/lervag/vimtex",
 }
 
 require("which-key").setup()
-require("todo-comments").setup({ signs = false })
+require("todo-comments").setup { signs = false }
 require("stickybuf").setup()
 require("mason").setup()

@@ -1,30 +1,26 @@
 vim.pack.add {
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter",             version = "main" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 }
+local ts = require "nvim-treesitter"
+ts.setup {
+  install_dir = vim.fn.stdpath "data" .. "/site",
+}
 
-if vim.fn.executable('tree-sitter') == 0 then
-  vim.cmd[[MasonInstall tree-sitter-cli]]
-end
-
-local ts = require("nvim-treesitter")
-ts.setup({
-  install_dir = vim.fn.stdpath('data') .. '/site'
-})
-
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = ts.get_installed(),
   callback = function()
     vim.treesitter.start()
-    local tso = require("nvim-treesitter-textobjects")
-    local select = require("nvim-treesitter-textobjects.select")
+    local tso = require "nvim-treesitter-textobjects"
+    local select = require "nvim-treesitter-textobjects.select"
+    local swap = require "nvim-treesitter-textobjects.swap"
     tso.setup {
       select = {
         lookahead = true,
         selection_modes = {
-          ['@parameter.outer'] = 'v',
-          ['@function.outer'] = 'v',
-          ['@class.outer'] = 'V',
+          ["@parameter.outer"] = "v",
+          ["@function.outer"] = "v",
+          ["@class.outer"] = "V",
         },
         include_surrounding_whitespace = false,
       },
@@ -47,8 +43,14 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set({ "x", "o" }, "as", function()
       select.select_textobject("@local.scope", "locals")
     end)
+    vim.keymap.set("n", "<leader>.", function()
+      swap.swap_next "@parameter.inner"
+    end)
+    vim.keymap.set("n", "<leader>,", function()
+      swap.swap_previous "@parameter.inner"
+    end)
+
+    vim.wo.foldmethod = "expr"
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
   end,
 })
-
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

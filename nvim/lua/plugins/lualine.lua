@@ -4,11 +4,13 @@ vim.pack.add {
 
 local function show_macro_recording()
   local reg = vim.fn.reg_recording()
-  if reg == "" then return "" end -- not recording
+  if reg == "" then
+    return ""
+  end -- not recording
   return "@" .. reg
 end
 
-require "lualine".setup {
+require("lualine").setup {
   options = {
     icons_enabled = true,
     theme = "auto",
@@ -26,7 +28,7 @@ require "lualine".setup {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
-      refresh_time = 16,   -- ~60fps
+      refresh_time = 16, -- ~60fps
       events = {
         "WinEnter",
         "BufEnter",
@@ -46,7 +48,7 @@ require "lualine".setup {
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = { "filename" },
     lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_y = { show_macro_recording, },
+    lualine_y = { show_macro_recording },
     lualine_z = { "searchcount", "location" },
   },
   inactive_sections = {

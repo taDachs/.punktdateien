@@ -1,5 +1,5 @@
 vim.pack.add {
-  "https://github.com/Bekaboo/dropbar.nvim"
+  "https://github.com/Bekaboo/dropbar.nvim",
 }
 
-require "dropbar".setup()
+require("dropbar").setup()

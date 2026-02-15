@@ -1,11 +1,11 @@
-vim.pack.add({
+vim.pack.add {
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/j-hui/fidget.nvim" },
-})
+}
 
-require "fidget".setup({})
+require("fidget").setup {}
 
-vim.lsp.enable({
+local servers = {
   "lua_ls",
   "clangd",
   "ruff",
@@ -14,7 +14,9 @@ vim.lsp.enable({
   "docker_language_server",
   "docker_compose_language_server",
   "dockerls",
-})
+}
+
+vim.lsp.enable(servers)
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("config-lsp-attach", { clear = true }),
@@ -23,34 +25,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
       mode = mode or "n"
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
-    local ok, snacks = pcall(require, "snacks")
-    local picker = (function()
-      if ok then
-        return {
-          definition = snacks.picker.lsp_definitions,
-          references = snacks.picker.lsp_references,
-          implementation = snacks.picker.lsp_implementations,
-          type_definition = snacks.picker.lsp_type_definitions,
-          document_symbol = snacks.picker.lsp_symbols,
-          workspace_symbol = snacks.picker.lsp_workspace_symbols,
-        }
-      else
-        return vim.lsp.buf
-      end
-    end)()
-
-    map("grd", picker.definition, "Goto Definition")
-    map("grr", picker.references, "Goto References")
-    map("gri", picker.implementation, "Goto Implementation")
+    map("grd", vim.lsp.buf.definition, "Goto Definition")
+    map("grr", vim.lsp.buf.references, "Goto References")
+    map("gri", vim.lsp.buf.implementation, "Goto Implementation")
     map("grD", vim.lsp.buf.declaration, "Goto Declaration")
-    map("grt", picker.type_definition, "Type Definition")
-    map("<leader>ds", picker.document_symbol, "Document Symbols")
-    map("<leader>ws", picker.workspace_symbol, "Workspace Symbols")
+    map("grt", vim.lsp.buf.type_definition, "Type Definition")
+    map("<leader>ds", vim.lsp.buf.document_symbol, "Document Symbols")
+    map("<leader>ws", vim.lsp.buf.workspace_symbol, "Workspace Symbols")
     map("grn", vim.lsp.buf.rename, "Rename")
     map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if not client then return end
+    if not client then
+      return
+    end
 
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
@@ -102,12 +90,14 @@ vim.diagnostic.config {
     --- @param diagnostic? vim.Diagnostic
     --- @param bufnr integer
     on_jump = function(diagnostic, bufnr)
-      if not diagnostic then return end
-      vim.diagnostic.open_float({
+      if not diagnostic then
+        return
+      end
+      vim.diagnostic.open_float {
         bufnr = bufnr,
-        scope = 'cursor',
+        scope = "cursor",
         focus = false,
-      })
+      }
     end,
   },
 }
