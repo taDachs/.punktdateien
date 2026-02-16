@@ -48,7 +48,7 @@ require("mini.move").setup {
 
 require("mini.splitjoin").setup {
   mappings = {
-    toggle = "<leader>tl",
+    toggle = "<leader>sj",
     split = "",
     join = "",
   },
