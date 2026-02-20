@@ -14,6 +14,7 @@ local servers = {
   "docker_language_server",
   "docker_compose_language_server",
   "dockerls",
+  "copilot",
 }
 
 vim.lsp.enable(servers)
@@ -72,6 +73,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
       map("<leader>th", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
       end, "Toggle Inlay Hints")
+    end
+
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, event.buf) then
+      map("<leader>tc", function()
+        vim.notify("Toggling inline completion: " .. (vim.lsp.inline_completion.is_enabled { bufnr = event.buf } and "off" or "on"))
+        vim.lsp.inline_completion.enable(not vim.lsp.inline_completion.is_enabled { bufnr = event.buf })
+      end, "Toggle Inlay Completion")
+
+      vim.keymap.set(
+        'i',
+        '<C-F>',
+        vim.lsp.inline_completion.get,
+        { desc = 'LSP: accept inline completion', buffer = event.buf }
+      )
+      vim.keymap.set(
+        'i',
+        '<C-G>',
+        vim.lsp.inline_completion.select,
+        { desc = 'LSP: switch inline completion', buffer = event.buf }
+      )
     end
   end,
 })
