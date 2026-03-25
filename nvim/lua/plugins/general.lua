@@ -1,15 +1,12 @@
-vim.pack.add {
-  "https://github.com/tpope/vim-eunuch",
-  "https://github.com/folke/which-key.nvim",
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/christoomey/vim-tmux-navigator",
-  "https://github.com/folke/todo-comments.nvim",
-  "https://github.com/stevearc/stickybuf.nvim",
-  "https://github.com/mason-org/mason.nvim",
-  "https://github.com/lervag/vimtex",
+return {
+  "tpope/vim-eunuch",
+  { "folke/which-key.nvim", config = true },
+  "nvim-lua/plenary.nvim",
+  "christoomey/vim-tmux-navigator",
+  { "folke/todo-comments.nvim", opts = { signs = false } },
+  { "stevearc/stickybuf.nvim", config = true },
+  { "mason-org/mason.nvim", config = true },
+  "lervag/vimtex",
+  "neovim/nvim-lspconfig",
+  { "j-hui/fidget.nvim", opts = {} },
 }
-
-require("which-key").setup()
-require("todo-comments").setup { signs = false }
-require("stickybuf").setup()
-require("mason").setup()
