@@ -1,6 +1,7 @@
 if [ ! -d "/opt/ros/humble"  ] \
-  && [ ! -d "/opt/ros/iron" ] \
   && [ ! -d "/opt/ros/foxy" ] \
+  && [ ! -d "/opt/ros/iron" ] \
+  && [ ! -d "/opt/ros/kilted" ] \
   && [ ! -d "/opt/ros/rolling" ] \
   ; then
   return 0
