@@ -12,7 +12,6 @@ return {
 
     vim.keymap.set("n", "<esc>", function()
       if not require("copilot-lsp.nes").clear() then
-        vim.fn.norm("<Esc>")
       end
     end, { desc = "Clear Copilot suggestion or fallback" })
 
