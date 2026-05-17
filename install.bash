@@ -21,8 +21,14 @@ ln -sf ${PWD}/shell/.profile_plugins ${HOME}
 ln -sf ${PWD}/shell/.shellrc ${HOME}
 ln -sf ${PWD}/shell/.zprofile ${HOME}
 ln -sf ${PWD}/taskwarrior/.taskrc ${HOME}
+ln -sf ${PWD}/timewarrior ${HOME}/.config
 
 ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
+
+ln -sf ${PWD}/agents ${HOME}/.agents
+
+mkdir -p ${HOME}/.claude
+ln -sf ${PWD}/agents/skills ${HOME}/.claude/skills
 
 
 mkdir -p $HOME/.local/bin
