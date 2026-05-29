@@ -27,8 +27,25 @@ ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
 
 ln -sf ${PWD}/agents ${HOME}/.agents
 
+if [ -L "${HOME}/.claude" ]; then
+  echo "Refusing to install: ${HOME}/.claude is a symlink (would mix state into dotfiles repo)" >&2
+  exit 1
+fi
+
 mkdir -p ${HOME}/.claude
+ln -sf ${PWD}/claude/settings.json ${HOME}/.claude/settings.json
+ln -sf ${PWD}/claude/rules ${HOME}/.claude/rules
+ln -sf ${PWD}/claude/agents ${HOME}/.claude/agents
 ln -sf ${PWD}/agents/skills ${HOME}/.claude/skills
+
+if [ -L "${HOME}/.config/opencode" ]; then
+  echo "Refusing to install: ${HOME}/.config/opencode is a symlink (keep opencode state out of repo)" >&2
+  exit 1
+fi
+
+mkdir -p ${HOME}/.config/opencode
+ln -sf ${PWD}/opencode/config.json ${HOME}/.config/opencode/config.json
+ln -sf ${PWD}/opencode/AGENTS.md ${HOME}/.config/opencode/AGENTS.md
 
 
 mkdir -p $HOME/.local/bin
