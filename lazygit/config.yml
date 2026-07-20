@@ -1,0 +1,14 @@
+gui:
+  scrollHeight: 10
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - bold
+git:
+  commit:
+    signOff: true
+  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=oneline
+confirmOnQuit: true
