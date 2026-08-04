@@ -49,7 +49,7 @@ return {
           lualine_c = { "filename" },
           lualine_x = { "encoding", "fileformat", "filetype" },
           lualine_y = { show_macro_recording },
-          lualine_z = { "searchcount", "location" },
+          lualine_z = { "searchcount", "location", require("opencode").statusline },
         },
         inactive_sections = {
           lualine_a = {},

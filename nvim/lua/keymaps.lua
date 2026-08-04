@@ -30,4 +30,3 @@ vim.keymap.set("n", "<C-h>", "<cmd><C-U>TmuxNavigateLeft<cr>", { desc = "Move fo
 vim.keymap.set("n", "<C-l>", "<cmd><C-U>TmuxNavigateDown<cr>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<cmd><C-U>TmuxNavigateUp<cr>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<cmd><C-U>TmuxNavigateRight<cr>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", { desc = "Move focus to the upper window" })
