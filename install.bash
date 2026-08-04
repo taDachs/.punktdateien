@@ -25,7 +25,10 @@ ln -sf ${PWD}/timewarrior ${HOME}/.config
 
 ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
 
-ln -sf ${PWD}/agents ${HOME}/.agents
+mkdir -p ${HOME}/.agents/skills
+for skill in gtd-weekly-review taskwarrior; do
+  ln -sfn "${PWD}/agents/skills/${skill}" "${HOME}/.agents/skills/${skill}"
+done
 
 if [ -L "${HOME}/.claude" ]; then
   echo "Refusing to install: ${HOME}/.claude is a symlink (would mix state into dotfiles repo)" >&2
@@ -36,7 +39,10 @@ mkdir -p ${HOME}/.claude
 ln -sf ${PWD}/claude/settings.json ${HOME}/.claude/settings.json
 ln -sf ${PWD}/claude/rules ${HOME}/.claude/rules
 ln -sf ${PWD}/claude/agents ${HOME}/.claude/agents
-ln -sf ${PWD}/agents/skills ${HOME}/.claude/skills
+mkdir -p ${HOME}/.claude/skills
+for skill in gtd-weekly-review taskwarrior; do
+  ln -sfn "${PWD}/agents/skills/${skill}" "${HOME}/.claude/skills/${skill}"
+done
 
 if [ -L "${HOME}/.config/opencode" ]; then
   echo "Refusing to install: ${HOME}/.config/opencode is a symlink (keep opencode state out of repo)" >&2

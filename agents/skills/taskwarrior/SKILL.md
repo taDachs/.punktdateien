@@ -1,112 +1,91 @@
 ---
 name: taskwarrior
-description: Natural language TaskWarrior task management. Use when user wants to add tasks, check status, identify slipping tasks, break down complex tasks, manage dependencies, or sync tasks. Triggered by: "taskwarrior", "task add", "check my tasks", "what's overdue", "slipping tasks", "break down this task", "add to my task list", "what should I work on".
+description: Operate the user's Taskwarrior CLI correctly and safely. Use this whenever a task involves reading, querying, adding, completing, or modifying tasks in Taskwarrior — including any GTD workflow, capturing a todo, reviewing or reporting on tasks, or any command that runs `task ...`. Critical reference: explains why to address tasks by their stable UUID rather than the unstable numeric id, how to read tasks as structured JSON, checking the active context, and how to modify tasks without triggering destructive bulk operations. Consult this before running any Taskwarrior command.
+compatibility: Requires the `task` (Taskwarrior) CLI on PATH. `jq` is optional but convenient for parsing JSON output.
 ---
 
-You are an expert TaskWarrior task manager and productivity specialist. You have deep knowledge of TaskWarrior's CLI, its data model (projects, tags, priorities, dependencies, annotations, UDAs), and best practices for Getting Things Done (GTD) and task atomicity. Your job is to serve as a seamless natural-language interface to TaskWarrior, ensuring tasks are well-defined, properly structured, and never slip through the cracks.
+# Taskwarrior
 
-## Core Workflow (MANDATORY for every interaction)
+Operational reference for the user's Taskwarrior. Read it before running any `task` command.
 
-1. **Pre-sync**: Always run `task sync` before any TaskWarrior read or write operation. Confirm sync succeeded. If it fails, warn the user and ask whether to proceed with potentially stale data.
-2. **Perform the requested operation(s)** (see sections below).
-3. **Post-sync**: Always run `task sync` after any TaskWarrior write operation. Confirm sync succeeded. Report any sync conflicts to the user.
+## Address tasks by UUID, never by id
 
-Never skip the sync steps. This is non-negotiable.
+Every task has an `id` (small integer) and a `uuid` (36-char identifier). The `id` is ephemeral — Taskwarrior reassigns ids when tasks are added, completed, or deleted, so the same id can point to a different task minutes later. The `uuid` is permanent. Whenever you read a task in one step and act on it in another, carry its `uuid` and target that. A `uuid` works anywhere an `id` does:
 
-## Natural Language to TaskWarrior Command Translation
+```bash
+task 7e3a9b21-... modify +next -inbox
+task 7e3a9b21-... done
+```
 
-When the user gives you a task description in natural language:
+After adding a task, get its `uuid` from the `+LATEST` virtual tag (which Taskwarrior points at the most recently added task) rather than trusting the printed id: `task +LATEST uuids` or `task +LATEST export`.
 
-1. **Parse the intent**: Extract the task description, project, tags, priority, due date, scheduled date, recurrence, and any implied dependencies.
-2. **Interpret dates intelligently**:
-   - "next Friday" → compute the actual date relative to today
-   - "end of month" → last day of current month
-   - "ASAP" → priority:H with due:today
-   - "someday" → no due date, priority:L
-   - Always output dates in YYYY-MM-DD format for TaskWarrior commands
-3. **Construct the TaskWarrior command** and show it to the user before executing.
-4. **Annotate the task** with a more complete description: run `task <id> annotate "<expanded description>"` to add context, acceptance criteria, or clarifying notes.
-5. **Ask clarifying questions** if anything is ambiguous: Who is the stakeholder? What does done look like? Are there blockers? What project does this belong to?
+## Check the active context first
 
-Example translation:
-- Input: "finish the API docs by Thursday for the backend team"
-- Output command: `task add "Write API documentation" project:backend due:2026-05-07 priority:M +docs`
-- Annotation: `task <id> annotate "Deliverable for backend team. Covers all public endpoints. Done when reviewed and merged to main."`
+Taskwarrior contexts apply a hidden filter to reads and writes, so a context can silently narrow what you see and what a new task inherits. Before querying or modifying, check what's active:
 
-Use the UUID when handling tasks. The numeric ID changes when tasks are added or removed, therefore it is unreliable.
+```bash
+task context show
+```
 
-## Task Atomicity and Complexity Assessment
+Account for it: a filter like `task +inbox export` only returns inbox tasks *within the current context*. If the context could hide relevant tasks, note it to the user, and use `rc.context=none` on a command to bypass it when you need the full picture.
 
-For every task (new or existing), assess whether it is **atomic** (a single, completable action) or **complex** (a goal requiring multiple steps).
+## Read tasks as JSON
 
-**Atomicity heuristics**:
-- Can it be done in one sitting (< 2 hours)?
-- Does it have a single, clear done-state?
-- Does it not depend on decisions not yet made?
+Don't parse the human-readable report tables. Use `export`, which emits a JSON array (fields include `uuid`, `id`, `description`, `status`, `tags`, `project`, `due`, `scheduled`, `wait`, `annotations`):
 
-If a task fails atomicity checks, it is a **complex task** and must be broken down:
+```bash
+task <filter> export
+```
 
-1. Propose a breakdown into 3–10 atomic subtasks.
-2. Present the breakdown to the user clearly, with proposed due dates and a dependency chain.
-3. **Ask for confirmation** before creating any tasks: "Here's how I'd break this down — does this look right, or should I adjust anything?"
-4. Upon confirmation, create all subtasks with `depends:` linking them in logical order.
-5. Optionally create the parent as a `+project` tag or `project:` attribute grouping all subtasks.
+Helpers: `task <filter> count`, `task <filter> uuids`, `task _get <id_or_uuid>.<attr>`.
 
-## Dependency Management
+Note: UPPERCASE tags (`+PENDING`, `+WAITING`, `+OVERDUE`, …) are read-only virtual tags Taskwarrior computes; they are distinct from any lowercase user tags. Match case exactly and never `modify` them.
 
-- When creating related tasks, always consider dependencies. Ask: "Does task B require task A to be done first?"
-- Use `task <id> modify depends:<other-id>` to set dependencies.
-- When presenting tasks, show the dependency chain clearly.
-- Warn the user if a dependency chain has a task that is overdue or unscheduled, creating a bottleneck.
-- When a task is completed, remind the user of tasks that are now unblocked.
+## Modify safely
 
-## Slipping Task Detection
+Operate on one `uuid` at a time and show the user the change first. Single-uuid commands target exactly one task and avoid the bulk-confirmation prompt. Don't disable confirmations (`rc.confirmation=off` / `rc.bulk=0`) for convenience — they exist to catch over-broad changes.
 
-When asked to check for slipping tasks (or proactively when syncing reveals issues), run the following queries and report results:
+```bash
+task <uuid> modify <changes>
+task <uuid> annotate "<note>"
+task <uuid> done
+task <uuid> delete
+```
 
-1. **Overdue**: `task overdue` — tasks past their due date
-2. **Due soon**: `task due:today` and `task due.before:+3d` — tasks due in the next 3 days
-3. **High urgency, no due date**: `task urgency>8 -SCHEDULED -DUE` — high-urgency tasks without scheduling
-4. **Blocked tasks with overdue blockers**: identify tasks whose dependencies are overdue
-5. **Stale active tasks**: tasks in `+ACTIVE` state for more than a day without completion
+To act on several tasks, loop over their uuids and handle each explicitly.
 
-Present slipping tasks in a prioritized table with: Task ID, Description, Due Date, Urgency Score, and Recommended Action.
+## Don't assume structure
 
-Always suggest concrete remediation: reschedule, delegate, defer, or split the task.
+Detect from `export` output (or ask the user) before relying on `project:`, due/scheduled dates, contexts, UDAs, or dependencies. Don't fabricate conventions the user hasn't established.
 
-## Annotation Standards
+## Examples
 
-Every task you create or modify should have a rich annotation. Annotations should include:
-- **What**: More detailed description of the work
-- **Why**: The purpose or business value (if known)
-- **Done when**: Clear acceptance criteria
-- **Notes**: Any relevant context, links, or caveats
+```bash
+# Capture a new item and get its uuid back
+task add "Email the contractor about the quote" +inbox
+task +LATEST uuids                        # +LATEST = the most recently added task
 
-Format annotations as plain text. Use multiple `task annotate` commands if needed for distinct pieces of information.
+# Read a filtered set as JSON to reason over
+task +next export
+task +waiting export
+task status:pending project:home export
 
-## Output Format
+# Re-tag a captured item into a next action (by uuid)
+task 7e3a9b21-... modify -inbox +next
 
-For each interaction, structure your response as:
+# Record context on a delegated item
+task 7e3a9b21-... modify -inbox +waiting
+task 7e3a9b21-... annotate "waiting on Sam, asked 2026-06-29"
 
-1. **Sync Status**: Confirm pre-sync result
-2. **Action Taken / Analysis**: Commands run, tasks created/modified, or analysis performed
-3. **Task Summary**: Show affected tasks with IDs, descriptions, due dates, and status
-4. **Clarifying Questions** (if any): Numbered list of questions before proceeding
-5. **Sync Status**: Confirm post-sync result
-6. **Next Steps**: Proactive suggestions (unblocked tasks, upcoming deadlines, etc.)
+# Set or change attributes
+task 7e3a9b21-... modify due:friday project:home
 
-## Error Handling
+# Complete or remove
+task 7e3a9b21-... done
+task 7e3a9b21-... delete
 
-- If `task sync` fails, always inform the user and ask whether to proceed.
-- If a task ID doesn't exist, confirm with the user before creating a new one.
-- If date parsing is ambiguous, present the interpreted date and ask for confirmation.
-- If the TaskWarrior command might be destructive (delete, purge), always confirm explicitly.
-- Never silently fail — always report errors with context.
-
-## Interaction Style
-
-- Be concise but thorough. Don't pad responses.
-- Use tables for task lists when showing multiple tasks.
-- Ask one clarifying question at a time unless multiple are tightly related.
-- Be proactive: if you notice something the user didn't ask about (e.g., a related task is overdue), mention it briefly.
-- Respect the user's time: propose the most reasonable interpretation and ask for a quick yes/no rather than demanding full details upfront.
+# Quick checks
+task +inbox count                        # how many are left
+task context show                        # what filter is currently active
+task +inbox export rc.context=none       # ignore the active context for this read
+```
