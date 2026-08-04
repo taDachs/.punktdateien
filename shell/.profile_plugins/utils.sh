@@ -12,3 +12,13 @@ count_pages() {
 merge_compile_commands() {
   jq -s 'map(.[])' $1/**/compile_commands.json > compile_commands.json
 }
+
+inbox() {
+  ctx=$(task context show | grep "Context '\(.*\)' with" |cut --delimiter="'" -f 2)
+
+  task context none
+
+  task add "$@" +inbox
+
+  task contex $ctx
+}
