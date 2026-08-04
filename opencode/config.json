@@ -1,23 +1,311 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "share": "disabled",
-  "plugin": ["opencode-mystatus", "@tarquinen/opencode-smart-title", "opentmux", "opencode-websearch"],
-  "command": {
-    "mystatus": {
-      "description": "Query quota usage for all AI accounts",
-      "template": "Use the mystatus tool to query quota usage. Return the result as-is without modification."
+  "agent": {
+    "explore": {
+      // Replaced KIT Mistral Small with FZI Qwen.
+      "model": "fzi-llm/Qwen/Qwen3.5-397B-A17B"
+    },
+    "plan": {
+      "model": "openai/gpt-5.6-sol",
+      "variant": "high",
+      "reasoningSummary": "detailed"
+    },
+    "build": {
+      "model": "openai/gpt-5.6-luna",
+      "reasoningSummary": "detailed"
+    },
+    "general": {
+      "model": "fzi-llm/Qwen/Qwen3.5-397B-A17B"
+    },
+    "scout": {
+      // Replaced KIT Mistral Small with FZI Qwen.
+      "model": "fzi-llm/Qwen/Qwen3.5-397B-A17B",
+      "mode": "subagent"
+    },
+    "ai-documenter": {
+      "description": "Use this agent when creating or improving API documentation, writing OpenAPI specifications, building interactive documentation portals, or generating code examples for APIs.",
+      "mode": "subagent",
+      // Replaced KIT Mistral Small with FZI Qwen.
+      "model": "fzi-llm/Qwen/Qwen3.5-397B-A17B",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/api-documenter.md}"
+    },
+    "cpp-pro": {
+      "description": "Use this agent when building high-performance C++ systems requiring modern C++20/23 features, template metaprogramming, or zero-overhead abstractions for systems programming, embedded systems, or performance-critical applications.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-sol",
+      "variant": "high",
+      "temperature": 0.2,
+      "prompt": "{file:./prompts/cpp-pro.md}"
+    },
+    "docker-expert": {
+      "description": "Use this agent when you need to build, optimize, or secure Docker container images and orchestration for production environments.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-terra",
+      "variant": "high",
+      "temperature": 0.2,
+      "prompt": "{file:./prompts/docker-expert.md}"
+    },
+    "build-engineer": {
+      "description": "Use this agent when you need to optimize build performance, reduce compilation times, or scale build systems across growing teams.",
+      "mode": "subagent",
+      // Replaced KIT Mistral Small with FZI Qwen.
+      "model": "fzi-llm/Qwen/Qwen3.5-397B-A17B",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/build-engineer.md}"
+    },
+    "test-automator": {
+      "description": "Use this agent when you need to build, implement, or enhance automated test frameworks, create test scripts, or integrate testing into CI/CD pipelines.",
+      "mode": "subagent",
+      // Replaced KIT MiniMax with OpenAI Luna.
+      "model": "openai/gpt-5.6-luna",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/test-automator.md}"
+    },
+    "frontend-developer": {
+      "description": "Use when building complete frontend applications across React, Vue, and Angular frameworks requiring multi-framework expertise and full-stack integration.",
+      "mode": "subagent",
+      // Replaced KIT MiniMax with OpenAI Luna.
+      "model": "openai/gpt-5.6-luna",
+      "temperature": 0.8,
+      "prompt": "{file:./prompts/frontend-developer.md}"
+    },
+    "python-pro": {
+      "description": "Use this agent when you need to build type-safe, production-ready Python code for web APIs, system utilities, or complex applications requiring modern async patterns and extensive type coverage.",
+      "mode": "subagent",
+      // Replaced KIT MiniMax with OpenAI Luna.
+      "model": "openai/gpt-5.6-luna",
+      "variant": "high",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/python-pro.md}"
+    },
+    "qa-expert": {
+      "description": "Use this agent when you need comprehensive quality assurance strategy, test planning across the entire development cycle, or quality metrics analysis to improve overall software quality.",
+      "mode": "subagent",
+      // Replaced KIT MiniMax with OpenAI Terra.
+      "model": "openai/gpt-5.6-terra",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/qa-expert.md}"
+    },
+    "cli-developer": {
+      "description": "Use this agent when building command-line tools and terminal applications that require intuitive command design, cross-platform compatibility, and optimized developer experience.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-luna",
+      "variant": "high",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/cli-developer.md}"
+    },
+    "git-workflow-manager": {
+      "description": "Use this agent when you need to design, establish, or optimize Git workflows, branching strategies, and merge management for a project or team.",
+      "mode": "subagent",
+      // Replaced KIT Mistral Small with FZI Qwen.
+      "model": "fzi-llm/Qwen/Qwen3.5-397B-A17B",
+      "temperature": 0.1,
+      "prompt": "{file:./prompts/git-workflow-manager.md}"
+    },
+    "reviewer": {
+      "description": "Reviews code for quality and best practices",
+      "mode": "primary",
+      "model": "openai/gpt-5.6-terra",
+      "variant": "high",
+      "temperature": 0.1,
+      "permission": {
+        "write": "deny",
+        "edit": "deny",
+        "bash": "deny"
+      },
+      "prompt": "{file:./prompts/reviewer.md}"
+    },
+    "debugger": {
+      "description": "Use this agent when you need to diagnose and fix bugs, identify root causes of failures, or analyze error logs and stack traces to resolve issues.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-sol",
+      "variant": "high",
+      "temperature": 0.5,
+      "prompt": "{file:./prompts/debugger.md}"
+    },
+    "rust-engineer": {
+      "description": "Use when building Rust systems where memory safety, ownership patterns, zero-cost abstractions, and performance optimization are critical for systems programming, embedded development, async applications, or high-performance services.",
+      "mode": "subagent",
+      // Replaced KIT MiniMax with OpenAI Luna.
+      "model": "openai/gpt-5.6-luna",
+      "temperature": 0.1,
+      "prompt": "{file:./prompts/rust-engineer.md}"
+    },
+    "tooling-engineer": {
+      "description": "Use this agent when you need to build or enhance developer tools including CLIs, code generators, build tools, and IDE extensions.",
+      "mode": "subagent",
+      // Replaced KIT MiniMax with OpenAI Luna.
+      "model": "openai/gpt-5.6-luna",
+      "temperature": 0.3,
+      "prompt": "{file:./prompts/tooling-engineer.md}"
     }
   },
+  "plugin": [
+    "opencode-agent-tmux",
+    "@tarquinen/opencode-smart-title",
+    "opencode-websearch",
+    "opencode-simple-notify",
+    "@plannotator/opencode@latest",
+    "@slkiser/opencode-quota@latest"
+  ],
+  "command": {},
   "tools": {
     "websearch": true,
     "codesearch": true
   },
   "permission": {
     "*": "ask",
+    "todowrite": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "sequential-thinking_sequentialthinking": "allow",
+    "github_get_me": "allow",
+    "github_search_issues": "allow",
+    "github_search_code": "allow",
+    "question": "allow",
+    "context7_*": "allow",
+    "codegraph_*": "allow",
+    "memory_*": "allow",
+    "external_directory": "allow",
+    "task": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "skill": "allow",
     "read": {
+      "*": "allow",
       "*.env": "deny",
       "*.env.*": "deny",
       "*.env.example": "allow"
+    },
+    "write": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny"
+    },
+    "edit": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "ls": "allow",
+      "ls *": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "less *": "allow",
+      "more *": "allow",
+      "tree": "allow",
+      "tree *": "allow",
+      "wc *": "allow",
+      "diff *": "allow",
+      "du *": "allow",
+      "df *": "allow",
+      "stat *": "allow",
+      "file *": "allow",
+      "which *": "allow",
+      "whereis *": "allow",
+      "type *": "allow",
+      "pwd": "allow",
+      "date": "allow",
+      "uname *": "allow",
+      "uptime": "allow",
+      "id": "allow",
+      "groups": "allow",
+      "hostname": "allow",
+      "echo *": "allow",
+      "printf *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "ack *": "allow",
+      "ag *": "allow",
+      "find *": "allow",
+      "fd *": "allow",
+      "locate *": "allow",
+      "graphify": "allow",
+      "graphify *": "allow",
+      "git *": "ask",
+      "git status": "allow",
+      "git status *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git show": "allow",
+      "git show *": "allow",
+      "git branch": "allow",
+      "git branch --show-current": "allow",
+      "git rev-parse *": "allow",
+      "git rev-list *": "allow",
+      "git ls-files *": "allow",
+      "git ls-tree *": "allow",
+      "git show-ref *": "allow",
+      "git describe *": "allow",
+      "git shortlog *": "allow",
+      "git blame *": "allow",
+      "git reflog *": "allow",
+      "git grep *": "allow",
+      "git tag -l*": "allow",
+      "git remote -v": "allow",
+      "git remote get-url *": "allow",
+      "git config --get*": "allow",
+      "git config --list*": "allow",
+      "git worktree list*": "allow",
+      "git submodule status*": "allow",
+      "git push --force*": "deny",
+      "git push -f*": "deny",
+      "git reset --hard*": "ask",
+      "git clean -fd*": "ask",
+      "cargo *": "allow",
+      "mkdir *": "allow",
+      "cp *": "allow",
+      "touch *": "allow",
+      "sed *": "ask",
+      "awk *": "ask",
+      "sort *": "allow",
+      "uniq *": "allow",
+      "cut *": "allow",
+      "tr *": "allow",
+      "tee *": "ask",
+      "xargs *": "ask",
+      "patch *": "ask",
+      "mv *": "ask",
+      "rm *": "ask",
+      "chmod *": "ask",
+      "chown *": "ask",
+      "env": "ask",
+      "printenv": "ask",
+      "sudo *": "ask",
+      "apt *": "ask",
+      "pip *": "ask",
+      "colcon *": "ask",
+      "rm -rf *": "deny"
+    }
+  },
+  "lsp": true,
+  "formatter": {
+    "clang-format": {
+      "disabled": false
+    },
+    "zig": {
+      "disabled": false
+    },
+    "ruff": {
+      "disabled": false
+    },
+    "rustfmt": {
+      "disabled": false
+    },
+    "cargofmt": {
+      "disabled": false
+    },
+    "uv": {
+      "disabled": true
     }
   },
   "provider": {
@@ -26,8 +314,14 @@
         "Qwen/Qwen3.5-397B-A17B": {
           "family": "",
           "modalities": {
-            "input": ["text", "video", "image"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "video",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "options": {
             "websearch": "auto"
@@ -46,6 +340,83 @@
       "options": {
         "baseURL": "https://llm.fzi.de/api"
       }
+    },
+    "openai": {
+      "models": {
+        "gpt-5.6-sol": {
+          "options": {
+            "reasoningEffort": "xhigh",
+            "reasoningSummary": "detailed",
+            "textVerbosity": "low",
+            "include": [
+              "reasoning.encrypted_content"
+            ]
+          }
+        },
+        "gpt-5.6-terra": {
+          "options": {
+            "reasoningEffort": "high",
+            "reasoningSummary": "detailed",
+            "textVerbosity": "low",
+            "include": [
+              "reasoning.encrypted_content"
+            ]
+          }
+        },
+        "gpt-5.6-luna": {
+          "options": {
+            "reasoningEffort": "medium",
+            "reasoningSummary": "detailed",
+            "textVerbosity": "low",
+            "include": [
+              "reasoning.encrypted_content"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mcp": {
+    "codegraph": {
+      "type": "local",
+      "command": [
+        "codegraph",
+        "serve",
+        "--mcp"
+      ],
+      "enabled": true
+    },
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "oauth": false
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "enabled": true,
+      "environment": {
+        "MEMORY_FILE_PATH": "/home/max/.local/share/opencode/memory.jsonl"
+      }
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true
     }
   }
 }

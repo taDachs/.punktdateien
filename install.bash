@@ -51,7 +51,9 @@ fi
 
 mkdir -p ${HOME}/.config/opencode
 ln -sf ${PWD}/opencode/config.json ${HOME}/.config/opencode/config.json
+ln -sf ${PWD}/opencode/config.json ${HOME}/.config/opencode/opencode.json
 ln -sf ${PWD}/opencode/AGENTS.md ${HOME}/.config/opencode/AGENTS.md
+ln -sfn ${PWD}/opencode/prompts ${HOME}/.config/opencode/prompts
 
 mkdir -p $HOME/.config/lazygit
 ln -sf ${PWD}/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
