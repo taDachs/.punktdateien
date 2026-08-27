@@ -29,6 +29,9 @@ function fzirobdev() {
   devcontainer exec --workspace-folder $HOME/work/fzi/devcontainers/robot_folders zsh
 }
 
+alias stacksh='docker compose exec -it $(cat compose.yaml | grep "devcontainer:" | sed -E "s/ |://g") zsh'
+alias stackexec='docker compose exec -it $(cat compose.yaml | grep "devcontainer:" | sed -E "s/ |://g")'
+
 alias devup='devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/taDachs/.punktdateien.git --dotfiles-install-command=install.bash'
 alias devupnodot='devcontainer up --workspace-folder .'
 alias devnew='devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/taDachs/.punktdateien.git --dotfiles-install-command=install.bash --remove-existing-container'
