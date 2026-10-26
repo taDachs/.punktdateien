@@ -33,7 +33,6 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   vi-mode
-  zlong_alert
   fzf-zsh-plugin
   lxd-completion-zsh
   conda-zsh-completion
@@ -94,3 +93,10 @@ if [ -x "$(command -v cowsay)" ]; then
 fi
 
 [ -z $PROFILE_IS_SOURCED ] && source ~/.profile
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# opencode
+export PATH=/home/max/.opencode/bin:$PATH
