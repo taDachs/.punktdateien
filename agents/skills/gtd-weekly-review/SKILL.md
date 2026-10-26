@@ -1,6 +1,6 @@
 ---
 name: gtd-weekly-review
-description: Guide the user step by step through their GTD weekly review in Taskwarrior, including project and tag memory, pausing for a decision at each step. Use whenever the user wants to run their weekly review, process their inbox, or review next actions, waiting-for, projects, or tags — even if they just say "let's do my review" or "process my inbox".
+description: Guide an interactive Taskwarrior GTD weekly Reflect/Review, including inbox clarification, next actions, waiting-for, projects, and tag memory. Use for "weekly review", "process my inbox", or requests to review projects, next actions, waiting-for, or tags. For choosing what to work on now ("what's next?", "start work"), use gtd-engage instead.
 compatibility: Requires the `task` (Taskwarrior) CLI. Relies on the conventions in the `taskwarrior` skill.
 ---
 
@@ -13,12 +13,13 @@ Guide the user through a Getting Things Done weekly review, conducted entirely i
 GTD lives entirely in Taskwarrior. The following is established and can be relied on:
 
 - **`+inbox`** — captured, not yet processed.
-- **`+next`** — a concrete next action, ready to do.
-- **`+waiting`** — delegated / waiting on someone or something else.
+- **`+next`** — a startable action the user could realistically choose before the next weekly review: can begin now, clear what doing it means, recognizable when finished. It can take five minutes or two hours. Not every project needs one this week.
+- **`+waiting`** — the user's part is done; the ball is with someone or something else.
+- **Pending task with `project:` but no workflow tag** — a known future project step, not currently actionable/current. No `+later` tag is needed.
 - **`project:`** — GTD projects only: multi-step outcomes with a clear done state. Do not use `project:` for work/customer/industry buckets.
 - **Work/customer/industry tags** — use tags for external or organizational buckets, e.g. `+intellirisk`, `+stack`, `+tfur`, `+husky`, `+phd`, `+julius_ba`.
 
-When a phase depends on one of the unestablished items, first detect it from `export` output; if it's ambiguous, ask the user how they track it rather than inventing a tag or attribute.
+Use `due:` for real deadlines and `scheduled:` only for genuine not-before constraints, never as a daily selection device. When a phase depends on another unestablished convention, detect it from `export` or memory; if ambiguous, ask rather than inventing it.
 
 ## Project memory
 
@@ -68,7 +69,7 @@ On first run, create the `~/.agents/memory/gtd-weekly-review/` directory and see
 # GTD Tag Memory
 
 ## next
-GTD workflow tag for a concrete next action that is ready to do.
+GTD workflow tag for a startable action I could realistically choose before the next weekly review; a project need not have one every week.
 
 ## intellirisk
 Work/customer bucket for Intellirisk-related tasks. Use as `+intellirisk`; do not use `project:intellirisk`.
@@ -84,7 +85,7 @@ If a tag appears in Taskwarrior but has no memory entry, ask the user for its me
 
 1. **Consult the `taskwarrior` skill.** All command patterns, the read-as-JSON approach, and especially the rule of addressing tasks by `uuid` (never the unstable `id`) live there. Follow them. In particular, remember the user's lowercase `+waiting` is **not** Taskwarrior's virtual `+WAITING`.
 2. **Check Taskwarrior is reachable**: `task --version`. If it errors, tell the user and stop.
-3. **Load the project and tag memory files** (create and seed them on first run — see the Project memory and Tag memory sections for their locations).
+3. **Check the active Taskwarrior context** as described in `taskwarrior`; bypass a narrowing context for whole-system reads when needed. Load the project and tag memory files (create and seed them on first run — see their sections above). The current tag memory defines `+someday`; use that established mechanism where appropriate.
 4. **Orient the user.** Briefly say what the review will cover (the phases below) and ask if they're ready to begin. Then go phase by phase.
 
 ## How to pace every step
@@ -116,9 +117,9 @@ Then take the items **one at a time**. For each, present it and walk the user th
 - **Is it actionable?**
   - **No** → offer: delete it (`task <uuid> delete`); move it to someday/maybe (ask the user how they track that if you don't already know — don't assume a tag); or keep it as reference (ask how they want reference material handled).
   - **Yes, and it takes under ~2 minutes** → suggest doing it now, then `task <uuid> done`.
-  - **Yes, single concrete action** → make it a next action: `task <uuid> modify -inbox +next`. Ask whether to set work/customer/industry tags, `due:`, or other attributes. Only set `project:` if it belongs to an existing GTD project. If the user introduces a new tag, ask for its meaning and append it to tag memory.
-  - **Yes, but it's multi-step** → it's a GTD project. Set a `project:` on a `+next` action that captures the *very next* physical step (e.g. `task <uuid> modify -inbox +next project:<name>`), confirming the outcome-style project name with the user. Separately ask which work/customer/industry tags apply. If this is a **new** project (no entry in the project memory), ask the user for a one- or two-sentence description and append it to the memory file. If the user introduces a new tag, ask for its meaning and append it to tag memory.
-  - **Yes, but it's delegated / depends on someone else** → `task <uuid> modify -inbox +waiting` and `task <uuid> annotate "..."` to record who and since when.
+  - **Yes, startable now** → agree on wording that passes three tests: Can I actually start this now? Do I immediately know what doing it means? Will I recognize when this action is finished? If the user could realistically choose it before the next review, change `-inbox +next`. Otherwise, keep an agreed known future step with `project:` and no workflow tag, or ask how to hold an item without a project. Do not split work merely for being large. Ask about relevant domain/work/customer tags and real deadlines or not-before constraints only when relevant; use `project:` only for a GTD outcome. Record new tag meanings in tag memory.
+  - **Yes, a multi-step outcome** → agree on its `project:` name and intended done state (append to project memory if new). If the user wants to work on it before the next review, rewrite the inbox item into a startable action with `-inbox +next project:<name>`. Otherwise retain an agreed known future step as a pending task with `-inbox project:<name>` and no workflow tag. Several independent current next actions are fine. Keep domain buckets as tags.
+  - **Someone else must act** → if the user has not yet asked, the contact is their action ("Message Louis asking for deployment code"): make it `+next` only if they could choose it this week; otherwise keep it as a known future project step. After they ask, rewrite that same task as "Waiting for Louis to send deployment code" and change `-inbox -next +waiting` as applicable; annotate who and since when. Never assume the message was sent or convert it without the user's decision.
 
 After each item, confirm what you did and continue to the next. The phase ends when `task +inbox count` returns 0 — or when the user decides to stop.
 
@@ -136,7 +137,9 @@ Ask the user if anything is on their mind that isn't captured yet — commitment
 task +next export
 ```
 
-Present the list. For each (or grouped sensibly, but still pausing for the user's calls), ask whether it is: still valid, still genuinely the *next* action, correctly prioritized, already done, or no longer relevant. Flag items that look stale (old `entry`/`modified` dates) since those are often where reality has drifted. Execute their decisions: `done`, `delete`, re-tag, or set/adjust `due:`/`project:` if they use them.
+Present the list. For each (or grouped sensibly, still pausing for the user's calls), ask: **Could you realistically choose to work on this before the next weekly review?** Apply the startable-action test above, without making task size itself a reason to split it.
+
+Offer choices: keep `+next`; remove `+next` but retain `project:` as a known future step; rewrite as a clearer startable action; convert/rewrite the same task to `+waiting` if the user's part is done; move to the existing someday/maybe mechanism; mark done; or delete. For a future step without a GTD project, ask how it should be held instead of leaving an unclassified loose end. Stale `entry`/`modified` dates merit scrutiny; if an action has survived several reviews unchosen, probe what is blocking it. "Still valid" alone is not grounds to keep `+next`. Do not infer a review count from its age.
 
 ### 2b. Review waiting-for
 
@@ -144,7 +147,7 @@ Present the list. For each (or grouped sensibly, but still pausing for the user'
 task +waiting export
 ```
 
-For each delegated item, ask: are you still waiting, or has it come back? Does it need a nudge? If it's been received, either complete it (`task <uuid> done`) or convert it to a next action (`task <uuid> modify -waiting +next`). Encourage adding/refreshing an annotation noting who and since when, so follow-ups are easy.
+For each item, ask whether the ball is still outside the user's court, has come back, or needs a nudge. A nudge is the user's action (`+next` only if current this week); a request already sent remains `+waiting`. If received, agree whether to complete it, rewrite it as a current startable `+next`, or retain a known future project step without a workflow tag. Keep who/what/since-when annotations useful.
 
 ### 2c. Review the calendar (only if the user uses dates)
 
@@ -154,28 +157,24 @@ First detect whether dates are in play:
 task +PENDING export   # inspect for `due` / `scheduled` fields
 ```
 
-If they use them, present upcoming `due`/`scheduled`/`+OVERDUE` items and confirm each is still accurate. If they don't use dates, say so and skip — don't push date discipline they haven't asked for.
+If present, confirm `due` represents a real deadline and `scheduled` a genuine not-before constraint; include overdue items. If absent, skip. Do not add dates just to choose today's work.
 
 ### 2d. Review projects
 
-List the GTD projects in use, then load the project memory (see the Project memory section):
+Derive projects with pending tasks from `export` JSON (including untagged future steps), and consult project memory. `task projects` is an optional overview, not a substitute for the pending tasks:
 
 ```bash
 task projects        # projects and their pending counts
 ```
 
-For each active project:
+For each project with pending tasks:
 
-1. **Look up its description** in the memory. If there is **no entry**, ask the user for a one- or two-sentence description of the project's intended outcome, then append it to the memory file. This is required — don't review a project blind, and don't invent a description yourself.
-2. With the description in hand for context, do the high-value GTD check: **every active project should have at least one next action.**
+1. **Check the `project:` value is a GTD outcome.** Flag suspected repository/customer/work buckets, especially imported ones, and ask what they mean. Do not silently migrate tasks or memory entries.
+2. **Look up its description** in memory. For a genuine GTD project with no entry, ask for the one- or two-sentence intended outcome and append it. Do not invent or overwrite the description.
+3. **Review its open steps**, including untagged future steps and waiting items. A project can remain active with no `+next`; that simply means none of its actions are on this week's menu. Do not relabel the project inactive or add a `+next` to satisfy a count.
+4. **If several actions are `+next`**, check whether they are genuinely parallel/current or sequential future steps. With the user's approval, remove `+next` from future steps while retaining their `project:` and domain tags.
 
-```bash
-task project:<name> +next count
-```
-
-If a project has zero next actions, surface it (along with its description) and ask the user to define the very next physical step, then add it as a `+next` action on that project.
-
-If you see a `project:` value that looks like a work/customer/industry bucket rather than a GTD outcome, flag it and ask whether it should be converted into tags. Do not perform that migration without the user's explicit decision.
+Show projects with no `+next` together with their outcomes and known steps; ask which, **if any**, the user wants to bring into play before the next review. Pause for their answer before changing anything. Leaving all of them without `+next` is a valid choice, not a gap to fix.
 
 ### 2e. Review tags
 
@@ -191,7 +190,7 @@ If a tag's current usage appears inconsistent with its remembered meaning, show 
 
 ### 2f. Review someday/maybe (only if the user tracks it)
 
-If you established earlier how the user holds someday/maybe items, review them now: anything ready to activate into `+next` or `+inbox`? If the user has no someday/maybe system, ask whether they want one — but don't create it unilaterally.
+If tag memory still establishes `+someday` (or another established mechanism), review those items: anything ready to activate into `+next` or `+inbox`? If no mechanism is established, ask without creating one unilaterally.
 
 ---
 
@@ -203,7 +202,7 @@ Prompt the user, lightly, for higher-altitude thinking: any new projects, goals,
 
 ## Wrap-up
 
-Summarize the session for the user: how many inbox items were processed, how many next actions and waiting items were reviewed, any projects flagged for a missing next action, any tag meanings added or revised, and anything captured during the mind sweep or creative phase. Confirm the review is complete. Don't over-explain — a tight summary of what changed is enough.
+Summarize the session for the user: how many inbox items were processed, how many next actions and waiting items were reviewed, any projects brought into this week's menu, any tag meanings added or revised, and anything captured during the mind sweep or creative phase. Confirm the review is complete. Don't over-explain — a tight summary of what changed is enough.
 
 ## Guardrails recap
 

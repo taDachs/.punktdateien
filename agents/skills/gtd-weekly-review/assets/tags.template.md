@@ -12,7 +12,7 @@ a clear done state. Work/customer/industry buckets belong in tags instead.
 Example:
 
 ## next
-GTD workflow tag for a concrete next action that is ready to do.
+GTD workflow tag for an action I can start now, know how to do, recognize as finished, and realistically choose before the next weekly review. A project need not have one every week.
 
 ## customer-name
 Work/customer bucket for tasks related to Customer Name. Use as
