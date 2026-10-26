@@ -8,6 +8,8 @@ local servers = {
   "docker_compose_language_server",
   "dockerls",
   "copilot",
+  "gdscript",
+  "openscad_lsp"
 }
 
 vim.lsp.enable(servers)
