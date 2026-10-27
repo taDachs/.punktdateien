@@ -25,8 +25,3 @@ vim.keymap.set("n", "<C-RIGHT>", "<C-w>>", { desc = "Increase window width" })
 vim.keymap.set("n", "<C-LEFT>", "<C-w><", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-UP>", "<C-w>+", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-DOWN>", "<C-w>-", { desc = "Decrease window height" })
-
-vim.keymap.set("n", "<C-h>", "<cmd><C-U>TmuxNavigateLeft<cr>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<cmd><C-U>TmuxNavigateDown<cr>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<cmd><C-U>TmuxNavigateUp<cr>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<cmd><C-U>TmuxNavigateRight<cr>", { desc = "Move focus to the upper window" })

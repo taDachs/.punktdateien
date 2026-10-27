@@ -23,6 +23,8 @@ ln -sf ${PWD}/shell/.zprofile ${HOME}
 ln -sf ${PWD}/taskwarrior/.taskrc ${HOME}
 ln -sf ${PWD}/timewarrior ${HOME}/.config
 
+ln -sf ${PWD}/herdr ${HOME}/.config
+
 ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
 
 mkdir -p ${HOME}/.agents/skills

@@ -11,4 +11,4 @@ vim.wo[0][0].foldmethod = "expr"
 vim.wo[0][0].foldexpr = "vimtex#fold#level(v:lnum)"
 vim.wo[0][0].foldtext = "vimtex#fold#text()"
 
-vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_view_method = "evince"

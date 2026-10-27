@@ -5,7 +5,7 @@ local servers = {
   "ty",
   "lemminx",
   "docker_language_server",
-  "docker_compose_language_server",
+  "docker_compose_language_service",
   "dockerls",
   "copilot",
   "gdscript",

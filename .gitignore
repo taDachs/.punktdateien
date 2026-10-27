@@ -24,9 +24,17 @@ claude/.last-cleanup
 
 # External agent skills are installed locally; only personal skills are tracked.
 agents/skills/*
+!agents/skills/gtd-engage/
+!agents/skills/gtd-engage/**
 !agents/skills/gtd-weekly-review/
 !agents/skills/gtd-weekly-review/**
 !agents/skills/taskwarrior/
 !agents/skills/taskwarrior/**
 agents/.skill-lock.json
 agents/memory/
+
+herdr/*.log
+herdr/*.lock
+herdr/*.sock*
+herdr/session*
+herdr/release-notes.json
