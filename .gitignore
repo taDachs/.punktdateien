@@ -38,3 +38,4 @@ herdr/*.lock
 herdr/*.sock*
 herdr/session*
 herdr/release-notes.json
+herdr/plugins*

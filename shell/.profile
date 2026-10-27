@@ -21,7 +21,7 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$PATH:$HOME/.cargo/bin"
 fi
 
-if [ -d "$HOME/.cargo" ] ; then
+if [ -f "$HOME/.cargo/env" ] ; then
   . "$HOME/.cargo/env"
 fi
 

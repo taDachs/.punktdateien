@@ -22,3 +22,13 @@ inbox() {
 
   task contex $ctx
 }
+
+someday() {
+  ctx=$(task context show | grep "Context '\(.*\)' with" |cut --delimiter="'" -f 2)
+
+  task context none
+
+  task add "$@" +someday
+
+  task contex $ctx
+}

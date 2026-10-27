@@ -25,7 +25,7 @@ data.location=/home/max/.task
 
 # Color theme (uncomment one to use)
 #include light-16.theme
-# include light-256.theme
+ include /usr/local/share/doc/task/rc/light-256.theme
 #include dark-16.theme
 #include dark-256.theme
 #include dark-red-256.theme
@@ -39,7 +39,7 @@ data.location=/home/max/.task
 #include solarized-light-256.theme
 #include no-color.theme
 
-news.version=2.6.0
+news.version=3.4.2
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
 report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
@@ -47,6 +47,61 @@ report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
+# sync
 sync.server.url=https:\/\/tasksync.gott-in-der-maschine.de
 sync.server.client_id=$TASKSYNC_UUID
 sync.encryption_secret=$TASKSYNC_ENCRYPTION_SECRET
+
+# urgency
+urgency.age.coefficient=0.01
+urgency.tags.coefficient=0
+urgency.annotations.coefficient=0
+
+context.science.read=+phd
+context.science.write=+phd
+
+context.projects.read=+intellirisk or +tfur
+context.projects.write=+intellirisk or +tfur
+
+context.inbox.read=+inbox
+context.orga.read=proj:admin or proj:orga
+context.orga.write=proj:admin or proj:orga
+context.office.read=+office
+context.office.write=+office
+
+uda.gitlabtitle.type=string
+uda.gitlabtitle.label=Gitlab Title
+uda.gitlabdescription.type=string
+uda.gitlabdescription.label=Gitlab Description
+uda.gitlabcreatedon.type=date
+uda.gitlabcreatedon.label=Gitlab Created
+uda.gitlabupdatedat.type=date
+uda.gitlabupdatedat.label=Gitlab Updated
+uda.gitlabduedate.type=date
+uda.gitlabduedate.label=Gitlab Due Date
+uda.gitlabmilestone.type=string
+uda.gitlabmilestone.label=Gitlab Milestone
+uda.gitlaburl.type=string
+uda.gitlaburl.label=Gitlab URL
+uda.gitlabrepo.type=string
+uda.gitlabrepo.label=Gitlab Repo Slug
+uda.gitlabtype.type=string
+uda.gitlabtype.label=Gitlab Type
+uda.gitlabnumber.type=string
+uda.gitlabnumber.label=Gitlab Issue/MR #
+uda.gitlabstate.type=string
+uda.gitlabstate.label=Gitlab Issue/MR State
+uda.gitlabupvotes.type=numeric
+uda.gitlabupvotes.label=Gitlab Upvotes
+uda.gitlabdownvotes.type=numeric
+uda.gitlabdownvotes.label=Gitlab Downvotes
+uda.gitlabwip.type=numeric
+uda.gitlabwip.label=Gitlab MR Work-In-Progress Flag
+uda.gitlabauthor.type=string
+uda.gitlabauthor.label=Gitlab Author
+uda.gitlabassignee.type=string
+uda.gitlabassignee.label=Gitlab Assignee
+uda.gitlabnamespace.type=string
+uda.gitlabnamespace.label=Gitlab Namespace
+uda.gitlabweight.type=numeric
+uda.gitlabweight.label=Gitlab Weight
