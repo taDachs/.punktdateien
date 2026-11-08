@@ -25,6 +25,20 @@ ln -sf ${PWD}/timewarrior ${HOME}/.config
 
 ln -sf ${PWD}/herdr ${HOME}/.config
 
+# herdr plugins live in herdr/plugins/ (gitignored), so (re)install them here.
+# Keep this list in sync with the plugin_action keybindings in herdr/config.toml.
+herdr_plugins=(
+  jeffarese/herdr-bar
+  ChmaraX/herdr-gitview
+  ChmaraX/herdr-nvim
+  aimdevlee/herdr-nvim-nav
+)
+if command -v herdr >/dev/null; then
+  for plugin in "${herdr_plugins[@]}"; do
+    herdr plugin install -y "${plugin}" || echo "herdr: failed to install ${plugin} (already installed?)" >&2
+  done
+fi
+
 ln -sf ${PWD}/robot_folders/robot_folders.yaml ${HOME}/.config
 
 mkdir -p ${HOME}/.agents/skills
@@ -52,8 +66,7 @@ if [ -L "${HOME}/.config/opencode" ]; then
 fi
 
 mkdir -p ${HOME}/.config/opencode
-ln -sf ${PWD}/opencode/config.json ${HOME}/.config/opencode/config.json
-ln -sf ${PWD}/opencode/config.json ${HOME}/.config/opencode/opencode.json
+ln -sf ${PWD}/opencode/opencode.jsonc ${HOME}/.config/opencode/opencode.jsonc
 ln -sf ${PWD}/opencode/AGENTS.md ${HOME}/.config/opencode/AGENTS.md
 ln -sfn ${PWD}/opencode/prompts ${HOME}/.config/opencode/prompts
 
