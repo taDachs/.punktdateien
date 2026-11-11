@@ -24,6 +24,11 @@
   },
 
   "agents": {
+    "plan": {
+      "mode": "all",
+      "model": "openai/gpt-6.1-sol#high",
+      "description": "Investigates requirements and develops implementation plans without changing project files"
+    },
     "title": {
       "model": "openai/gpt-6.1-sol#fast"
     }
@@ -31,6 +36,21 @@
 
   "plugins": [
     "@upstash/context7-opencode",
+    "@tavily/opencode-plugin",
     "opencode-mem@latest",
   ],
+  "mcp": {
+    "servers": {
+      "codegraph": {
+        "type": "local",
+        "command": [
+          "codegraph",
+          "serve",
+          "--mcp"
+        ],
+        "disabled": false,
+        "codemode": false
+      }
+    }
+  },
 }
