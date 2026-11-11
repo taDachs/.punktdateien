@@ -65,10 +65,14 @@ if [ -L "${HOME}/.config/opencode" ]; then
   exit 1
 fi
 
-mkdir -p ${HOME}/.config/opencode
-ln -sf ${PWD}/opencode/opencode.jsonc ${HOME}/.config/opencode/opencode.jsonc
-ln -sf ${PWD}/opencode/AGENTS.md ${HOME}/.config/opencode/AGENTS.md
-ln -sfn ${PWD}/opencode/prompts ${HOME}/.config/opencode/prompts
+mkdir -p "${HOME}/.config/opencode"
+for file in opencode.jsonc AGENTS.md cli.json; do
+  ln -sf "${PWD}/opencode/${file}" "${HOME}/.config/opencode/${file}"
+done
+mkdir -p "${HOME}/.config/opencode/agents"
+for agent in "${PWD}"/opencode/agents/*.md; do
+  ln -sf "${agent}" "${HOME}/.config/opencode/agents/$(basename "${agent}")"
+done
 
 mkdir -p $HOME/.config/lazygit
 ln -sf ${PWD}/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
