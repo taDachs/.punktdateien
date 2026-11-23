@@ -8,6 +8,12 @@ mkdir -p $HOME/.config
 
 ln -sf ${PWD}/zsh/.zshrc ${HOME}
 ln -sf ${PWD}/alacritty ${HOME}/.config
+mkdir -p "${HOME}/.config/ghostty"
+ln -sfn "${PWD}/ghostty/config.ghostty" "${HOME}/.config/ghostty/config.ghostty"
+# Desktop-specific lists take precedence over the generic terminal preference.
+for desktop in xdg ubuntu-xdg gnome-xdg; do
+  ln -sfn "${PWD}/xdg/xdg-terminals.list" "${HOME}/.config/${desktop}-terminals.list"
+done
 ln -sf ${PWD}/i3 ${HOME}/.config
 ln -sf ${PWD}/nvim ${HOME}/.config
 ln -sf ${PWD}/git ${HOME}/.config
@@ -24,6 +30,9 @@ ln -sf ${PWD}/taskwarrior/.taskrc ${HOME}
 ln -sf ${PWD}/timewarrior ${HOME}/.config
 
 ln -sf ${PWD}/herdr ${HOME}/.config
+
+# Pi configuration and declared extension packages (state stays in ~/.pi/agent).
+bash "${PWD}/pi/install.bash"
 
 # herdr plugins live in herdr/plugins/ (gitignored), so (re)install them here.
 # Keep this list in sync with the plugin_action keybindings in herdr/config.toml.

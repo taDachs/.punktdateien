@@ -1,0 +1,20 @@
+# Match Alacritty's font and follow the desktop appearance (also set by darkman).
+font-family = BlexMono Nerd Font
+font-size = 11
+theme = light:Dayfox,dark:Carbonfox
+
+# Keep a block cursor at the shell prompt as well as in the terminal.
+cursor-style = block
+cursor-style-blink = false
+
+# Use widely supported TERM=xterm-256color over SSH, keeping Ghostty's TERM locally.
+# shell-integration-features = no-cursor,ssh-env
+shell-integration-features = ssh-env
+
+# Start new windows, tabs, and splits in the home directory.
+working-directory = home
+window-inherit-working-directory = false
+tab-inherit-working-directory = false
+split-inherit-working-directory = false
+
+keybind = ctrl+enter=unbind
