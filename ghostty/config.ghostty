@@ -1,5 +1,7 @@
 # Match Alacritty's font and follow the desktop appearance (also set by darkman).
 font-family = BlexMono Nerd Font
+# Use Herdr's custom font for agent logos rather than unrelated fallback glyphs.
+font-codepoint-map = U+E1A0-U+E1BA,U+E1C0-U+E1C5=Herdr Agent Icons Max
 font-size = 11
 theme = light:Dayfox,dark:Carbonfox
 
